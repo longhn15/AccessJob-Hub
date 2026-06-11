@@ -96,6 +96,31 @@ Response mẫu:
 - Biến env: `MYSQL_*`, `SPRING_DATASOURCE_*` trong `.env.example`
 - Port MySQL **không** expose ra host mặc định; uncomment `MYSQL_PORT` trong `.env` nếu cần debug
 
+### Flyway migration
+
+Backend tự chạy Flyway khi khởi động. File migration nằm tại `backend/src/main/resources/db/migration/`:
+
+| File | Mô tả |
+|------|-------|
+| `V1__create_core_tables.sql` | Tạo 4 bảng MVP |
+| `V2__seed_demo_data.sql` | Seed 3 jobs + 4 resources |
+
+Kiểm tra migration và seed sau khi `docker compose up -d`:
+
+```bash
+docker compose logs backend --tail=150
+curl http://localhost:8080/api/health
+docker compose exec mysql mysql -uaccessjob -p"$MYSQL_PASSWORD" accessjobhub -e "SHOW TABLES;"
+docker compose exec mysql mysql -uaccessjob -p"$MYSQL_PASSWORD" accessjobhub -e "SELECT COUNT(*) FROM jobs; SELECT COUNT(*) FROM resources;"
+```
+
+Reset DB (chạy lại migration từ đầu):
+
+```bash
+docker compose down -v
+docker compose up --build
+```
+
 ## Xử lý sự cố
 
 | Vấn đề | Gợi ý |

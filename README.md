@@ -69,10 +69,27 @@ Frontend dev server: http://localhost:5173 (proxy `/api` → backend).
 
 Quy tắc phát triển nằm trong `.cursor/rules/` — đọc trước khi sửa code.
 
+## Database & migration
+
+Schema MVP được quản lý bằng **Flyway** (`backend/src/main/resources/db/migration/`).
+
+- Khi backend start (local hoặc Docker), Flyway tự chạy migration.
+- Bảng: `jobs`, `resources`, `applications`, `accessibility_feedback`.
+- Seed demo: 3 việc làm và 4 tài nguyên (migration `V2__seed_demo_data.sql`).
+- Charset: `utf8mb4` / `utf8mb4_unicode_ci` (hỗ trợ tiếng Việt).
+
+Reset DB demo (xóa volume MySQL):
+
+```bash
+docker compose down -v
+docker compose up --build
+```
+
 ## Trạng thái MVP
 
 - [x] Skeleton monorepo + Docker
 - [x] MySQL 8 qua Docker Compose (volume `mysql_data`)
+- [x] Flyway migration + seed data demo (jobs, resources)
 - [x] Trang chủ accessible (semantic layout, skip link)
 - [x] `GET /api/health` (kèm trạng thái database)
 - [ ] Danh sách việc làm
