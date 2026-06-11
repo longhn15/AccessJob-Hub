@@ -1,0 +1,55 @@
+---
+description: "Quy tắc Spring Boot REST API, validation và error response cho FE accessible"
+globs:
+  - "backend/**/*"
+alwaysApply: false
+---
+
+# Backend Rule
+
+## Kiến trúc
+
+- Spring Boot, API REST rõ ràng.
+- Controller mỏng → Service (business logic) → Repository (truy vấn).
+- DTO tách Entity; **không** trả Entity trực tiếp ra client.
+
+## Validation & error
+
+- Bean Validation (`@Valid`, `@NotBlank`, …).
+- Global Exception Handler; **không** trả stack trace ra client.
+- Message API bằng tiếng Việt, dễ hiểu cho người dùng và screen reader.
+
+### Format lỗi validation
+
+```json
+{
+  "message": "Dữ liệu gửi lên chưa hợp lệ.",
+  "fieldErrors": [
+    { "field": "email", "message": "Email không đúng định dạng." }
+  ],
+  "timestamp": "2026-06-11T10:00:00Z"
+}
+```
+
+FE map `fieldErrors` vào form với `aria-describedby`.
+
+## Config & security
+
+- CORS đọc từ env/config; không hardcode frontend URL production.
+- Không log secret/token/credential hoặc dữ liệu cá nhân đầy đủ.
+
+## Data
+
+- Seed data nhỏ, đủ demo MVP.
+- Không thêm auth/security phức tạp nếu task không yêu cầu.
+
+## API MVP đề xuất
+
+| Endpoint | Mô tả |
+|----------|-------|
+| `GET /api/health` | Health check |
+| `GET /api/jobs` | Danh sách việc làm |
+| `GET /api/jobs/{id}` | Chi tiết việc làm |
+| `GET /api/resources` | Tài nguyên học tập |
+| `POST /api/applications` | Form ứng tuyển |
+| `POST /api/accessibility-feedback` | Feedback accessibility |

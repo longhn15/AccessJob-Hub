@@ -1,0 +1,58 @@
+---
+description: "Bối cảnh dự án AccessJob Hub và phạm vi MVP cuộc thi WCAG 2.2"
+alwaysApply: true
+---
+
+# Project Context — AccessJob Hub
+
+## Dự án
+
+**AccessJob Hub** — website hỗ trợ người khuyết tật tiếp cận thông tin việc làm, tài nguyên học tập và gửi form quan tâm/ứng tuyển theo hướng dễ tiếp cận.
+
+**Mục tiêu cuộc thi:** Thiết kế website/ứng dụng số đảm bảo tiêu chuẩn **WCAG 2.2**.
+
+## Người dùng mục tiêu
+
+- Người khuyết tật
+- Người dùng bàn phím
+- Screen reader user
+- Người thị lực kém
+- Người dùng mobile
+
+## Tech stack
+
+| Layer | Công nghệ |
+|-------|-----------|
+| Front-end | React + TypeScript + Vite |
+| Back-end | Java Spring Boot |
+| Database | PostgreSQL (Docker); H2 cho local/dev nếu cần |
+| Runtime | Docker / Docker Compose |
+| UI tone | Xanh dương đậm và trắng |
+
+## MVP — phải có
+
+1. Trang chủ
+2. Danh sách việc làm
+3. Chi tiết việc làm
+4. Form quan tâm/ứng tuyển
+5. Trang tài nguyên
+6. Trang Accessibility Statement
+7. Form feedback accessibility
+
+## MVP — không làm
+
+- Auth phức tạp
+- Admin dashboard đầy đủ
+- Upload CV
+- Chat realtime
+- AI recommendation
+- Microservices
+- Redis / Kafka / Elasticsearch
+
+## Tiêu chí thành công
+
+- Chạy được bằng Docker Compose
+- Có accessibility checklist
+- Có README và demo script
+- FE/BE build được
+- Flow chính dùng được bằng bàn phím

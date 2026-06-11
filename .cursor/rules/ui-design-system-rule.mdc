@@ -1,0 +1,56 @@
+---
+description: "Design system: màu sắc, typography, component states cho UI accessible"
+globs:
+  - "frontend/src/styles/**/*"
+  - "frontend/src/components/**/*"
+alwaysApply: false
+---
+
+# UI Design System Rule
+
+## Tone chủ đạo
+
+Xanh dương đậm + trắng.
+
+## CSS variables (gợi ý token)
+
+```css
+:root {
+  --color-primary: /* xanh dương đậm, contrast ≥ 4.5:1 trên trắng */;
+  --color-background: #ffffff;
+  --color-text: /* gần đen hoặc xanh rất đậm */;
+  --color-focus: /* nổi bật, contrast cao */;
+  --color-error: /* đỏ đủ contrast */;
+  --color-success: /* xanh lá/xanh dương đủ contrast */;
+  --color-border: /* xám trung tính */;
+}
+```
+
+## Quy tắc màu
+
+- Tất cả màu định nghĩa bằng CSS variables trong `frontend/src/styles/`.
+- Không hardcode màu rải rác trong component.
+- Success/error không chỉ dùng màu — kèm text/icon.
+
+## Component states
+
+| Component | States bắt buộc |
+|-----------|-----------------|
+| Button | hover, `:focus-visible`, disabled |
+| Input | normal, focus, invalid, disabled |
+| Card/list | heading rõ ràng |
+
+## Typography & spacing
+
+- Khoảng cách dùng `rem`.
+- Nội dung chính ≥ 14px; không dùng text quá nhỏ.
+
+## Motion
+
+- Không tạo animation gây xao nhãng.
+- Nếu có animation: tôn trọng `prefers-reduced-motion`.
+
+## Không được
+
+- Màu tương phản thấp cho text hoặc focus ring.
+- Animation tự động lặp vô hạn trên nội dung chính.

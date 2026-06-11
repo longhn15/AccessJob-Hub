@@ -1,0 +1,33 @@
+---
+description: "Quy tắc làm việc cốt lõi cho toàn bộ project AccessJob Hub"
+alwaysApply: true
+---
+
+# Core Working Rule
+
+## Phạm vi
+
+Toàn bộ project AccessJob Hub.
+
+## Phải làm
+
+- Làm đúng task được giao; ưu tiên MVP và minimal diff.
+- Đọc README, rules, `package.json`/`pom.xml`, Docker/env liên quan trước khi sửa.
+- Xác định task thuộc FE, BE, DB, Docker, docs hay integration trước khi code.
+- Ghi rõ giả định khi thiếu dữ kiện.
+- Tính đến môi trường Docker và máy yếu (image nhẹ, ít service thừa).
+- Tính đến accessibility khi sửa UI.
+- Dùng env/config cho URL, port, secret, token, credential.
+
+## Không được làm
+
+- Over-engineering, refactor lan rộng khi task không yêu cầu.
+- Sửa file không liên quan đến task.
+- Thêm dependency nếu chưa thật sự cần.
+- Hardcode URL, port, secret, token, credential.
+- Sửa ké vấn đề ngoài phạm vi — chỉ ghi vào đề xuất tiếp theo.
+
+## Khi hoàn thành task lớn
+
+- Tạo report theo `report-verification-rule.mdc`.
+- Output chat ngắn gọn: hiểu task, đã làm, file, kiểm tra, rủi ro.

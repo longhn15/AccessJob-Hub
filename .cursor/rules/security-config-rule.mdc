@@ -1,0 +1,43 @@
+---
+description: "Bảo mật cấu hình, secret, CORS và thu thập dữ liệu tối thiểu"
+globs:
+  - "backend/**/*"
+  - "frontend/**/*"
+  - "docker-compose.yml"
+  - ".env.example"
+alwaysApply: false
+---
+
+# Security & Config Rule
+
+## Secret & credential
+
+- Không hardcode secret/token/password thật trong source hoặc image.
+- Dùng env vars; mẫu trong `.env.example`.
+- Không commit `.env` thật.
+
+## Logging & response
+
+- Không log dữ liệu nhạy cảm (password, token, email/phone đầy đủ).
+- Không trả stack trace ra client.
+
+## Network
+
+- CORS cấu hình rõ qua env; không wildcard `*` trong production public.
+- Không expose DB port ra host nếu không cần debug.
+
+## Dữ liệu người dùng
+
+- Form chỉ thu thập tối thiểu cho MVP.
+- Email/số điện thoại: validate, không log đầy đủ.
+- Không lưu thông tin cá nhân không cần thiết.
+
+## Authentication
+
+- **Không** thêm auth nếu chưa nằm trong MVP.
+- Auth sau này: accessible authentication; tránh CAPTCHA hình ảnh khó tiếp cận.
+
+## Frontend
+
+- API URL qua env (`import.meta.env.VITE_API_URL`).
+- Không embed credential trong bundle.

@@ -1,0 +1,59 @@
+---
+description: "Quy tắc Docker Compose, Dockerfile và runtime ổn định trên máy yếu"
+globs:
+  - "Dockerfile"
+  - "**/Dockerfile"
+  - "docker-compose.yml"
+  - ".env.example"
+  - "nginx.conf"
+  - "frontend/**/*"
+  - "backend/**/*"
+alwaysApply: false
+---
+
+# Docker Runtime Rule
+
+## Yêu cầu
+
+Project phải chạy được bằng `docker compose up`.
+
+## Networking
+
+- Service trong container **không** gọi nhau qua `localhost`.
+- Backend connect DB bằng **service name** (vd: `postgres`).
+- Frontend gọi API qua env (`VITE_API_URL` hoặc proxy config).
+
+## Frontend static + Nginx
+
+- Fallback SPA: mọi route về `index.html` cho React Router.
+
+## Dockerfile
+
+- Gọn, multi-stage nếu cần; không copy file thừa (`node_modules`, `target`).
+- Không bake secret vào image.
+
+## Env
+
+- Có `.env.example`; **không** commit `.env` thật.
+
+## Giới hạn scope MVP
+
+- Không thêm container không cần thiết.
+- Không thêm Redis/Kafka/monitoring/logging stack.
+- Hạn chế image nặng, log dư, background process thừa.
+
+## Sau khi sửa Docker
+
+Chạy hoặc yêu cầu chạy:
+
+```bash
+docker compose config
+docker compose build
+docker compose up
+```
+
+Nếu không chạy được: ghi lý do và `expected verification` trong report.
+
+## Service đề xuất MVP
+
+`frontend`, `backend`, `postgres` (volume cho data).

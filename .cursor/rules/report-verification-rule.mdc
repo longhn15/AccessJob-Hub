@@ -1,0 +1,52 @@
+---
+description: "Bắt buộc tạo report và verify trung thực sau mỗi task lớn"
+globs:
+  - "docs/**/*"
+alwaysApply: true
+---
+
+# Report & Verification Rule
+
+## Khi nào tạo report
+
+Sau mỗi **task lớn**, tạo file trong `docs/`:
+
+- `docs/SETUP_CURSOR_RULES_001.md`
+- `docs/SETUP_DOCKER_PROJECT_001.md`
+- `docs/FRONTEND_ACCESSIBLE_LAYOUT_001.md`
+
+## Cấu trúc report (15 mục)
+
+1. Mức độ hiểu task
+2. Tóm tắt yêu cầu
+3. Phạm vi đã thực hiện
+4. Danh sách file đã đọc
+5. Danh sách file đã tạo/sửa
+6. Thay đổi chính theo từng file
+7. Lý do thiết kế
+8. Accessibility impact
+9. Docker/runtime impact
+10. API impact (nếu có)
+11. Database impact (nếu có)
+12. Cách kiểm tra
+13. Kết quả kiểm tra
+14. Rủi ro còn lại
+15. Đề xuất tiếp theo
+
+## Nguyên tắc verify
+
+- Kết quả **trung thực**; không claim pass nếu chưa chạy.
+- Command fail → ghi rõ fail ở đâu.
+- Không chạy được → ghi lý do.
+- Chỉ phân tích source → ghi `expected verification`.
+
+## Output chat cuối (ngắn gọn)
+
+- Hiểu task
+- Đã làm
+- File đã tạo/sửa
+- Accessibility đã kiểm tra
+- Docker/runtime đã kiểm tra
+- Build/test pass/fail/chưa chạy
+- Report ở đâu
+- Rủi ro còn lại

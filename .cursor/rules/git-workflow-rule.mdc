@@ -1,0 +1,46 @@
+---
+description: "Branch, commit message và checklist trước merge cho AccessJob Hub"
+alwaysApply: true
+---
+
+# Git Workflow Rule
+
+## Branch
+
+| Loại | Pattern |
+|------|---------|
+| Chính | `main`, `dev` |
+| Task | `feat/...`, `fix/...`, `docs/...`, `chore/...`, `test/...` |
+
+## Commit message (Conventional Commits)
+
+```
+chore: initialize project structure
+feat: add accessible layout
+feat: implement jobs api
+feat: add docker compose setup
+fix: improve focus visible state
+fix: connect form error with aria-describedby
+docs: add WCAG checklist
+```
+
+## Không commit
+
+`.env`, secret, token, credential, `node_modules`, `target`, `dist`, file build thừa.
+
+## Checklist trước merge
+
+- [ ] Build FE (`npm run build`)
+- [ ] Build BE (`mvn clean package -DskipTests`)
+- [ ] `docker compose config` (nếu sửa Docker)
+- [ ] Keyboard navigation (nếu sửa UI)
+- [ ] Form label/error (nếu sửa form)
+- [ ] README/docs (nếu đổi behavior)
+
+## Tag/release đề xuất
+
+`v0.1-setup` → `v0.2-core-ui` → `v0.3-core-api` → `v0.4-integration` → `v1.0-demo`
+
+## Lưu ý
+
+Chỉ tạo commit khi user yêu cầu rõ ràng.

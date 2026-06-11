@@ -1,0 +1,58 @@
+---
+description: "Quy tắc React + TypeScript + Vite và accessibility cơ bản cho frontend"
+globs:
+  - "frontend/**/*"
+alwaysApply: false
+---
+
+# Frontend Rule
+
+## Stack
+
+React + TypeScript + Vite. Ưu tiên CSS Modules hoặc CSS thuần với CSS variables.
+
+## HTML & semantics
+
+- Semantic HTML trước ARIA.
+- `<button>` cho hành động; `<a>` hoặc React Router `<Link>` cho điều hướng.
+- Layout: `header`, `nav`, `main`, `footer`.
+- Mỗi page một `h1`; heading đúng cấp, không nhảy cấp.
+- Skip link đến `#main-content`.
+
+## Keyboard & focus
+
+- Mọi thành phần tương tác dùng được bằng bàn phím.
+- Focus visible rõ ràng; không xóa `outline` nếu chưa có thay thế (`:focus-visible`).
+- Tab order logic.
+
+## Form
+
+- Label visible cho mọi input; không dùng placeholder làm label duy nhất.
+- Error message có `id`; input lỗi có `aria-invalid="true"` và `aria-describedby`.
+- Loading/success/error dùng `role` hoặc `aria-live` phù hợp.
+
+## Hình ảnh & màu sắc
+
+- Ảnh thông tin: `alt` mô tả; ảnh trang trí: `alt=""`.
+- Không truyền đạt thông tin chỉ bằng màu.
+
+## Responsive
+
+- Mobile width 360px; zoom 200% không mất nội dung/chức năng.
+
+## UI tone
+
+- Chủ đạo: xanh dương đậm + trắng.
+- Xám trung tính cho border/background phụ.
+- Không dùng màu tương phản thấp.
+
+## Component
+
+- Props rõ ràng; có disabled/loading/error state khi phù hợp.
+- Không dùng UI library nặng nếu chưa có lý do rõ ràng.
+
+## Không được
+
+- `div`/`span` giả button hoặc link.
+- Hardcode màu/API URL trong component.
+- Bỏ qua accessibility khi thêm UI mới.

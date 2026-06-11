@@ -1,0 +1,47 @@
+---
+description: "Tiêu chuẩn WCAG 2.2 và kiểm tra accessibility cho UI và tài liệu"
+globs:
+  - "frontend/**/*"
+  - "docs/**/*"
+alwaysApply: false
+---
+
+# Accessibility & WCAG 2.2 Rule
+
+## Nguyên tắc POUR
+
+| Nguyên tắc | Trọng tâm |
+|------------|-----------|
+| Perceivable | Contrast, alt text, không chỉ dùng màu |
+| Operable | Keyboard, focus, target size, skip link |
+| Understandable | Label, error message, ngôn ngữ rõ ràng |
+| Robust | Semantic HTML, ARIA đúng, tương thích assistive tech |
+
+## Tiêu chí ưu tiên demo
+
+Keyboard navigation, focus visible, contrast, semantic HTML, alt text, form labels, error message, `aria-describedby`, `aria-invalid`, `aria-live`, skip link, screen reader support, không phụ thuộc màu, target size (WCAG 2.2), responsive/zoom.
+
+## Tự kiểm tra khi sửa UI
+
+1. Dùng được không cần chuột?
+2. Focus order có logic?
+3. Focus visible có rõ?
+4. Screen reader đọc được tên/role/state?
+5. Lỗi form có được thông báo?
+6. Màu sắc đủ contrast?
+7. Có thông tin chỉ truyền bằng màu?
+
+## ARIA
+
+- Không thêm ARIA nếu HTML native đã đủ.
+- ARIA sai nguy hiểm hơn không dùng ARIA.
+
+## Modal / dropdown / menu
+
+- Quản lý focus trap, phím Esc, return focus về trigger.
+
+## Claim & verify
+
+- **Không** claim đã verify screen reader nếu chưa test thật.
+- **Không** claim pass Lighthouse/axe nếu chưa chạy.
+- Ghi `expected verification` nếu chưa có môi trường test.

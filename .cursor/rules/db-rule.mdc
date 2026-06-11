@@ -1,0 +1,49 @@
+---
+description: "Quy tắc database PostgreSQL/H2, schema MVP và migration cho AccessJob Hub"
+globs:
+  - "backend/src/main/resources/**/*"
+  - "backend/src/main/java/**/repository/**/*"
+  - "backend/src/main/java/**/entity/**/*"
+  - "docker-compose.yml"
+alwaysApply: false
+---
+
+# Database Rule
+
+## Engine
+
+- **Docker/production:** PostgreSQL qua service name trong Docker Compose.
+- **Local/dev:** H2 nếu phù hợp MVP; ghi rõ trong README.
+
+## Schema MVP
+
+| Bảng | Mục đích |
+|------|----------|
+| `jobs` | Việc làm |
+| `resources` | Tài nguyên học tập |
+| `applications` | Form ứng tuyển/quan tâm |
+| `accessibility_feedback` | Feedback accessibility |
+
+- Schema đơn giản; tránh quan hệ phức tạp không cần thiết.
+- Không lưu dữ liệu nhạy cảm nếu không cần.
+
+## Query & performance
+
+- Danh sách có limit/filter/pagination hợp lý.
+- Không load dataset lớn vào memory; tránh N+1.
+
+## Config
+
+- DB config từ env (`SPRING_DATASOURCE_URL`, `DB_PASSWORD`, …).
+- Không hardcode password thật.
+- PostgreSQL trong Docker: khai báo volume để giữ dữ liệu demo.
+
+## Migration / seed
+
+- MVP: `schema.sql` + `data.sql` hoặc Flyway — ghi rõ trong README.
+- Seed nhỏ, đủ demo flow chính.
+
+## Không được
+
+- Schema over-engineered cho use case hiện tại.
+- Commit credential DB vào source.

@@ -1,0 +1,54 @@
+---
+description: "Checklist kiểm tra build, Docker, accessibility theo từng loại task"
+alwaysApply: true
+---
+
+# Testing Rule
+
+## Nguyên tắc
+
+Kiểm tra phù hợp theo task; không claim đã test nếu chưa chạy thật.
+
+## Front-end
+
+```bash
+npm run build
+npm run lint          # nếu đã cấu hình
+```
+
+Manual: keyboard, focus visible, form error, responsive 360px, zoom 200%.
+
+## Back-end
+
+```bash
+mvn clean package -DskipTests
+mvn test              # nếu có test
+curl http://localhost:8080/api/health
+```
+
+## Docker
+
+```bash
+docker compose config
+docker compose build
+docker compose up
+```
+
+## Accessibility
+
+- axe DevTools / Lighthouse — nếu có thể chạy.
+- Keyboard manual test — bắt buộc khi sửa UI.
+- Screen reader manual test — chỉ claim nếu đã test thật.
+
+## Khi chưa có môi trường
+
+Ghi trong report:
+
+- `Chưa chạy FE build vì chưa có frontend source`
+- `Chưa chạy BE build vì chưa có backend source`
+- `Chưa chạy Docker build vì chưa có Dockerfile/docker-compose đầy đủ`
+
+## Không được
+
+- Nói pass Lighthouse/axe/screen reader nếu chưa chạy.
+- Bỏ qua keyboard test khi sửa form hoặc navigation.
