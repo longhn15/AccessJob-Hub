@@ -50,3 +50,5 @@ Sau mỗi **task lớn**, tạo file trong `docs/`:
 - Build/test pass/fail/chưa chạy
 - Report ở đâu
 - Rủi ro còn lại
+
+Mỗi khi tạo report mới trong docs/, bắt buộc kiểm tra các report cùng nhóm tên đã tồn tại và tăng số thứ tự tuần tự: _001, _002, _003... Không được ghi đè report cũ; nếu đã có *_001.md thì report tiếp theo cùng nhóm phải là *_002.md.

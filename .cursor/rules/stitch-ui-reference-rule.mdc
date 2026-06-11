@@ -1,0 +1,124 @@
+---
+description: "Tham chiếu phong cách StitchAI Inclusive Utility — mapping nguồn → design tokens (không copy code HTML vào FE)"
+globs:
+  - "frontend/**/*"
+  - ".cursor/rules/ui-design-system-rule.mdc"
+alwaysApply: false
+---
+
+# Stitch UI Reference Rule
+
+## Nguồn StitchAI
+
+| File | Vai trò |
+|------|---------|
+| `stitch_accessjob_hub_accessibility_interface.zip` | Gói export StitchAI gốc (root repo) |
+| `accessjob_hub_design_documentation.md` | Tổng quan palette, typography, dev rules |
+| `inclusive_utility/DESIGN.md` | Theme **Inclusive Utility** — colors, type scale, spacing, components |
+| `accessjob_hub_home/code.html` | Home — hero, feature cards, nav, skip link |
+| `browse_jobs_accessjob_hub/code.html` | Jobs list — filter sidebar, JobCard, pagination |
+| `job_details_accessjob_hub/code.html` | Job detail — mô tả, apply CTA, meta |
+| `accessibility_accessjob_hub/code.html` | Accessibility statement — content sections |
+| `*/screen.png` | Screenshot đối chiếu layout/visual (không embed vào FE) |
+
+**Lưu ý:** File `code.html` dùng Tailwind CDN — **chỉ tham chiếu visual/structure**. Task FE phải implement bằng React + TypeScript + CSS variables theo `ui-design-system-rule.mdc`.
+
+## Design philosophy (Inclusive Utility)
+
+1. **Universal design** — clarity, cognitive ease, WCAG 2.2 AAA hướng tới.
+2. **High-contrast modernism** — institutional + modern SaaS; đáng tin cậy.
+3. **Content-first** — không trang trí thừa.
+4. **Affordance-first** — control tương tác phân biệt rõ nội dung tĩnh.
+5. **Intentional friction** — whitespace rộng, section rõ, tránh overload.
+
+## Mapping màu Stitch → CSS variables dự án
+
+Stitch `DESIGN.md` có palette Material rộng; dự án **chuẩn hóa** về token tối thiểu sau:
+
+| Stitch / HTML | Token dự án | Hex | Dùng cho |
+|---------------|-------------|-----|----------|
+| `primary-container` | `--color-primary` | `#003366` | Button, nav accent, card border |
+| `primary` | `--color-primary-dark` | `#001e40` | Hover/active đậm, heading accent |
+| `on-primary` | `--color-on-primary` | `#ffffff` | Chữ trên nền primary |
+| `surface-container-lowest` / white | `--color-background`, `--color-surface` | `#ffffff` | Nền trang, card |
+| `surface` / soft sections | `--color-surface-soft` | `#f0f7ff` | Hero bg, highlight block |
+| `on-background` / text | `--color-text` | `#1a1a1a` | Body, heading |
+| `on-surface-variant` | `--color-text-muted` | `#43474f` | Meta, phụ đề |
+| `outline-variant` | `--color-border` | `#c3c6d1` | Viền nhẹ, divider |
+| `error` (chuẩn hóa) | `--color-error` | `#d32f2f` | Lỗi form |
+| `success` (chuẩn hóa) | `--color-success` | `#2e7d32` | Thành công |
+| `tertiary-fixed` / `#FFD700` | `--color-focus` | `#ffd700` | Focus ring, skip link |
+
+**Không dùng** trực tiếp token Stitch phụ (`secondary-container`, `tertiary-container`, …) trong component — map về token trên nếu cần.
+
+## Mapping typography Stitch → dự án
+
+| Stitch token | Desktop | Mobile | Weight | → Semantic |
+|--------------|---------|--------|--------|------------|
+| `headline-xl` | 40px | 32px | 800 | `h1` |
+| `headline-lg` | 32px | 24px | 700 | `h2` |
+| `headline-md` | 24px | 24px | 700 | `h3`, card title |
+| `body-lg` | 20px | 20px | 400 | Lead / intro |
+| `body-md` | 18px | 18px | 400 | Body default |
+| `label-md` | 16px | 16px | 600 | Label, nav item |
+| `label-sm` | 14px | 14px | 700 | Footer, badge — **sàn** cho text UI |
+
+Font family: **Atkinson Hyperlegible Next** (Google Fonts trong Stitch mockup).
+
+## Mapping spacing Stitch → dự án
+
+| Stitch | rem | Token |
+|--------|-----|-------|
+| `margin-mobile` | 1rem (16px) | `--spacing-margin-mobile` |
+| `margin-desktop` | 2.5rem (40px) | `--spacing-margin-desktop` |
+| `gutter` | 1.5rem | `--spacing-gutter` |
+| `stack-sm` | 0.5rem | `--spacing-stack-sm` |
+| `stack-md` | 1.5rem | `--spacing-stack-md` |
+| `stack-lg` | 3rem | `--spacing-stack-lg` |
+| `touch-target-min` | 44px | `--spacing-touch-min` |
+
+Max-width container: **1280px** (`max-w-[1280px]` trong Stitch → `--layout-max-width`).
+
+## Mapping shape Stitch → dự án
+
+| Stitch `rounded` | rem | Token | Dùng |
+|------------------|-----|-------|------|
+| `sm` | 0.125 | `--radius-sm` | Checkbox nhỏ |
+| `DEFAULT` / `lg` | 0.25 | `--radius-md` | **Chủ đạo** — button, input, card |
+| `xl` | 0.5 | `--radius-lg` | Hero panel, section |
+| `full` | pill | `--radius-full` | Badge only |
+
+## Patterns trích từ screen (áp dụng khi implement)
+
+### Home (`accessjob_hub_home`)
+
+- Skip link → header sticky → hero 2 cột (copy + ảnh) → grid 4 feature cards.
+- Feature card: icon trong circle nền xanh nhạt, `h3`, body ngắn, border 2px primary.
+- CTA hero: primary filled + secondary outline `2px solid primary`.
+
+### Browse jobs (`browse_jobs_accessjob_hub`)
+
+- Layout: filter `aside` (border 2px) + danh sách `JobCard`.
+- JobCard: title link, company·location, badge work type, excerpt 2 dòng, block accessibility, "Xem chi tiết".
+- Pagination: nút 44×44, trang hiện tại nền primary.
+
+### Job details (`job_details_accessjob_hub`)
+
+- `h1` title, meta row, sections: mô tả, yêu cầu, hỗ trợ tiếp cận, sidebar apply CTA sticky (desktop).
+
+### Accessibility (`accessibility_accessjob_hub`)
+
+- Content page: heading hierarchy rõ, danh sách cam kết WCAG, link external có indicator.
+
+## Điều **không** làm khi đọc Stitch
+
+- Không copy Tailwind config vào `frontend/`.
+- Không thêm Tailwind CDN / Material Symbols chỉ vì mockup có (icon: dùng SVG inline hoặc thư viện nhẹ nếu task yêu cầu).
+- Không implement dark mode chỉ vì mockup có class `dark:` — MVP light theme trước.
+- Không embed ảnh Google CDN từ mockup — dùng asset local có `alt` phù hợp.
+
+## Khi nào đọc rule này
+
+- Task FE mới (page, component) — đối chiếu layout/pattern với `code.html` tương ứng.
+- Review UI — kiểm tra token mapping, không lệch màu Stitch đã chuẩn hóa.
+- Cập nhật design token — sửa `ui-design-system-rule.mdc` + `frontend/src/styles/` đồng bộ.

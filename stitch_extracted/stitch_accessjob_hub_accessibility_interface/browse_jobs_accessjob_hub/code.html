@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tìm kiếm việc làm tiếp cận - AccessJob Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dcd9d9",
+                        "primary-fixed": "#d5e3ff",
+                        "on-primary-fixed": "#001b3c",
+                        "on-secondary-fixed-variant": "#004491",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e5e2e1",
+                        "outline-variant": "#c3c6d1",
+                        "on-primary-container": "#799dd6",
+                        "primary-container": "#003366",
+                        "background": "#fcf9f8",
+                        "secondary-fixed-dim": "#acc7ff",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "surface-tint": "#3a5f94",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-tertiary-container": "#4c3e00",
+                        "secondary": "#115cb9",
+                        "on-surface-variant": "#43474f",
+                        "on-surface": "#1c1b1b",
+                        "surface-container-high": "#eae7e7",
+                        "inverse-primary": "#a7c8ff",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "surface": "#fcf9f8",
+                        "inverse-surface": "#313030",
+                        "on-secondary": "#ffffff",
+                        "primary": "#001e40",
+                        "outline": "#737780",
+                        "on-secondary-container": "#003370",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#f0eded",
+                        "on-tertiary-fixed": "#221b00",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffe16d",
+                        "tertiary-container": "#c9a900",
+                        "on-primary-fixed-variant": "#1f477b",
+                        "tertiary": "#705d00",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1c1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#659dfe",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#fcf9f8",
+                        "on-secondary-fixed": "#001a40",
+                        "surface-variant": "#e5e2e1",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-fixed-dim": "#e9c400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "2.5rem",
+                        "margin-mobile": "1rem",
+                        "stack-lg": "3rem",
+                        "stack-sm": "0.5rem",
+                        "stack-md": "1.5rem",
+                        "gutter": "1.5rem",
+                        "touch-target-min": "44px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Atkinson Hyperlegible Next"],
+                        "headline-lg": ["Atkinson Hyperlegible Next"],
+                        "headline-xl": ["Atkinson Hyperlegible Next"],
+                        "body-lg": ["Atkinson Hyperlegible Next"],
+                        "headline-lg-mobile": ["Atkinson Hyperlegible Next"],
+                        "headline-xl-mobile": ["Atkinson Hyperlegible Next"],
+                        "headline-md": ["Atkinson Hyperlegible Next"],
+                        "label-md": ["Atkinson Hyperlegible Next"],
+                        "body-md": ["Atkinson Hyperlegible Next"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["14px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "headline-xl": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "body-lg": ["20px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "700" }],
+                        "label-md": ["16px", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "body-md": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        /* Focus ring non-negotiable for accessibility */
+        *:focus-visible { outline: 3px solid #FFD700; outline-offset: 2px; }
+        .skip-link:focus { transform: translateY(0); }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col font-body-md">
+<!-- Skip to main content -->
+<a class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-[#FFD700] text-on-background px-4 py-2 z-50 font-label-md text-label-md font-bold" href="#main-content">
+        Chuyển đến nội dung chính
+    </a>
+<!-- TopNavBar Component -->
+<header class="bg-background dark:bg-background docked full-width top-0 border-b-2 border-primary dark:border-outline-variant flat no shadows">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-[1280px] mx-auto h-20">
+<div class="font-headline-md text-headline-md font-black text-primary dark:text-primary-fixed">
+                AccessJob Hub
+            </div>
+<nav class="hidden md:flex space-x-6 items-center">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-surface-container-highest transition-colors duration-200 focus:ring-3 focus:ring-tertiary focus:ring-offset-2 outline-none min-h-[44px] flex items-center px-2 rounded" href="#">Home</a>
+<a aria-current="page" class="font-label-md text-label-md text-primary dark:text-primary-fixed font-bold border-b-[3px] border-primary dark:border-primary-fixed pb-1 hover:bg-surface-container dark:hover:bg-surface-container-highest transition-colors duration-200 focus:ring-3 focus:ring-tertiary focus:ring-offset-2 outline-none min-h-[44px] flex items-center px-2 rounded" href="#">Jobs</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-surface-container-highest transition-colors duration-200 focus:ring-3 focus:ring-tertiary focus:ring-offset-2 outline-none min-h-[44px] flex items-center px-2 rounded" href="#">Resources</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-surface-container-highest transition-colors duration-200 focus:ring-3 focus:ring-tertiary focus:ring-offset-2 outline-none min-h-[44px] flex items-center px-2 rounded" href="#">Accessibility</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-surface-container-highest transition-colors duration-200 focus:ring-3 focus:ring-tertiary focus:ring-offset-2 outline-none min-h-[44px] flex items-center px-2 rounded" href="#">Feedback</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="Search" class="hidden md:flex items-center justify-center min-w-[44px] min-h-[44px] text-primary dark:text-primary-fixed hover:bg-surface-container rounded transition-colors focus:ring-3 focus:ring-[#FFD700] outline-none">
+<span aria-hidden="true" class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">search</span>
+</button>
+<a class="font-label-md text-label-md bg-primary text-on-primary px-6 py-3 rounded-DEFAULT hover:bg-primary-fixed-dim hover:text-on-primary-fixed transition-colors min-h-[44px] flex items-center font-bold focus:ring-3 focus:ring-[#FFD700] outline-none" href="#">
+                    Log In
+                </a>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg" id="main-content">
+<!-- Page Header -->
+<div class="mb-stack-lg">
+<h1 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-background">
+                Tìm kiếm việc làm tiếp cận
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-stack-sm max-w-3xl">
+                Khám phá các cơ hội nghề nghiệp được thiết kế với sự hỗ trợ tiếp cận là cốt lõi.
+            </p>
+</div>
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Filters Sidebar -->
+<aside aria-labelledby="filter-heading" class="w-full lg:w-1/3 xl:w-1/4 bg-surface p-6 border-2 border-outline-variant rounded-lg">
+<h2 class="font-headline-md text-headline-md mb-stack-md text-on-background flex items-center" id="filter-heading">
+<span aria-hidden="true" class="material-symbols-outlined mr-2">filter_list</span>
+                    Bộ lọc tìm kiếm
+                </h2>
+<form action="#" class="space-y-stack-md">
+<!-- Search Input -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="job-search">Từ khóa công việc</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-outline">
+<span class="material-symbols-outlined">search</span>
+</span>
+<input class="w-full pl-10 pr-4 py-3 border-2 border-[#1A1A1A] rounded-DEFAULT bg-surface-lowest text-on-surface font-body-md text-body-md focus:border-primary focus:ring-0 min-h-[44px]" id="job-search" name="q" placeholder="VD: Lập trình viên, Kế toán..." type="text"/>
+</div>
+</div>
+<!-- Location Filter -->
+<fieldset>
+<legend class="font-label-md text-label-md text-on-surface mb-2">Địa điểm</legend>
+<select aria-label="Chọn địa điểm" class="w-full px-4 py-3 border-2 border-[#1A1A1A] rounded-DEFAULT bg-surface-lowest text-on-surface font-body-md text-body-md focus:border-primary focus:ring-0 min-h-[44px]">
+<option value="">Tất cả địa điểm</option>
+<option value="hn">Hà Nội</option>
+<option value="hcm">Hồ Chí Minh</option>
+<option value="dn">Đà Nẵng</option>
+</select>
+</fieldset>
+<!-- Work Type -->
+<fieldset>
+<legend class="font-label-md text-label-md text-on-surface mb-3">Hình thức làm việc</legend>
+<div class="space-y-3">
+<label class="flex items-center space-x-3 cursor-pointer min-h-[44px] p-2 hover:bg-surface-container rounded">
+<input class="w-5 h-5 border-2 border-[#1A1A1A] rounded-sm text-primary focus:ring-[#FFD700] focus:ring-offset-2" name="work_type" type="checkbox" value="fulltime"/>
+<span class="font-body-md text-body-md text-on-surface">Toàn thời gian</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer min-h-[44px] p-2 hover:bg-surface-container rounded">
+<input class="w-5 h-5 border-2 border-[#1A1A1A] rounded-sm text-primary focus:ring-[#FFD700] focus:ring-offset-2" name="work_type" type="checkbox" value="parttime"/>
+<span class="font-body-md text-body-md text-on-surface">Bán thời gian</span>
+</label>
+</div>
+</fieldset>
+<!-- Accessibility Focus -->
+<fieldset>
+<legend class="font-label-md text-label-md text-on-surface mb-3">Yêu cầu hỗ trợ (Ví dụ)</legend>
+<div class="space-y-3">
+<label class="flex items-center space-x-3 cursor-pointer min-h-[44px] p-2 hover:bg-surface-container rounded">
+<input class="w-5 h-5 border-2 border-[#1A1A1A] rounded-sm text-primary focus:ring-[#FFD700] focus:ring-offset-2" name="remote" type="checkbox" value="true"/>
+<span class="font-body-md text-body-md text-on-surface">Cho phép làm từ xa (Remote)</span>
+</label>
+<label class="flex items-center space-x-3 cursor-pointer min-h-[44px] p-2 hover:bg-surface-container rounded">
+<input class="w-5 h-5 border-2 border-[#1A1A1A] rounded-sm text-primary focus:ring-[#FFD700] focus:ring-offset-2" name="screen_reader" type="checkbox" value="true"/>
+<span class="font-body-md text-body-md text-on-surface">Phần mềm tương thích trình đọc màn hình</span>
+</label>
+</div>
+</fieldset>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md font-bold py-3 px-4 rounded-DEFAULT hover:bg-on-primary-fixed transition-colors min-h-[44px] focus:ring-3 focus:ring-[#FFD700] outline-none" type="submit">
+                        Áp dụng bộ lọc
+                    </button>
+</form>
+</aside>
+<!-- Job Results List -->
+<section aria-labelledby="results-heading" class="w-full lg:w-2/3 xl:w-3/4 flex flex-col gap-stack-md">
+<div class="flex justify-between items-center mb-4 border-b-2 border-outline-variant pb-4">
+<h2 aria-live="polite" class="font-body-lg text-body-lg text-on-surface font-semibold" id="results-heading">
+                        Đang hiển thị 12 công việc
+                    </h2>
+<div class="flex items-center space-x-2">
+<label class="sr-only" for="sort-jobs">Sắp xếp theo</label>
+<select class="px-4 py-2 border-2 border-[#1A1A1A] rounded-DEFAULT bg-surface text-on-surface font-body-md text-body-md focus:border-primary focus:ring-[#FFD700] min-h-[44px]" id="sort-jobs">
+<option value="newest">Mới nhất</option>
+<option value="relevant">Phù hợp nhất</option>
+</select>
+</div>
+</div>
+<!-- Job Card 1 (Standard) -->
+<article class="bg-surface-lowest border-[1px] border-[#003366] rounded-lg p-6 hover:shadow-md transition-shadow relative focus-within:ring-3 focus-within:ring-[#FFD700] focus-within:border-transparent">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-1">
+<a class="focus:outline-none before:absolute before:inset-0" href="#">
+                                    Chuyên viên Phân tích Dữ liệu
+                                </a>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Công ty TNHH Giải pháp Số · Hà Nội</p>
+</div>
+<span aria-label="Hình thức làm việc: Từ xa" class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px] mr-1">home_work</span>
+                            Remote
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-4 line-clamp-2">
+                        Chúng tôi đang tìm kiếm một chuyên viên phân tích dữ liệu có khả năng làm việc độc lập. Công ty cung cấp thiết bị làm việc tại nhà và hỗ trợ tối đa các công cụ tiếp cận công nghệ.
+                    </p>
+<div class="bg-surface-container p-4 rounded-lg border-l-4 border-secondary mb-6">
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Hỗ trợ tiếp cận nổi bật</h4>
+<ul class="flex flex-wrap gap-2">
+<li class="inline-flex items-center bg-surface-lowest border border-outline px-2 py-1 rounded text-body-md font-body-md text-on-surface text-sm">
+<span class="material-symbols-outlined text-[16px] mr-1 text-primary">keyboard</span>
+                                Tương thích điều hướng bàn phím 100%
+                            </li>
+<li class="inline-flex items-center bg-surface-lowest border border-outline px-2 py-1 rounded text-body-md font-body-md text-on-surface text-sm">
+<span class="material-symbols-outlined text-[16px] mr-1 text-primary">record_voice_over</span>
+                                Hỗ trợ phần mềm đọc màn hình
+                            </li>
+</ul>
+</div>
+<div class="flex justify-end">
+<span class="inline-flex items-center font-label-md text-label-md text-primary font-bold z-10 relative pointer-events-none group-focus-within:text-secondary group-hover:underline">
+                            Xem chi tiết
+                            <span class="material-symbols-outlined ml-1">arrow_forward</span>
+</span>
+</div>
+</article>
+<!-- Job Card 2 (Focus State Demo) -->
+<article class="bg-surface-lowest border-2 border-primary rounded-lg p-6 shadow-md relative ring-3 ring-[#FFD700] ring-offset-2">
+<div class="absolute -top-3 -right-3 bg-[#FFD700] text-on-background font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm font-bold border border-outline">
+                        Trạng thái: Đang Focus
+                    </div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-1">
+<a class="focus:outline-none before:absolute before:inset-0" href="#">
+                                    Nhân viên Hỗ trợ Khách hàng Trực tuyến
+                                </a>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Tập đoàn Bán lẻ Toàn Cầu · Hồ Chí Minh</p>
+</div>
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px] mr-1">business</span>
+                            Tại văn phòng
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-4 line-clamp-2">
+                        Vị trí chăm sóc khách hàng qua kênh chat và email. Văn phòng được thiết kế không rào cản, có đường dốc cho xe lăn và khu vực nghỉ ngơi yên tĩnh.
+                    </p>
+<div class="bg-surface-container p-4 rounded-lg border-l-4 border-secondary mb-6">
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Hỗ trợ tiếp cận nổi bật</h4>
+<ul class="flex flex-wrap gap-2">
+<li class="inline-flex items-center bg-surface-lowest border border-outline px-2 py-1 rounded text-body-md font-body-md text-on-surface text-sm">
+<span class="material-symbols-outlined text-[16px] mr-1 text-primary">accessible</span>
+                                Văn phòng không rào cản (Wheelchair accessible)
+                            </li>
+<li class="inline-flex items-center bg-surface-lowest border border-outline px-2 py-1 rounded text-body-md font-body-md text-on-surface text-sm">
+<span class="material-symbols-outlined text-[16px] mr-1 text-primary">hearing</span>
+                                Môi trường làm việc giảm thiểu tiếng ồn
+                            </li>
+</ul>
+</div>
+<div class="flex justify-end">
+<span class="inline-flex items-center font-label-md text-label-md text-primary font-bold z-10 relative pointer-events-none underline">
+                            Xem chi tiết
+                            <span class="material-symbols-outlined ml-1">arrow_forward</span>
+</span>
+</div>
+</article>
+<!-- Job Card 3 -->
+<article class="bg-surface-lowest border-[1px] border-[#003366] rounded-lg p-6 hover:shadow-md transition-shadow relative focus-within:ring-3 focus-within:ring-[#FFD700] focus-within:border-transparent">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-1">
+<a class="focus:outline-none before:absolute before:inset-0" href="#">
+                                    Lập trình viên Web (Frontend)
+                                </a>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Tech Access Studio · Đà Nẵng</p>
+</div>
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px] mr-1">home_work</span>
+                            Remote / Hybrid
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-4 line-clamp-2">
+                        Tham gia phát triển các sản phẩm web tuân thủ tiêu chuẩn WCAG 2.2 AAA. Môi trường làm việc linh hoạt, đánh giá hiệu quả qua kết quả công việc.
+                    </p>
+<div class="bg-surface-container p-4 rounded-lg border-l-4 border-secondary mb-6">
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Hỗ trợ tiếp cận nổi bật</h4>
+<ul class="flex flex-wrap gap-2">
+<li class="inline-flex items-center bg-surface-lowest border border-outline px-2 py-1 rounded text-body-md font-body-md text-on-surface text-sm">
+<span class="material-symbols-outlined text-[16px] mr-1 text-primary">schedule</span>
+                                Thời gian làm việc linh hoạt
+                            </li>
+<li class="inline-flex items-center bg-surface-lowest border border-outline px-2 py-1 rounded text-body-md font-body-md text-on-surface text-sm">
+<span class="material-symbols-outlined text-[16px] mr-1 text-primary">closed_caption</span>
+                                Phụ đề thời gian thực trong mọi cuộc họp
+                            </li>
+</ul>
+</div>
+<div class="flex justify-end">
+<span class="inline-flex items-center font-label-md text-label-md text-primary font-bold z-10 relative pointer-events-none group-focus-within:text-secondary group-hover:underline">
+                            Xem chi tiết
+                            <span class="material-symbols-outlined ml-1">arrow_forward</span>
+</span>
+</div>
+</article>
+<!-- Empty State Placeholder (Commented out visually, but present for structure) -->
+<!-- 
+                <div class="bg-surface-container py-12 px-6 rounded-lg text-center border-2 border-dashed border-outline text-on-surface-variant">
+                    <span class="material-symbols-outlined text-5xl mb-4 text-outline" aria-hidden="true">search_off</span>
+                    <h3 class="font-headline-md text-headline-md mb-2 text-on-surface">Không tìm thấy kết quả phù hợp</h3>
+                    <p class="font-body-md text-body-md max-w-md mx-auto mb-6">Chúng tôi không tìm thấy công việc nào khớp với bộ lọc của bạn. Vui lòng thử thay đổi từ khóa hoặc xóa bớt các bộ lọc.</p>
+                    <button class="bg-primary text-on-primary font-label-md text-label-md font-bold py-3 px-6 rounded-DEFAULT hover:bg-primary-fixed-dim hover:text-on-primary-fixed transition-colors min-h-[44px] focus:ring-3 focus:ring-[#FFD700] outline-none">
+                        Xóa tất cả bộ lọc
+                    </button>
+                </div>
+                -->
+<!-- Pagination -->
+<nav aria-label="Phân trang" class="mt-8 flex justify-center border-t-2 border-outline-variant pt-6">
+<ul class="flex items-center space-x-2">
+<li>
+<button aria-label="Trang trước" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded border-2 border-outline text-on-surface hover:bg-surface-container focus:ring-3 focus:ring-[#FFD700] outline-none disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+</li>
+<li>
+<button aria-current="page" aria-label="Trang 1" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded border-2 border-primary bg-primary text-on-primary font-bold font-label-md text-label-md focus:ring-3 focus:ring-[#FFD700] outline-none">
+                                1
+                            </button>
+</li>
+<li>
+<button aria-label="Trang 2" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded border-2 border-outline text-on-surface hover:bg-surface-container font-label-md text-label-md focus:ring-3 focus:ring-[#FFD700] outline-none">
+                                2
+                            </button>
+</li>
+<li>
+<button aria-label="Trang 3" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded border-2 border-outline text-on-surface hover:bg-surface-container font-label-md text-label-md focus:ring-3 focus:ring-[#FFD700] outline-none">
+                                3
+                            </button>
+</li>
+<li>
+<span class="px-2 text-on-surface-variant">...</span>
+</li>
+<li>
+<button aria-label="Trang tiếp theo" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded border-2 border-outline text-on-surface hover:bg-surface-container focus:ring-3 focus:ring-[#FFD700] outline-none">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</li>
+</ul>
+</nav>
+</section>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface-container dark:bg-surface-container-highest full-width bottom-0 border-t-2 border-outline-variant dark:border-outline flat no shadows mt-auto">
+<div class="w-full py-stack-md px-margin-desktop mt-stack-lg max-w-[1280px] mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="font-label-md text-label-md font-bold text-primary dark:text-primary-fixed">
+                    AccessJob Hub
+                </div>
+<nav aria-label="Footer Navigation">
+<ul class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+<li>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:underline hover:text-primary dark:hover:text-primary-fixed transition-all min-h-[44px] flex items-center focus:ring-3 focus:ring-[#FFD700] outline-none px-2 rounded" href="#">Privacy Policy</a>
+</li>
+<li>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:underline hover:text-primary dark:hover:text-primary-fixed transition-all min-h-[44px] flex items-center focus:ring-3 focus:ring-[#FFD700] outline-none px-2 rounded" href="#">Terms of Service</a>
+</li>
+<li>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:underline hover:text-primary dark:hover:text-primary-fixed transition-all min-h-[44px] flex items-center focus:ring-3 focus:ring-[#FFD700] outline-none px-2 rounded" href="#">Contact Us</a>
+</li>
+<li>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:underline hover:text-primary dark:hover:text-primary-fixed transition-all min-h-[44px] flex items-center focus:ring-3 focus:ring-[#FFD700] outline-none px-2 rounded" href="#">Sitemap</a>
+</li>
+</ul>
+</nav>
+<div class="font-body-md text-body-md text-on-surface dark:text-on-surface text-center md:text-right text-sm">
+                    © 2024 AccessJob Hub. Committed to WCAG 2.2 AAA accessibility.
+                </div>
+</div>
+</div>
+</footer>
+</body></html>

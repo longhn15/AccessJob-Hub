@@ -1,56 +1,256 @@
 ---
-description: "Design system: màu sắc, typography, component states cho UI accessible"
+description: "Design system bắt buộc cho Front-end AccessJob Hub — tokens, component style, WCAG (chuẩn hóa từ StitchAI Inclusive Utility)"
 globs:
-  - "frontend/src/styles/**/*"
-  - "frontend/src/components/**/*"
+  - "frontend/src/**/*"
+  - "frontend/index.html"
 alwaysApply: false
 ---
 
-# UI Design System Rule
+# UI Design System Rule (bắt buộc cho mọi task Front-end)
 
-## Tone chủ đạo
+Nguồn tham chiếu: StitchAI `stitch_accessjob_hub_accessibility_interface.zip` — theme **Inclusive Utility**.  
+Chi tiết mapping: `.cursor/rules/stitch-ui-reference-rule.mdc`.
 
-Xanh dương đậm + trắng.
+**Phạm vi:** Mọi task sửa/thêm UI trong `frontend/` **phải** tuân thủ rule này. Không tự ý đổi tone màu hoặc token ngoài hệ dưới đây.
 
-## CSS variables (gợi ý token)
+## Tone & phong cách
+
+| Thuộc tính | Quy định |
+|------------|----------|
+| Màu chủ đạo | Xanh dương đậm `#003366` + trắng `#ffffff` |
+| Phong cách | Chuyên nghiệp, rõ ràng, inclusive, high-contrast, content-first |
+| Trang trí | Clarity over decoration — mọi yếu tố phục vụ chức năng |
+| Depth | Ưu tiên border / tonal separation; **không** shadow/blur nặng |
+| Motion | Không animation phức tạp; **bắt buộc** tôn trọng `prefers-reduced-motion` |
+
+## CSS variables bắt buộc
+
+Định nghĩa tập trung tại `frontend/src/styles/` (vd: `tokens.css`, `variables.css`).  
+**Mọi component phải dùng variables — không hardcode màu/spacing trong file component.**
 
 ```css
 :root {
-  --color-primary: /* xanh dương đậm, contrast ≥ 4.5:1 trên trắng */;
+  /* Color — core */
+  --color-primary: #003366;
+  --color-primary-dark: #001e40;
+  --color-on-primary: #ffffff;
   --color-background: #ffffff;
-  --color-text: /* gần đen hoặc xanh rất đậm */;
-  --color-focus: /* nổi bật, contrast cao */;
-  --color-error: /* đỏ đủ contrast */;
-  --color-success: /* xanh lá/xanh dương đủ contrast */;
-  --color-border: /* xám trung tính */;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f0f7ff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #43474f;
+  --color-border: #c3c6d1;
+  --color-error: #d32f2f;
+  --color-success: #2e7d32;
+  --color-focus: #ffd700;
+
+  /* Focus */
+  --focus-ring: 3px solid var(--color-focus);
+  --focus-offset: 2px;
+
+  /* Radius */
+  --radius-sm: 0.125rem;   /* 2px — phụ */
+  --radius-md: 0.25rem;    /* 4px — chủ đạo: button, input, card */
+  --radius-lg: 0.5rem;     /* 8px — section lớn */
+  --radius-full: 9999px;   /* chỉ Badge/Status chip */
+
+  /* Spacing */
+  --spacing-stack-sm: 0.5rem;
+  --spacing-stack-md: 1.5rem;
+  --spacing-stack-lg: 3rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-margin-mobile: 1rem;    /* 16px — gutter tối thiểu mobile */
+  --spacing-margin-desktop: 2.5rem; /* 40px — margin desktop rộng */
+  --spacing-touch-min: 44px;
+
+  /* Typography */
+  --font-family-base: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-size-body: 1.125rem;       /* 18px — tối thiểu body */
+  --font-size-body-lg: 1.25rem;     /* 20px */
+  --font-size-label: 1rem;          /* 16px */
+  --font-size-label-sm: 0.875rem;   /* 14px — nhãn/badge, không dùng cho body */
+  --line-height-body: 1.6;
+  --font-weight-heading: 700;
+  --font-weight-heading-strong: 800;
+
+  /* Layout */
+  --layout-max-width: 1280px;
 }
 ```
 
-## Quy tắc màu
+### Quy tắc màu
 
-- Tất cả màu định nghĩa bằng CSS variables trong `frontend/src/styles/`.
-- Không hardcode màu rải rác trong component.
-- Success/error không chỉ dùng màu — kèm text/icon.
+- Body text trên nền trắng: `--color-text` hoặc `--color-text-muted` (đủ contrast ≥ 4.5:1).
+- Primary button/link CTA: nền `--color-primary` hoặc `--color-primary-dark`, chữ `--color-on-primary`.
+- Nhóm nội dung / card phụ: `--color-surface-soft` trên `--color-background`.
+- Success/error/status: **không** chỉ dùng màu — kèm text và/hoặc icon.
 
-## Component states
+## Typography
 
-| Component | States bắt buộc |
-|-----------|-----------------|
-| Button | hover, `:focus-visible`, disabled |
-| Input | normal, focus, invalid, disabled |
-| Card/list | heading rõ ràng |
+| Token / vai trò | Size | Weight | Line-height | Ghi chú |
+|-----------------|------|--------|-------------|---------|
+| `h1` / headline-xl | 2rem mobile → 2.5rem desktop | 800 | 1.2 | Một `h1` mỗi page |
+| `h2` / headline-lg | 1.5rem mobile → 2rem desktop | 700 | 1.3 | |
+| `h3` / headline-md | 1.5rem | 700 | 1.4 | |
+| Body | **≥ 1.125rem (18px)** | 400 | **≥ 1.6** | Mặc định toàn site |
+| Body large | 1.25rem (20px) | 400 | 1.6 | Lead paragraph |
+| Label | 1rem (16px) | 600 | 1.4 | Form label, nav |
+| Label small | 0.875rem (14px) | 700 | 1.2 | Footer link, badge text — **không** dùng cho đoạn văn |
 
-## Typography & spacing
+- Font: `--font-family-base` — **Atkinson Hyperlegible Next** + system sans-serif fallback.
+- Heading: dùng **weight mạnh (700–800)** và semantic `<h1>`–`<h3>`; **không** chỉ phân cấp bằng màu.
+- Đơn vị: `rem` cho font-size và spacing (hỗ trợ zoom trình duyệt).
 
-- Khoảng cách dùng `rem`.
-- Nội dung chính ≥ 14px; không dùng text quá nhỏ.
+## Layout & spacing
+
+- Container nội dung: `max-width: var(--layout-max-width)` (1280px), căn giữa.
+- Padding ngang: `var(--spacing-margin-mobile)` mobile; `var(--spacing-margin-desktop)` desktop.
+- Khoảng cách dọc giữa section: `var(--spacing-stack-lg)`; trong section: `var(--spacing-stack-md)`.
+- Grid desktop 12 cột (khi cần); mobile 1 cột.
+- Touch target tối thiểu: **44×44px** (`min-height` + `min-width` hoặc padding đủ).
+
+## Focus style (bắt buộc)
+
+```css
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+```
+
+- **Không** `outline: none` / `outline: 0` nếu chưa có focus replacement tương đương.
+- Dùng `:focus-visible`, không style `:focus` cho mọi click chuột.
+- Focus ring: vàng `#ffd700`, 3px solid, offset 2px (cho phép 3px nếu cần trên nền phức tạp).
+- Card/link mở rộng vùng click: dùng `focus-within` để ring bao cả card.
 
 ## Motion
 
-- Không tạo animation gây xao nhãng.
-- Nếu có animation: tôn trọng `prefers-reduced-motion`.
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+```
 
-## Không được
+- Transition đơn giản (màu, background) ≤ 200ms nếu cần.
+- Không animation lặp vô hạn trên nội dung chính.
+- Không parallax, blur động, hoặc hiệu ứng gây xao nhãng.
 
-- Màu tương phản thấp cho text hoặc focus ring.
-- Animation tự động lặp vô hạn trên nội dung chính.
+## Component style bắt buộc
+
+### Button
+
+- Primary: `background: var(--color-primary)` (hoặc `--color-primary-dark`), `color: var(--color-on-primary)`.
+- `min-height: var(--spacing-touch-min)`; padding ngang ≥ 1rem; `border-radius: var(--radius-md)`.
+- `font-weight: 700`; `:hover` làm đậm nhẹ nền hoặc border inset — không chỉ đổi màu chữ.
+- `:focus-visible`: `--focus-ring` + `--focus-offset`.
+- `:disabled`: giảm contrast có chủ đích + `cursor: not-allowed` + không mất label.
+
+### LinkButton (CTA dạng link)
+
+- Visual giống Button primary/secondary khi là CTA chính.
+- **Semantic bắt buộc:** `<a href>` hoặc React Router `<Link>` — **không** `<button>` giả link điều hướng.
+
+### Input / Textarea / Select
+
+- Label visible luôn hiển thị; `htmlFor` / `id` khớp nhau.
+- Border: `2px solid var(--color-text)` hoặc `var(--color-border)`; `border-radius: var(--radius-md)`.
+- `min-height: var(--spacing-touch-min)` cho input/select.
+- Focus: border `--color-primary` + `--focus-ring`.
+- Invalid: `border-color: var(--color-error)`; `aria-invalid="true"`; `aria-describedby` trỏ ErrorMessage.
+- Placeholder: gợi ý phụ — **không** thay label.
+
+### ErrorMessage
+
+- Màu `--color-error` + **text mô tả** (tiếng Việt, cụ thể).
+- `id` duy nhất; gắn input qua `aria-describedby`.
+- Có thể kèm icon — không chỉ đổi màu viền.
+
+### ErrorSummary
+
+- Đặt **trước form** khi có ≥ 2 lỗi.
+- `role="alert"` hoặc `aria-live="assertive"`.
+- Liệt kê lỗi có link anchor tới field (`href="#field-id"`).
+
+### StatusMessage / Alert
+
+- Success: `--color-success` + text (vd: "Gửi thành công").
+- Error/info/warning: text + icon hoặc prefix — **không** chỉ background màu.
+- `role="status"` hoặc `aria-live="polite"` cho thông báo không nguy hiểm.
+
+### Card
+
+- Nền `--color-surface` hoặc `--color-surface-soft`.
+- Viền: `1px–2px solid var(--color-primary)` hoặc `var(--color-border)` — ưu tiên border hơn shadow.
+- `border-radius: var(--radius-md)`; heading card dùng `h2`/`h3`.
+- Card clickable: toàn card có `focus-within` ring; link phủ vùng (`::before` absolute) nếu cần.
+
+### JobCard / ResourceCard
+
+- Tiêu đề job/resource: `h3` + link; meta (công ty, địa điểm) dùng `--color-text-muted`.
+- Mô tả ngắn: tối đa ~2 dòng (`line-clamp` nếu cần) — **không** wall of text.
+- Badge hình thức (Remote, Full-time): dùng Badge — kèm text + icon.
+- Block "Hỗ trợ tiếp cận": nền `--color-surface-soft`, border-left 4px accent — danh sách ngắn, scannable.
+- CTA "Xem chi tiết": text + icon mũi tên; underline khi hover/focus.
+
+### Badge
+
+- Chỉ bổ trợ (work type, status phụ); **không** là tín hiệu duy nhất.
+- `border-radius: var(--radius-full)`; text ≥ `var(--font-size-label-sm)` + icon/text label.
+- `aria-label` nếu viết tắt (vd: "Remote" → "Hình thức: Từ xa").
+
+### SkipLink
+
+- Phần tử focusable **đầu tiên** trong DOM.
+- Ẩn mặc định; **hiện khi `:focus`** (không chỉ hover).
+- Nền `--color-focus`, chữ `--color-text`; border 2px; `z-index` cao.
+- Target: `#main-content`.
+
+### Navigation
+
+- `nav` + `aria-label`; mỗi link `min-height: var(--spacing-touch-min)`.
+- Active/current: `aria-current="page"` + **underline 3px** hoặc `border-bottom` — **không** chỉ đổi màu chữ.
+- Header: `border-bottom: 2px solid var(--color-primary)`; sticky tùy page.
+
+## Elevation & border
+
+- Card/container: border 1–2px thay shadow.
+- Shadow nhẹ chỉ cho modal/overlay (nếu có) — opacity cao, blur tối thiểu.
+- Section grouping: `--color-surface-soft` trên white.
+
+## WCAG — không được vi phạm
+
+| Cấm | Thay thế |
+|-----|----------|
+| Xóa outline không có replacement | `:focus-visible` + `--focus-ring` |
+| Placeholder làm label | `<label>` visible |
+| Text < 14px cho nội dung đọc | Body ≥ 18px; nhỏ nhất 14px chỉ label/badge |
+| Chữ xám nhạt contrast thấp | `--color-text-muted` (#43474f) |
+| Màu là tín hiệu duy nhất | Thêm text/icon/underline/pattern |
+| `div`/`span` giả button | `<button>`, `<a>`, `<Link>` |
+| Shadow/blur phức tạp | Border / tonal separation |
+| Hardcode `#003366`, `18px`, `44px` trong component | Dùng CSS variables |
+| Đổi sang palette khác (tím, xanh lá brand, v.v.) | Giữ token StitchAI đã chuẩn hóa |
+
+## Checklist trước khi hoàn thành task FE
+
+- [ ] Dùng CSS variables từ `frontend/src/styles/`, không hardcode màu/spacing
+- [ ] Font Atkinson Hyperlegible Next (fallback system sans-serif)
+- [ ] Body ≥ 18px / line-height ≥ 1.6
+- [ ] Focus ring vàng 3px visible trên mọi control tương tác
+- [ ] Touch target ≥ 44×44px
+- [ ] Form có label + error + `aria-*` đúng
+- [ ] Skip link hoạt động
+- [ ] Nav active có underline/border, không chỉ màu
+- [ ] `prefers-reduced-motion` respected
+- [ ] Không copy nguyên HTML/Tailwind từ Stitch — chuyển thành React + CSS Modules/variables
+
+## Liên kết rule khác
+
+- `.cursor/rules/frontend-rule.mdc` — semantic HTML, form, keyboard
+- `.cursor/rules/accessibility-wcag-rule.mdc` — WCAG 2.2
+- `.cursor/rules/stitch-ui-reference-rule.mdc` — mapping StitchAI → tokens
