@@ -9,7 +9,7 @@
 cp .env.example .env
 ```
 
-3. Chỉnh port hoặc CORS trong `.env` nếu cần (không commit file `.env`).
+3. Chỉnh port, CORS hoặc password MySQL trong `.env` nếu cần (không commit file `.env`).
 
 ## Lệnh cơ bản
 
@@ -43,12 +43,27 @@ docker compose up -d
 docker compose down
 ```
 
+Giữ dữ liệu MySQL (volume `mysql_data`):
+
+```bash
+docker compose down
+```
+
+Xóa cả volume (reset DB demo):
+
+```bash
+docker compose down -v
+```
+
 ## Services
 
 | Service | Port mặc định | Mô tả |
 |---------|---------------|-------|
-| `frontend` | 3000 → 80 | Nginx phục vụ React static |
+| `mysql` | nội bộ 3306 | MySQL 8, volume `mysql_data` |
 | `backend` | 8080 | Spring Boot API |
+| `frontend` | 3000 → 80 | Nginx phục vụ React static |
+
+Thứ tự khởi động: `mysql` (healthy) → `backend` (healthy) → `frontend`.
 
 ## Kiểm tra hoạt động
 
@@ -60,27 +75,34 @@ Response mẫu:
 
 ```json
 {
-  "status": "UP",
   "service": "accessjob-hub-api",
-  "timestamp": "2026-06-11T10:00:00Z"
+  "timestamp": "2026-06-11T10:00:00Z",
+  "database": "UP",
+  "status": "UP"
 }
 ```
 
 ## Networking
 
+- Backend connect MySQL qua service name `mysql:3306` (không dùng `localhost` trong container).
 - Frontend container proxy `/api/*` tới service `backend:8080`.
-- Không dùng `localhost` giữa các container.
 - Biến `CORS_ALLOWED_ORIGINS` cấu hình origin được phép gọi API.
 
 ## Database
 
-Bước skeleton **chưa** có MySQL container. Khi tích hợp DB, bổ sung service `mysql` (image `mysql:8`) với volume và uncomment các biến `MYSQL_*` / `SPRING_DATASOURCE_*` trong `.env.example`.
+- Image: `mysql:8`
+- Charset: `utf8mb4` / `utf8mb4_unicode_ci`
+- Volume: `mysql_data` — dữ liệu demo giữ khi `docker compose down`
+- Biến env: `MYSQL_*`, `SPRING_DATASOURCE_*` trong `.env.example`
+- Port MySQL **không** expose ra host mặc định; uncomment `MYSQL_PORT` trong `.env` nếu cần debug
 
 ## Xử lý sự cố
 
 | Vấn đề | Gợi ý |
 |--------|-------|
 | Port đã được dùng | Đổi `FRONTEND_PORT` / `BACKEND_PORT` trong `.env` |
+| Backend không start | `docker compose logs backend`, kiểm tra MySQL đã healthy |
+| MySQL unhealthy | `docker compose logs mysql`, đợi `start_period` 40s |
+| `database: DOWN` trong health | Kiểm tra `SPRING_DATASOURCE_*` khớp `MYSQL_*` |
 | Frontend không load | `docker compose logs frontend` |
-| Backend unhealthy | `docker compose logs backend`, kiểm tra port 8080 |
 | Build chậm trên máy yếu | Chỉ build service cần: `docker compose build backend` |
