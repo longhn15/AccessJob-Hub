@@ -20,7 +20,7 @@ Project phải chạy được bằng `docker compose up`.
 ## Networking
 
 - Service trong container **không** gọi nhau qua `localhost`.
-- Backend connect DB bằng **service name** (vd: `postgres`).
+- Backend connect DB bằng **service name** (vd: `mysql`).
 - Frontend gọi API qua env (`VITE_API_URL` hoặc proxy config).
 
 ## Frontend static + Nginx
@@ -56,4 +56,4 @@ Nếu không chạy được: ghi lý do và `expected verification` trong repor
 
 ## Service đề xuất MVP
 
-`frontend`, `backend`, `postgres` (volume cho data).
+`frontend`, `backend`, `mysql` (volume cho data).

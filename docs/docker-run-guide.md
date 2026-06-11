@@ -74,7 +74,7 @@ Response mẫu:
 
 ## Database
 
-Bước skeleton **chưa** có PostgreSQL. Khi tích hợp DB, bổ sung service `postgres` và uncomment các biến trong `.env.example`.
+Bước skeleton **chưa** có MySQL container. Khi tích hợp DB, bổ sung service `mysql` (image `mysql:8`) với volume và uncomment các biến `MYSQL_*` / `SPRING_DATASOURCE_*` trong `.env.example`.
 
 ## Xử lý sự cố
 

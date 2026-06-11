@@ -69,7 +69,7 @@
 
 ### `db-rule.mdc`
 
-- Schema MVP 4 bảng, PostgreSQL/H2, env config, volume, migration đơn giản.
+- Schema MVP 4 bảng, MySQL/H2, env config, volume, migration đơn giản.
 
 ### `docker-runtime-rule.mdc`
 

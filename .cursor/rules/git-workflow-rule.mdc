@@ -9,7 +9,7 @@ alwaysApply: true
 
 | Loại | Pattern |
 |------|---------|
-| Chính | `main`, `dev` |
+| Chính | `main`, `develop` |
 | Task | `feat/...`, `fix/...`, `docs/...`, `chore/...`, `test/...` |
 
 ## Commit message (Conventional Commits)

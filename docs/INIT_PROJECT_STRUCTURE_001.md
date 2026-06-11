@@ -9,7 +9,7 @@
 - Cấu trúc `frontend/`, `backend/`, Dockerfile, `docker-compose.yml`, `.env.example`, `.gitignore`, README.
 - Trang chủ semantic layout + skip link, tone xanh dương đậm/trắng.
 - `GET /api/health` hoạt động.
-- Docker Compose chạy frontend + backend (không PostgreSQL ở bước này).
+- Docker Compose chạy frontend + backend (không MySQL ở bước này).
 - Report và commit `chore: initialize project structure`.
 
 ## 3. Phạm vi đã thực hiện
@@ -118,7 +118,7 @@
 
 ## 11. Database impact
 
-Không có — chưa tích hợp PostgreSQL/H2.
+Không có — chưa tích hợp MySQL/H2.
 
 ## 12. Cách kiểm tra
 
@@ -162,6 +162,6 @@ docker compose down
 ## 15. Đề xuất tiếp theo
 
 1. Thêm React Router và các route MVP (jobs, resources, …).
-2. Tích hợp PostgreSQL + entity/seed.
+2. Tích hợp MySQL + entity/seed.
 3. Implement `GET /api/jobs` và trang danh sách việc làm accessible.
 4. Tạo `docs/WCAG_CHECKLIST.md` và chạy axe/Lighthouse.

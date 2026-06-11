@@ -25,7 +25,7 @@ alwaysApply: true
 |-------|-----------|
 | Front-end | React + TypeScript + Vite |
 | Back-end | Java Spring Boot |
-| Database | PostgreSQL (Docker); H2 cho local/dev nếu cần |
+| Database | MySQL (Docker); H2 cho local/dev nếu thật sự cần |
 | Runtime | Docker / Docker Compose |
 | UI tone | Xanh dương đậm và trắng |
 

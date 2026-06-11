@@ -1,5 +1,5 @@
 ---
-description: "Quy tắc database PostgreSQL/H2, schema MVP và migration cho AccessJob Hub"
+description: "Quy tắc database MySQL/H2, schema MVP và migration cho AccessJob Hub"
 globs:
   - "backend/src/main/resources/**/*"
   - "backend/src/main/java/**/repository/**/*"
@@ -12,8 +12,14 @@ alwaysApply: false
 
 ## Engine
 
-- **Docker/production:** PostgreSQL qua service name trong Docker Compose.
-- **Local/dev:** H2 nếu phù hợp MVP; ghi rõ trong README.
+- **Docker/production:** MySQL qua service name trong Docker Compose (vd: `mysql`).
+- **Local/dev:** H2 nếu thật sự cần cho dev nhanh; ghi rõ trong README. Docker runtime ưu tiên MySQL.
+
+## MySQL conventions
+
+- JDBC URL mẫu: `jdbc:mysql://mysql:3306/accessjobhub?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC`
+- Charset/collation: `utf8mb4` / `utf8mb4_unicode_ci` (hỗ trợ tiếng Việt).
+- Config từ env: `MYSQL_DATABASE`, `MYSQL_USER`, `MYSQL_PASSWORD`, `SPRING_DATASOURCE_URL`.
 
 ## Schema MVP
 
@@ -36,7 +42,7 @@ alwaysApply: false
 
 - DB config từ env (`SPRING_DATASOURCE_URL`, `DB_PASSWORD`, …).
 - Không hardcode password thật.
-- PostgreSQL trong Docker: khai báo volume để giữ dữ liệu demo.
+- MySQL trong Docker: khai báo volume để giữ dữ liệu demo; không expose port ra host nếu không cần debug.
 
 ## Migration / seed
 

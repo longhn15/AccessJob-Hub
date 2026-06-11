@@ -8,6 +8,7 @@ Website hỗ trợ người khuyết tật tiếp cận thông tin việc làm, 
 |-------|-----------|
 | Front-end | React + TypeScript + Vite |
 | Back-end | Java Spring Boot 3 |
+| Database | MySQL (Docker); H2 cho local/dev nếu thật sự cần |
 | Runtime | Docker / Docker Compose |
 
 ## Cấu trúc monorepo
