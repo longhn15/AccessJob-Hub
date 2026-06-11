@@ -85,6 +85,18 @@ docker compose down -v
 docker compose up --build
 ```
 
+## API endpoints
+
+Chi tiết: [docs/api-endpoints.md](docs/api-endpoints.md)
+
+| Method | Endpoint | Mô tả |
+|--------|----------|-------|
+| `GET` | `/api/health` | Health check + trạng thái database |
+| `GET` | `/api/jobs` | Danh sách việc làm (filter, limit) |
+| `GET` | `/api/jobs/{id}` | Chi tiết việc làm |
+| `GET` | `/api/resources` | Danh sách tài nguyên (filter, limit) |
+| `GET` | `/api/resources/{id}` | Chi tiết tài nguyên |
+
 ## Trạng thái MVP
 
 - [x] Skeleton monorepo + Docker
@@ -92,7 +104,7 @@ docker compose up --build
 - [x] Flyway migration + seed data demo (jobs, resources)
 - [x] Trang chủ accessible (semantic layout, skip link)
 - [x] `GET /api/health` (kèm trạng thái database)
-- [ ] Danh sách việc làm
+- [x] `GET /api/jobs`, `GET /api/jobs/{id}` (read-only)
+- [x] `GET /api/resources`, `GET /api/resources/{id}` (read-only)
 - [ ] Form ứng tuyển
-- [ ] Tài nguyên học tập
 - [ ] Accessibility Statement
