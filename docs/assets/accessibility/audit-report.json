@@ -1,0 +1,162 @@
+{
+  "timestamp": "2026-06-12T14:46:20.337Z",
+  "baseUrl": "http://localhost:3000",
+  "routes": {
+    "/": {
+      "status": 200,
+      "h1Count": 1,
+      "landmarks": {
+        "header": true,
+        "nav": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    "/jobs": {
+      "status": 200,
+      "h1Count": 1,
+      "landmarks": {
+        "header": true,
+        "nav": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    "/jobs/1": {
+      "status": 200,
+      "h1Count": 1,
+      "landmarks": {
+        "header": true,
+        "nav": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    "/resources": {
+      "status": 200,
+      "h1Count": 1,
+      "landmarks": {
+        "header": true,
+        "nav": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    "/resources/1": {
+      "status": 200,
+      "h1Count": 1,
+      "landmarks": {
+        "header": true,
+        "nav": true,
+        "main": true,
+        "footer": true
+      }
+    },
+    "/accessibility": {
+      "status": 200,
+      "h1Count": 1,
+      "landmarks": {
+        "header": true,
+        "nav": true,
+        "main": true,
+        "footer": true
+      }
+    }
+  },
+  "keyboard": {
+    "skipLinkReachable": true,
+    "skipLinkSteps": 1,
+    "skipLinkFocusesMain": true,
+    "jobsFilterKeywordReachable": true,
+    "jobCardLinkReachable": true,
+    "jobDetailOpenedViaKeyboard": true,
+    "applicationForm": {
+      "errorSummaryShown": true,
+      "fullNameAriaInvalid": true,
+      "emailAriaInvalid": true,
+      "focusAfterMultiError": {
+        "tag": "div",
+        "id": null,
+        "name": "Có 2 lỗi trong form. Vui lòng sửa các trường sau:Họ và tên: Họ và tên không được",
+        "outline": "none",
+        "outlineWidth": "3px"
+      },
+      "successMessageShown": true
+    },
+    "feedbackForm": {
+      "errorSummaryShown": true,
+      "successMessageShown": true
+    },
+    "navAriaCurrentOnAccessibility": true,
+    "focusRingSample": {
+      "outlineWidth": "3px",
+      "outlineStyle": "none",
+      "outlineColor": "rgb(255, 255, 255)"
+    }
+  },
+  "visual": {
+    "mobile360_": {
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false
+    },
+    "mobile360_jobs": {
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "horizontalOverflow": false
+    },
+    "mobile360_accessibility": {
+      "scrollWidth": 381,
+      "clientWidth": 360,
+      "horizontalOverflow": true
+    },
+    "zoom200_jobs": {
+      "scrollWidth": 640,
+      "clientWidth": 640,
+      "horizontalOverflow": false
+    },
+    "activeNavJobs": {
+      "text": "Việc làm",
+      "borderBottom": "3px",
+      "textDecoration": "underline",
+      "ariaCurrent": "page"
+    },
+    "touchTargetFilterSubmit": {
+      "width": 268,
+      "height": 44
+    }
+  },
+  "axe": {
+    "/": {
+      "violationCount": 0,
+      "violations": [],
+      "passCount": 18
+    },
+    "/jobs": {
+      "violationCount": 0,
+      "violations": [],
+      "passCount": 26
+    },
+    "/jobs/1": {
+      "violationCount": 0,
+      "violations": [],
+      "passCount": 22
+    },
+    "/resources": {
+      "violationCount": 0,
+      "violations": [],
+      "passCount": 25
+    },
+    "/resources/1": {
+      "violationCount": 0,
+      "violations": [],
+      "passCount": 18
+    },
+    "/accessibility": {
+      "violationCount": 0,
+      "violations": [],
+      "passCount": 26
+    }
+  },
+  "errors": []
+}

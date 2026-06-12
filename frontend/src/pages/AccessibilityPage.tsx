@@ -104,25 +104,27 @@ export function AccessibilityPage() {
         <p>
           Các phần sau sẽ được kiểm thử định kỳ trong quá trình phát triển MVP:
         </p>
-        <table className={styles.table}>
-          <caption className={styles.srOnly}>
-            Bảng phương pháp kiểm thử accessibility và phạm vi
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Phương pháp</th>
-              <th scope="col">Phạm vi kiểm thử</th>
-            </tr>
-          </thead>
-          <tbody>
-            {TESTING.map((row) => (
-              <tr key={row.method}>
-                <td>{row.method}</td>
-                <td>{row.scope}</td>
+        <div className={styles.tableWrapper}>
+          <table className={styles.table}>
+            <caption className={styles.srOnly}>
+              Bảng phương pháp kiểm thử accessibility và phạm vi
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Phương pháp</th>
+                <th scope="col">Phạm vi kiểm thử</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {TESTING.map((row) => (
+                <tr key={row.method}>
+                  <td>{row.method}</td>
+                  <td>{row.scope}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section aria-labelledby="feedback-heading">
