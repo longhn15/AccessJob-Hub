@@ -37,7 +37,15 @@ export function ErrorSummary({ errors, formId }: ErrorSummaryProps) {
       <ul className={styles.errorSummaryList}>
         {entries.map(([field, message]) => (
           <li key={field}>
-            <a href={`#${field}`}>
+            <a
+              href={`#${field}`}
+              onClick={(event) => {
+                event.preventDefault()
+                const control = document.getElementById(field)
+                control?.focus()
+                control?.scrollIntoView({ block: 'nearest' })
+              }}
+            >
               {FIELD_LABELS[field] ?? field}: {message}
             </a>
           </li>

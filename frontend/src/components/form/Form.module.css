@@ -39,6 +39,7 @@
   background-color: var(--color-background);
   color: var(--color-text);
   width: 100%;
+  scroll-margin-top: calc(var(--spacing-touch-min) + var(--spacing-stack-md));
 }
 
 .control:focus-visible {

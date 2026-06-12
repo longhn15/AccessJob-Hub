@@ -38,6 +38,7 @@
   font-size: var(--font-size-body);
   background-color: var(--color-background);
   color: var(--color-text);
+  scroll-margin-top: calc(var(--spacing-touch-min) + var(--spacing-stack-md));
 }
 
 .field input:focus-visible {

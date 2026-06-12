@@ -1,7 +1,12 @@
 import { type FormEvent, useId, useRef, useState } from 'react'
 import { createApplication } from '../../api/applications'
 import { ApiError } from '../../types/api'
-import { countFieldErrors, mapApiFieldErrors, type FieldErrors } from '../../utils/formErrors'
+import {
+  countFieldErrors,
+  focusFormErrors,
+  mapApiFieldErrors,
+  type FieldErrors,
+} from '../../utils/formErrors'
 import { isBlank, isValidEmail, LIMITS } from '../../utils/validation'
 import { ErrorSummary } from '../form/ErrorSummary'
 import { getFieldAriaProps } from '../form/fieldAria'
@@ -86,7 +91,9 @@ export function ApplicationForm({ jobId, jobTitle }: ApplicationFormProps) {
     const clientErrors = validateClient(values)
     if (countFieldErrors(clientErrors) > 0) {
       setFieldErrors(clientErrors)
-      errorSummaryRef.current?.focus()
+      requestAnimationFrame(() =>
+        focusFormErrors(clientErrors, errorSummaryRef.current),
+      )
       return
     }
 
@@ -116,7 +123,9 @@ export function ApplicationForm({ jobId, jobTitle }: ApplicationFormProps) {
           const apiErrors = mapApiFieldErrors(err.body)
           if (countFieldErrors(apiErrors) > 0) {
             setFieldErrors(apiErrors)
-            errorSummaryRef.current?.focus()
+            requestAnimationFrame(() =>
+              focusFormErrors(apiErrors, errorSummaryRef.current),
+            )
           } else {
             setFormError(err.message)
           }
@@ -158,7 +167,14 @@ export function ApplicationForm({ jobId, jobTitle }: ApplicationFormProps) {
         className={styles.form}
         onSubmit={handleSubmit}
         noValidate
-        aria-describedby={successMessage ? `${formId}-success` : undefined}
+        aria-describedby={
+          [
+            showErrorSummary ? `${formId}-error-summary` : undefined,
+            successMessage ? `${formId}-success` : undefined,
+          ]
+            .filter(Boolean)
+            .join(' ') || undefined
+        }
       >
         {showErrorSummary && (
           <div ref={errorSummaryRef} tabIndex={-1}>

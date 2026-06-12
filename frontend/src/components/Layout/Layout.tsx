@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useMatch } from 'react-router-dom'
 import styles from './Layout.module.css'
 
 interface LayoutProps {
@@ -12,6 +12,21 @@ const NAV_ITEMS = [
   { to: '/resources', label: 'Tài nguyên', end: false },
   { to: '/accessibility', label: 'Accessibility', end: false },
 ] as const
+
+function NavItem({ to, end, label }: { to: string; end?: boolean; label: string }) {
+  const isActive = !!useMatch({ path: to, end: end ?? false })
+
+  return (
+    <NavLink
+      to={to}
+      end={end}
+      className={isActive ? `${styles.navLink} ${styles.navLinkActive}` : styles.navLink}
+      aria-current={isActive ? 'page' : undefined}
+    >
+      {label}
+    </NavLink>
+  )
+}
 
 export function Layout({ children }: LayoutProps) {
   return (
@@ -29,15 +44,7 @@ export function Layout({ children }: LayoutProps) {
             <ul className={styles.navList}>
               {NAV_ITEMS.map((item) => (
                 <li key={item.to}>
-                  <NavLink
-                    to={item.to}
-                    end={item.end}
-                    className={({ isActive }) =>
-                      isActive ? `${styles.navLink} ${styles.navLinkActive}` : styles.navLink
-                    }
-                  >
-                    {item.label}
-                  </NavLink>
+                  <NavItem to={item.to} end={item.end} label={item.label} />
                 </li>
               ))}
             </ul>

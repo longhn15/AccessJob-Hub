@@ -79,7 +79,12 @@ export function JobDetailPage() {
   }
 
   if (loading) {
-    return <LoadingState label="Đang tải chi tiết việc làm…" />
+    return (
+      <div className={styles.page}>
+        <h1>Chi tiết việc làm</h1>
+        <LoadingState label="Đang tải chi tiết việc làm…" />
+      </div>
+    )
   }
 
   if (error || !job) {

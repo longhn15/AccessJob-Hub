@@ -1,7 +1,12 @@
 import { type FormEvent, useId, useRef, useState } from 'react'
 import { createAccessibilityFeedback } from '../../api/accessibilityFeedback'
 import { ApiError } from '../../types/api'
-import { countFieldErrors, mapApiFieldErrors, type FieldErrors } from '../../utils/formErrors'
+import {
+  countFieldErrors,
+  focusFormErrors,
+  mapApiFieldErrors,
+  type FieldErrors,
+} from '../../utils/formErrors'
 import { isBlank, isValidEmail, LIMITS } from '../../utils/validation'
 import { ErrorSummary } from '../form/ErrorSummary'
 import { getFieldAriaProps } from '../form/fieldAria'
@@ -84,7 +89,9 @@ export function AccessibilityFeedbackForm() {
     const clientErrors = validateClient(values)
     if (countFieldErrors(clientErrors) > 0) {
       setFieldErrors(clientErrors)
-      errorSummaryRef.current?.focus()
+      requestAnimationFrame(() =>
+        focusFormErrors(clientErrors, errorSummaryRef.current),
+      )
       return
     }
 
@@ -105,7 +112,9 @@ export function AccessibilityFeedbackForm() {
           const apiErrors = mapApiFieldErrors(err.body)
           if (countFieldErrors(apiErrors) > 0) {
             setFieldErrors(apiErrors)
-            errorSummaryRef.current?.focus()
+            requestAnimationFrame(() =>
+              focusFormErrors(apiErrors, errorSummaryRef.current),
+            )
           } else {
             setFormError(err.message)
           }
@@ -139,7 +148,15 @@ export function AccessibilityFeedbackForm() {
         <StatusMessage variant="error" message={formError} id={`${formId}-form-error`} />
       )}
 
-      <form id={formId} className={styles.form} onSubmit={handleSubmit} noValidate>
+      <form
+        id={formId}
+        className={styles.form}
+        onSubmit={handleSubmit}
+        noValidate
+        aria-describedby={
+          showErrorSummary ? `${formId}-error-summary` : undefined
+        }
+      >
         {showErrorSummary && (
           <div ref={errorSummaryRef} tabIndex={-1}>
             <ErrorSummary errors={fieldErrors} formId={formId} />

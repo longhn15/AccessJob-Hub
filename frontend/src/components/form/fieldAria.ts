@@ -5,7 +5,7 @@ export function getFieldAriaProps(id: string, error?: string, hint?: string) {
 
   return {
     id,
-    'aria-invalid': !!error,
+    'aria-invalid': error ? true : undefined,
     'aria-describedby': describedBy,
   }
 }

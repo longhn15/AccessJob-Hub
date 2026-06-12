@@ -32,7 +32,11 @@ export function ResourceCard({ resource }: ResourceCardProps) {
       )}
 
       <p className={styles.cta}>
-        <Link to={`/resources/${resource.id}`} className={styles.detailLink}>
+        <Link
+          to={`/resources/${resource.id}`}
+          className={styles.detailLink}
+          aria-label={`Xem chi tiết: ${resource.title}`}
+        >
           Xem chi tiết
           <span aria-hidden="true"> →</span>
         </Link>

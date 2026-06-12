@@ -69,7 +69,12 @@ export function ResourceDetailPage() {
   }
 
   if (loading) {
-    return <LoadingState label="Đang tải chi tiết tài nguyên…" />
+    return (
+      <div className={styles.page}>
+        <h1>Chi tiết tài nguyên</h1>
+        <LoadingState label="Đang tải chi tiết tài nguyên…" />
+      </div>
+    )
   }
 
   if (error || !resource) {

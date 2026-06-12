@@ -51,7 +51,11 @@ export function JobCard({ job }: JobCardProps) {
       )}
 
       <p className={styles.cta}>
-        <Link to={`/jobs/${job.id}`} className={styles.detailLink}>
+        <Link
+          to={`/jobs/${job.id}`}
+          className={styles.detailLink}
+          aria-label={`Xem chi tiết: ${job.title}`}
+        >
           Xem chi tiết
           <span aria-hidden="true"> →</span>
         </Link>
