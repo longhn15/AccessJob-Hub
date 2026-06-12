@@ -1,0 +1,53 @@
+:root {
+  /* Color — core */
+  --color-primary: #003366;
+  --color-primary-dark: #001e40;
+  --color-on-primary: #ffffff;
+  --color-background: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f0f7ff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #43474f;
+  --color-border: #c3c6d1;
+  --color-error: #d32f2f;
+  --color-success: #2e7d32;
+  --color-focus: #ffd700;
+
+  /* Focus */
+  --focus-ring: 3px solid var(--color-focus);
+  --focus-offset: 2px;
+
+  /* Radius */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --spacing-stack-sm: 0.5rem;
+  --spacing-stack-md: 1.5rem;
+  --spacing-stack-lg: 3rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-margin-mobile: 1rem;
+  --spacing-margin-desktop: 2.5rem;
+  --spacing-touch-min: 44px;
+
+  /* Typography */
+  --font-family-base: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-size-body: 1.125rem;
+  --font-size-body-lg: 1.25rem;
+  --font-size-label: 1rem;
+  --font-size-label-sm: 0.875rem;
+  --font-size-h1-mobile: 2rem;
+  --font-size-h1-desktop: 2.5rem;
+  --font-size-h2-mobile: 1.5rem;
+  --font-size-h2-desktop: 2rem;
+  --font-size-h3: 1.5rem;
+  --line-height-body: 1.6;
+  --font-weight-heading: 700;
+  --font-weight-heading-strong: 800;
+
+  /* Layout */
+  --layout-max-width: 1280px;
+}

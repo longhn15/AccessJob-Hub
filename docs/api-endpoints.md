@@ -3,6 +3,16 @@
 Base URL (Docker): `http://localhost:8080`  
 Base URL (qua Nginx FE): `http://localhost:3000/api` (proxy tới backend)
 
+### Front-end usage
+
+- FE đọc API qua `VITE_API_URL` (mặc định `/api`).
+- Dev (`npm run dev`): Vite proxy `/api` → `VITE_API_PROXY_TARGET` (mặc định `http://localhost:8080`).
+- Docker: Nginx frontend proxy `/api/` → backend; không hardcode URL production trong bundle.
+- Trang `/jobs` gọi `GET /api/jobs` với query `keyword`, `location`, `workType`, `remoteAvailable`.
+- Trang `/jobs/:id` gọi `GET /api/jobs/{id}`; hiển thị message từ body khi 404.
+- Trang `/resources` gọi `GET /api/resources` với query `keyword`, `category`.
+- Trang `/resources/:id` gọi `GET /api/resources/{id}`.
+
 ## Health
 
 ### `GET /api/health`

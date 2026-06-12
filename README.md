@@ -65,6 +65,19 @@ npm run dev
 
 Frontend dev server: http://localhost:5173 (proxy `/api` → backend).
 
+API base URL: `VITE_API_URL` (mặc định `/api` — dùng relative path qua Nginx hoặc Vite proxy).
+
+### Front-end routes
+
+| Route | Mô tả |
+|-------|--------|
+| `/` | Trang chủ |
+| `/jobs` | Danh sách việc làm (filter, gọi `GET /api/jobs`) |
+| `/jobs/:id` | Chi tiết việc làm (`GET /api/jobs/{id}`) |
+| `/resources` | Danh sách tài nguyên (`GET /api/resources`) |
+| `/resources/:id` | Chi tiết tài nguyên (`GET /api/resources/{id}`) |
+| `/accessibility` | Accessibility Statement (WCAG 2.2) |
+
 ## Cursor rules
 
 Quy tắc phát triển nằm trong `.cursor/rules/` — đọc trước khi sửa code.
@@ -110,4 +123,5 @@ Chi tiết: [docs/api-endpoints.md](docs/api-endpoints.md)
 - [x] `GET /api/resources`, `GET /api/resources/{id}` (read-only)
 - [x] `POST /api/applications` (form quan tâm/ứng tuyển)
 - [x] `POST /api/accessibility-feedback` (phản hồi accessibility)
-- [ ] Accessibility Statement
+- [x] Front-end core pages (jobs, resources, accessibility statement — read-only API)
+- [ ] Form ứng tuyển / phản hồi accessibility (FE)

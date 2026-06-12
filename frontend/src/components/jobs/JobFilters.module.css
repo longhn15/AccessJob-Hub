@@ -1,0 +1,90 @@
+.aside {
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-stack-md);
+  background-color: var(--color-surface);
+}
+
+.heading {
+  margin: 0 0 var(--spacing-stack-md);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-heading);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack-md);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack-sm);
+}
+
+.field label {
+  font-size: var(--font-size-label);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.field input,
+.field select {
+  min-height: var(--spacing-touch-min);
+  padding: 0 var(--spacing-stack-sm);
+  border: 2px solid var(--color-text);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: var(--font-size-body);
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.field input:focus-visible,
+.field select:focus-visible {
+  border-color: var(--color-primary);
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+.fieldCheckbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-stack-sm);
+}
+
+.fieldCheckbox input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.35rem;
+  flex-shrink: 0;
+}
+
+.fieldCheckbox label {
+  font-size: var(--font-size-label);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.submitButton {
+  min-height: var(--spacing-touch-min);
+  padding: 0 var(--spacing-gutter);
+  border: none;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: inherit;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-heading);
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.submitButton:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}

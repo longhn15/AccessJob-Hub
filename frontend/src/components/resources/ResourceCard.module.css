@@ -1,0 +1,90 @@
+.card {
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-stack-md);
+}
+
+.card:focus-within {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+.header {
+  margin-bottom: var(--spacing-stack-sm);
+}
+
+.title {
+  margin: 0 0 var(--spacing-stack-sm);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-heading);
+  line-height: 1.4;
+}
+
+.titleLink {
+  color: var(--color-primary-dark);
+  text-decoration: none;
+}
+
+.titleLink:hover,
+.titleLink:focus-visible {
+  text-decoration: underline;
+}
+
+.description {
+  margin: 0 0 var(--spacing-stack-md);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: var(--line-height-body);
+}
+
+.external {
+  margin: 0 0 var(--spacing-stack-md);
+}
+
+.external a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--spacing-touch-min);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-heading);
+  text-decoration: none;
+}
+
+.external a:hover,
+.external a:focus-visible {
+  text-decoration: underline;
+}
+
+.cta {
+  margin: 0;
+}
+
+.detailLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--spacing-touch-min);
+  padding: 0 var(--spacing-stack-sm);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-heading);
+  text-decoration: none;
+}
+
+.detailLink:hover,
+.detailLink:focus-visible {
+  text-decoration: underline;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

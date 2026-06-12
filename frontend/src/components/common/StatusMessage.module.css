@@ -1,0 +1,38 @@
+.message {
+  padding: var(--spacing-stack-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.loading {
+  composes: message;
+  background-color: var(--color-surface-soft);
+  border-color: var(--color-primary);
+}
+
+.error {
+  composes: message;
+  background-color: var(--color-surface);
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.empty {
+  composes: message;
+  background-color: var(--color-surface-soft);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.emptyTitle {
+  margin: 0 0 var(--spacing-stack-sm);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-text);
+}
+
+.emptyText {
+  margin: 0;
+}
