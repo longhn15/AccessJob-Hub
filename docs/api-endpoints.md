@@ -126,6 +126,103 @@ Chi tiết một tài nguyên **active**.
 
 ---
 
+## Applications
+
+### `POST /api/applications`
+
+Gửi form quan tâm/ứng tuyển cho một việc làm **đang active**.
+
+**Request body**
+
+```json
+{
+  "jobId": 1,
+  "fullName": "Nguyễn Văn A",
+  "email": "user@example.com",
+  "phone": "0900000000",
+  "message": "Tôi quan tâm đến vị trí này."
+}
+```
+
+| Field | Bắt buộc | Validation |
+|-------|----------|------------|
+| `jobId` | Có | Phải tồn tại và job phải active |
+| `fullName` | Có | Không blank, tối đa 255 ký tự |
+| `email` | Có | Đúng định dạng email |
+| `phone` | Không | Tối đa 50 ký tự; chỉ số và `+`, `-`, `(`, `)` |
+| `message` | Không | Tối đa 5000 ký tự |
+
+**Response 201**
+
+```json
+{
+  "id": 1,
+  "message": "Thông tin quan tâm của bạn đã được ghi nhận.",
+  "status": "pending",
+  "createdAt": "2026-06-11T10:00:00Z"
+}
+```
+
+**Response 400** — validation error
+
+```json
+{
+  "message": "Dữ liệu gửi lên chưa hợp lệ.",
+  "fieldErrors": [
+    { "field": "email", "message": "Email không đúng định dạng." }
+  ],
+  "timestamp": "2026-06-11T10:00:00Z"
+}
+```
+
+**Response 404** — job không tồn tại hoặc không active
+
+```json
+{
+  "message": "Không tìm thấy việc làm phù hợp để gửi thông tin quan tâm.",
+  "timestamp": "2026-06-11T10:00:00Z"
+}
+```
+
+---
+
+## Accessibility feedback
+
+### `POST /api/accessibility-feedback`
+
+Gửi phản hồi về khả năng tiếp cận của website.
+
+**Request body**
+
+```json
+{
+  "category": "keyboard",
+  "description": "Tôi gặp khó khăn khi dùng phím Tab ở trang danh sách việc làm.",
+  "contactEmail": "user@example.com"
+}
+```
+
+| Field | Bắt buộc | Validation |
+|-------|----------|------------|
+| `category` | Có | Không blank, tối đa 100 ký tự |
+| `description` | Có | Không blank, tối đa 5000 ký tự |
+| `contactEmail` | Không | Nếu có thì đúng định dạng email |
+
+**Response 201**
+
+```json
+{
+  "id": 1,
+  "message": "Cảm ơn bạn đã gửi phản hồi về khả năng tiếp cận.",
+  "status": "pending",
+  "createdAt": "2026-06-11T10:00:00Z"
+}
+```
+
+**Response 400** — validation error (cùng format `fieldErrors` như Applications)
+
+---
+
 ## Ví dụ curl
 
 ```bash
@@ -139,4 +236,10 @@ curl http://localhost:8080/api/resources
 curl "http://localhost:8080/api/resources?category=Tiêu%20chuẩn"
 curl "http://localhost:8080/api/resources?keyword=WCAG"
 curl http://localhost:8080/api/resources/1
+curl -X POST http://localhost:8080/api/applications \
+  -H "Content-Type: application/json" \
+  -d '{"jobId":1,"fullName":"Nguyễn Văn A","email":"user@example.com","phone":"0900000000","message":"Tôi quan tâm đến vị trí này."}'
+curl -X POST http://localhost:8080/api/accessibility-feedback \
+  -H "Content-Type: application/json" \
+  -d '{"category":"keyboard","description":"Tôi gặp khó khăn khi dùng phím Tab ở trang danh sách việc làm.","contactEmail":"user@example.com"}'
 ```

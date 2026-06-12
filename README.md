@@ -96,6 +96,8 @@ Chi tiết: [docs/api-endpoints.md](docs/api-endpoints.md)
 | `GET` | `/api/jobs/{id}` | Chi tiết việc làm |
 | `GET` | `/api/resources` | Danh sách tài nguyên (filter, limit) |
 | `GET` | `/api/resources/{id}` | Chi tiết tài nguyên |
+| `POST` | `/api/applications` | Gửi form quan tâm/ứng tuyển |
+| `POST` | `/api/accessibility-feedback` | Gửi phản hồi accessibility |
 
 ## Trạng thái MVP
 
@@ -106,5 +108,6 @@ Chi tiết: [docs/api-endpoints.md](docs/api-endpoints.md)
 - [x] `GET /api/health` (kèm trạng thái database)
 - [x] `GET /api/jobs`, `GET /api/jobs/{id}` (read-only)
 - [x] `GET /api/resources`, `GET /api/resources/{id}` (read-only)
-- [ ] Form ứng tuyển
+- [x] `POST /api/applications` (form quan tâm/ứng tuyển)
+- [x] `POST /api/accessibility-feedback` (phản hồi accessibility)
 - [ ] Accessibility Statement
