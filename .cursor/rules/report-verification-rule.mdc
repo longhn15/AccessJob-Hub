@@ -9,18 +9,57 @@ alwaysApply: true
 
 ## Khi nào tạo report
 
-Sau mỗi **task lớn**, tạo file trong `docs/`:
+Sau mỗi **task lớn**, tạo **một file mới** trong `docs/` theo quy tắc đánh số toàn cục bên dưới.
 
-- `docs/SETUP_CURSOR_RULES_001.md`
-- `docs/SETUP_DOCKER_PROJECT_001.md`
-- `docs/FRONTEND_ACCESSIBLE_LAYOUT_001.md`
+## Đánh số report — toàn cục (bắt buộc)
+
+Số thứ tự `_NNN` là **duy nhất trên toàn bộ `docs/`**, không đánh số riêng theo từng nhóm/tên task.
+
+### Cách lấy số cho report mới
+
+1. Quét **toàn bộ** `docs/*_[0-9][0-9][0-9].md` (pattern: tên bất kỳ + `_` + 3 chữ số + `.md`).
+2. Trích số `NNN` từ mỗi file khớp pattern; lấy **giá trị lớn nhất**.
+3. Report mới dùng số **max + 1**, zero-pad 3 chữ số: `_001`, `_002`, `_003`, …
+4. Nếu chưa có file nào khớp pattern → bắt đầu từ `_001`.
+
+### Quy tắc bắt buộc
+
+- **Không** tạo lại `*_001.md` cho task mới nếu trong `docs/` đã tồn tại bất kỳ `*_001.md` nào.
+- **Không** ghi đè report cũ.
+- **Không** đánh số theo nhóm tên (vd: `FRONTEND_*` có `_001`, `_002` riêng; `JOBS_API_*` có `_001` riêng) — mỗi report mới phải dùng số toàn cục tiếp theo.
+- Phần tên trước `_NNN` mô tả task (vd: `GLOBAL_REPORT_NUMBERING_RULE`, `FRONTEND_CORE_PAGES`); phần số phản ánh **thứ tự tạo report trong repo**, không phản ánh “lần thứ mấy của cùng chủ đề”.
+
+### Ví dụ đúng
+
+Giả sử `docs/` đã có:
+
+- `SETUP_CURSOR_RULES_001.md`
+- `CORE_DOMAIN_SCHEMA_002.md`
+
+→ Số lớn nhất = `002` → report task tiếp theo: `docs/GLOBAL_REPORT_NUMBERING_RULE_003.md`
+
+Giả sử `docs/` chưa có file `*_[0-9][0-9][0-9].md` → report đầu tiên: `docs/INIT_PROJECT_STRUCTURE_001.md`
+
+Hai task khác nhau, cùng lần lượt sau `CORE_DOMAIN_SCHEMA_002.md`:
+
+- `docs/FRONTEND_CORE_PAGES_003.md`
+- `docs/JOBS_API_004.md`
+
+### Ví dụ sai
+
+| Sai | Lý do |
+|-----|--------|
+| Đã có `JOBS_API_001.md` → tạo `FRONTEND_CORE_PAGES_001.md` | Số `_001` đã dùng toàn cục; phải dùng max+1 |
+| Đã có `FRONTEND_CORE_PAGES_001.md` → tạo `FRONTEND_CORE_PAGES_002.md` chỉ vì “cùng nhóm FE” | Đánh số theo nhóm — **cấm**; phải quét toàn bộ `docs/` |
+| Ghi đè `CORE_DOMAIN_SCHEMA_002.md` | **Cấm** ghi đè report cũ |
+| Bỏ qua `CORE_DOMAIN_SCHEMA_002.md` khi quét → tạo `*_002.md` | Phải lấy max trên **mọi** file khớp pattern |
 
 ## Cấu trúc report (15 mục)
 
 1. Mức độ hiểu task
 2. Tóm tắt yêu cầu
 3. Phạm vi đã thực hiện
-4. Danh sách file đã đọc
+4. Danh sách file đã đọc (gồm rule files đã đọc và rule ảnh hưởng trực tiếp)
 5. Danh sách file đã tạo/sửa
 6. Thay đổi chính theo từng file
 7. Lý do thiết kế
@@ -50,5 +89,3 @@ Sau mỗi **task lớn**, tạo file trong `docs/`:
 - Build/test pass/fail/chưa chạy
 - Report ở đâu
 - Rủi ro còn lại
-
-Mỗi khi tạo report mới trong docs/, bắt buộc kiểm tra các report cùng nhóm tên đã tồn tại và tăng số thứ tự tuần tự: _001, _002, _003... Không được ghi đè report cũ; nếu đã có *_001.md thì report tiếp theo cùng nhóm phải là *_002.md.

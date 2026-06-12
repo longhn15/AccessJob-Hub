@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { AccessibilityFeedbackForm } from '../components/feedback/AccessibilityFeedbackForm'
 import styles from './AccessibilityPage.module.css'
 
 const COMMITMENTS = [
@@ -30,7 +31,7 @@ const COMMITMENTS = [
     id: 'labels',
     title: 'Nhãn form',
     description:
-      'Mọi trường nhập có label hiển thị; không dùng placeholder làm nhãn duy nhất. Lỗi form sẽ có aria-describedby khi triển khai.',
+      'Mọi trường nhập có label hiển thị; không dùng placeholder làm nhãn duy nhất. Lỗi form dùng aria-describedby và aria-invalid.',
   },
   {
     id: 'errors',
@@ -127,10 +128,9 @@ export function AccessibilityPage() {
       <section aria-labelledby="feedback-heading">
         <h2 id="feedback-heading">Phản hồi accessibility</h2>
         <p>
-          Form gửi phản hồi về khả năng tiếp cận sẽ được bổ sung trong giai đoạn tiếp theo. Nếu bạn
-          gặp rào cản khi sử dụng website, vui lòng liên hệ qua email trên trang chi tiết việc làm
-          hoặc quay lại sau khi form được mở.
+          Nếu bạn gặp rào cản khi sử dụng website, vui lòng gửi phản hồi qua form bên dưới.
         </p>
+        <AccessibilityFeedbackForm />
         <p>
           <Link to="/" className={styles.inlineLink}>
             Về trang chủ

@@ -73,10 +73,10 @@ API base URL: `VITE_API_URL` (mặc định `/api` — dùng relative path qua N
 |-------|--------|
 | `/` | Trang chủ |
 | `/jobs` | Danh sách việc làm (filter, gọi `GET /api/jobs`) |
-| `/jobs/:id` | Chi tiết việc làm (`GET /api/jobs/{id}`) |
+| `/jobs/:id` | Chi tiết việc làm + form quan tâm (`GET /api/jobs/{id}`, `POST /api/applications`) |
 | `/resources` | Danh sách tài nguyên (`GET /api/resources`) |
 | `/resources/:id` | Chi tiết tài nguyên (`GET /api/resources/{id}`) |
-| `/accessibility` | Accessibility Statement (WCAG 2.2) |
+| `/accessibility` | Accessibility Statement + form phản hồi (`POST /api/accessibility-feedback`) |
 
 ## Cursor rules
 
@@ -124,4 +124,4 @@ Chi tiết: [docs/api-endpoints.md](docs/api-endpoints.md)
 - [x] `POST /api/applications` (form quan tâm/ứng tuyển)
 - [x] `POST /api/accessibility-feedback` (phản hồi accessibility)
 - [x] Front-end core pages (jobs, resources, accessibility statement — read-only API)
-- [ ] Form ứng tuyển / phản hồi accessibility (FE)
+- [x] Form ứng tuyển / phản hồi accessibility (FE)

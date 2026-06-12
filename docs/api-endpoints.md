@@ -12,6 +12,8 @@ Base URL (qua Nginx FE): `http://localhost:3000/api` (proxy tới backend)
 - Trang `/jobs/:id` gọi `GET /api/jobs/{id}`; hiển thị message từ body khi 404.
 - Trang `/resources` gọi `GET /api/resources` với query `keyword`, `category`.
 - Trang `/resources/:id` gọi `GET /api/resources/{id}`.
+- Trang `/jobs/:id` — form quan tâm gọi `POST /api/applications` với `jobId`, `fullName`, `email`, `phone?`, `message?`; map `fieldErrors` vào từng field; success giữ nguyên trang và reset form.
+- Trang `/accessibility` — form phản hồi gọi `POST /api/accessibility-feedback` với `category`, `description`, `contactEmail?`; map `fieldErrors`; `ErrorSummary` khi ≥ 2 lỗi.
 
 ## Health
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { fetchJobById } from '../api/jobs'
+import { ApplicationForm } from '../components/applications/ApplicationForm'
 import { Badge } from '../components/common/Badge'
 import { ErrorState } from '../components/common/ErrorState'
 import { LoadingState } from '../components/common/LoadingState'
@@ -145,6 +146,8 @@ export function JobDetailPage() {
             <a href={`mailto:${job.contactEmail}`}>{job.contactEmail}</a>
           </p>
         </section>
+
+        <ApplicationForm jobId={job.id} jobTitle={job.title} />
       </div>
     </article>
   )

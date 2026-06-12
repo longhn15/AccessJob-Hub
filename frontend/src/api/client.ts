@@ -32,3 +32,25 @@ export async function apiGet<T>(path: string, params?: Record<string, string | n
 
   return (await response.json()) as T
 }
+
+export async function apiPost<T>(path: string, body: unknown): Promise<T> {
+  const url = buildUrl(path)
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
+
+  if (!response.ok) {
+    let errorBody: ApiErrorBody | undefined
+    try {
+      errorBody = (await response.json()) as ApiErrorBody
+    } catch {
+      errorBody = undefined
+    }
+    const message = errorBody?.message ?? `Yêu cầu thất bại (mã ${response.status}).`
+    throw new ApiError(response.status, message, errorBody)
+  }
+
+  return (await response.json()) as T
+}
