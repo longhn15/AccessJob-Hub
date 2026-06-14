@@ -101,6 +101,23 @@
   text-underline-offset: 0.2em;
 }
 
+.preferencesBar {
+  background-color: var(--color-background);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.preferencesInner {
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: var(--spacing-stack-sm) var(--spacing-margin-mobile);
+}
+
+@media (min-width: 768px) {
+  .preferencesInner {
+    padding: var(--spacing-stack-sm) var(--spacing-margin-desktop);
+  }
+}
+
 .main {
   flex: 1;
   max-width: var(--layout-max-width);

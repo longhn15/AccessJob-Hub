@@ -1,4 +1,5 @@
 @import './styles/tokens.css';
+@import './styles/a11y-preferences.css';
 
 *,
 *::before,

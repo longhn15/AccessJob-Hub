@@ -51,6 +51,12 @@ const COMMITMENTS = [
     description:
       'Giao diện hoạt động trên mobile 360px và zoom 200% mà không mất nội dung hay chức năng.',
   },
+  {
+    id: 'preferences',
+    title: 'Tùy chỉnh tiếp cận',
+    description:
+      'Panel Tùy chỉnh tiếp cận (ngay dưới header) cho phép tăng cỡ chữ, khoảng cách dòng, tương phản cao, giảm chuyển động và gạch chân link. Lựa chọn lưu vào localStorage và áp dụng toàn site.',
+  },
 ]
 
 const TESTING = [
@@ -86,6 +92,15 @@ export function AccessibilityPage() {
           cấp độ AA trở lên cho các luồng chính của website.
         </p>
       </header>
+
+      <section aria-labelledby="preferences-heading">
+        <h2 id="preferences-heading">Tùy chỉnh hiển thị</h2>
+        <p>
+          Mở panel <a href="#a11y-preferences-panel">Tùy chỉnh tiếp cận</a> ngay dưới thanh điều
+          hướng để điều chỉnh cỡ chữ, khoảng cách dòng, tương phản, chuyển động và liên kết. Tùy
+          chọn được lưu tự động trên trình duyệt này.
+        </p>
+      </section>
 
       <section aria-labelledby="commitments-heading">
         <h2 id="commitments-heading">Cam kết đã áp dụng</h2>

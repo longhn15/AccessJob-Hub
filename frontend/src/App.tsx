@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { AccessibilityPreferencesProvider } from './components/accessibility/AccessibilityPreferencesProvider'
 import { Layout } from './components/Layout/Layout'
 import { AccessibilityPage } from './pages/AccessibilityPage'
 import { HomePage } from './pages/HomePage'
@@ -9,18 +10,20 @@ import { ResourcesListPage } from './pages/ResourcesListPage'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/jobs" element={<JobsListPage />} />
-          <Route path="/jobs/:id" element={<JobDetailPage />} />
-          <Route path="/resources" element={<ResourcesListPage />} />
-          <Route path="/resources/:id" element={<ResourceDetailPage />} />
-          <Route path="/accessibility" element={<AccessibilityPage />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+    <AccessibilityPreferencesProvider>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/jobs" element={<JobsListPage />} />
+            <Route path="/jobs/:id" element={<JobDetailPage />} />
+            <Route path="/resources" element={<ResourcesListPage />} />
+            <Route path="/resources/:id" element={<ResourceDetailPage />} />
+            <Route path="/accessibility" element={<AccessibilityPage />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </AccessibilityPreferencesProvider>
   )
 }
 

@@ -1,0 +1,56 @@
+/* Accessibility preferences — applied via data attributes on html */
+
+html[data-font-scale='large'] {
+  --font-size-body: 1.25rem;
+  --font-size-body-lg: 1.375rem;
+  --font-size-label: 1.125rem;
+  --font-size-label-sm: 1rem;
+  --font-size-h1-mobile: 2.25rem;
+  --font-size-h1-desktop: 2.75rem;
+  --font-size-h2-mobile: 1.75rem;
+  --font-size-h2-desktop: 2.25rem;
+  --font-size-h3: 1.625rem;
+}
+
+html[data-font-scale='x-large'] {
+  --font-size-body: 1.375rem;
+  --font-size-body-lg: 1.5rem;
+  --font-size-label: 1.25rem;
+  --font-size-label-sm: 1.125rem;
+  --font-size-h1-mobile: 2.5rem;
+  --font-size-h1-desktop: 3rem;
+  --font-size-h2-mobile: 2rem;
+  --font-size-h2-desktop: 2.5rem;
+  --font-size-h3: 1.75rem;
+}
+
+html[data-line-height='comfortable'] {
+  --line-height-body: 1.85;
+}
+
+html[data-contrast='high'] {
+  --color-text: #000000;
+  --color-text-muted: #1a1a1a;
+  --color-border: #000000;
+  --color-primary: #001e40;
+  --color-primary-dark: #000814;
+  --color-background: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-soft: #dbeafe;
+  --color-focus: #ffea00;
+}
+
+html[data-reduced-motion='true'] *,
+html[data-reduced-motion='true'] *::before,
+html[data-reduced-motion='true'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+html[data-underlined-links='true'] a {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}

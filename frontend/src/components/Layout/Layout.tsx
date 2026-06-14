@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link, NavLink, useMatch } from 'react-router-dom'
+import { AccessibilityPreferencesPanel } from '../accessibility/AccessibilityPreferencesPanel'
 import styles from './Layout.module.css'
 
 interface LayoutProps {
@@ -51,6 +52,12 @@ export function Layout({ children }: LayoutProps) {
           </nav>
         </div>
       </header>
+
+      <div className={styles.preferencesBar}>
+        <div className={styles.preferencesInner}>
+          <AccessibilityPreferencesPanel />
+        </div>
+      </div>
 
       <main id="main-content" className={styles.main} tabIndex={-1}>
         {children}

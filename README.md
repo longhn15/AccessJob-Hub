@@ -78,6 +78,19 @@ API base URL: `VITE_API_URL` (mặc định `/api` — dùng relative path qua N
 | `/resources/:id` | Chi tiết tài nguyên (`GET /api/resources/{id}`) |
 | `/accessibility` | Accessibility Statement + form phản hồi (`POST /api/accessibility-feedback`) |
 
+### Accessibility Preferences Panel
+
+Panel **Tùy chỉnh tiếp cận** (ngay dưới header, mọi trang) cho phép:
+
+- Tăng cỡ chữ (Mặc định / Lớn / Rất lớn)
+- Tăng khoảng cách dòng (Mặc định / Thoải mái)
+- Bật tương phản cao
+- Giảm chuyển động (hoặc theo cài đặt hệ thống)
+- Gạch chân link rõ hơn
+- Đặt lại mặc định
+
+Lựa chọn lưu vào `localStorage` (`accessjob:a11y-preferences`) và áp dụng toàn site qua `data-*` trên `<html>`.
+
 ## Cursor rules
 
 Quy tắc phát triển nằm trong `.cursor/rules/` — đọc trước khi sửa code.
@@ -125,3 +138,4 @@ Chi tiết: [docs/api-endpoints.md](docs/api-endpoints.md)
 - [x] `POST /api/accessibility-feedback` (phản hồi accessibility)
 - [x] Front-end core pages (jobs, resources, accessibility statement — read-only API)
 - [x] Form ứng tuyển / phản hồi accessibility (FE)
+- [x] Accessibility Preferences Panel (localStorage, toàn site)

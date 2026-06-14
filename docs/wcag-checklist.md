@@ -35,7 +35,8 @@ Checklist thực tế cho các luồng Front-end chính. Cập nhật sau vòng 
 | 2.6 | Không keyboard trap | Tab xuyên suốt form | Form | ✅ |
 | 2.7 | Touch target ≥ 44×44px | Đo nút filter submit | `/jobs` | ✅ 268×44px |
 | 2.8 | Nav active state | `aria-current="page"` + underline 3px | Layout nav | ✅ `/jobs`, `/accessibility` |
-| 2.9 | `prefers-reduced-motion` | CSS global | `index.css` | ✅ |
+| 2.9 | `prefers-reduced-motion` | CSS global + panel giảm chuyển động | `index.css`, Preferences Panel | ✅ |
+| 2.10 | Accessibility Preferences Panel | Keyboard, fieldset/radio, status message, localStorage | Layout (mọi route) | ✅ axe 0 violation `/`, `/jobs`, `/accessibility` (2026-06-14) |
 
 ---
 
@@ -119,4 +120,4 @@ Chi tiết: `.cursor/rules/ui-design-system-rule.mdc`
 | Ngày | Ghi chú |
 |------|---------|
 | 2026-06-12 | Tạo checklist ban đầu (`ACCESSIBILITY_VERIFICATION_FIXES_005`) |
-| 2026-06-12 | Cập nhật kết quả kiểm thử browser thật — Lighthouse, axe, Playwright (`FINAL_ACCESSIBILITY_AUDIT_006`) |
+| 2026-06-14 | Thêm Accessibility Preferences Panel — checklist mục 2.10 (`ACCESSIBILITY_PREFERENCES_007`) |
