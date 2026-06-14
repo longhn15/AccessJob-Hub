@@ -3,6 +3,13 @@ import styles from './HomePage.module.css'
 
 const FEATURES = [
   {
+    title: 'Gợi ý việc phù hợp',
+    description:
+      'Wizard hỏi nhu cầu tiếp cận trước, rồi gợi ý việc làm phù hợp với lý do rõ ràng.',
+    to: '/job-matching',
+    cta: 'Bắt đầu wizard',
+  },
+  {
     title: 'Việc làm dễ tiếp cận',
     description: 'Danh sách việc làm có thông tin hỗ trợ tiếp cận và bộ lọc rõ ràng.',
     to: '/jobs',
@@ -41,8 +48,11 @@ export function HomePage() {
             công cụ theo tiêu chuẩn WCAG 2.2.
           </p>
           <div className={styles.heroActions}>
-            <Link to="/jobs" className={styles.primaryButton}>
-              Tìm việc làm
+            <Link to="/job-matching" className={styles.primaryButton}>
+              Tìm việc phù hợp
+            </Link>
+            <Link to="/jobs" className={styles.secondaryButton}>
+              Xem tất cả việc làm
             </Link>
             <Link to="/resources" className={styles.secondaryButton}>
               Khám phá tài nguyên

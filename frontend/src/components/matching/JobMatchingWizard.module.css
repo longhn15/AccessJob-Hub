@@ -1,0 +1,194 @@
+.wizard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack-md);
+}
+
+.progress {
+  margin: 0;
+  padding: var(--spacing-stack-sm) var(--spacing-stack-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-soft);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-primary-dark);
+}
+
+.stepPanel {
+  padding: var(--spacing-stack-md);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-soft);
+}
+
+.stepHeading {
+  margin: 0 0 var(--spacing-stack-sm);
+  font-size: var(--font-size-h2-mobile);
+  font-weight: var(--font-weight-heading);
+  line-height: 1.3;
+  color: var(--color-primary-dark);
+}
+
+@media (min-width: 768px) {
+  .stepHeading {
+    font-size: var(--font-size-h2-desktop);
+  }
+}
+
+.stepHint {
+  margin: 0 0 var(--spacing-stack-md);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+}
+
+.fieldset {
+  margin: 0;
+  padding: var(--spacing-stack-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-background);
+}
+
+.legend {
+  padding: 0 var(--spacing-stack-sm);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-text);
+}
+
+.optionList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack-sm);
+  margin: var(--spacing-stack-md) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.optionLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-stack-sm);
+  min-height: var(--spacing-touch-min);
+  padding: var(--spacing-stack-sm);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.optionLabel:hover {
+  background-color: var(--color-surface-soft);
+}
+
+.optionLabel:has(input:focus-visible) {
+  border-color: var(--color-primary);
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+.control {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.2rem;
+  accent-color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.error {
+  margin: 0 0 var(--spacing-stack-md);
+  padding: var(--spacing-stack-sm) var(--spacing-stack-md);
+  border: 2px solid var(--color-error);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  line-height: var(--line-height-body);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-stack-sm);
+}
+
+.backButton,
+.nextButton,
+.adjustButton {
+  min-height: var(--spacing-touch-min);
+  min-width: var(--spacing-touch-min);
+  padding: 0 var(--spacing-gutter);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-heading);
+  cursor: pointer;
+}
+
+.backButton {
+  border: 2px solid var(--color-primary);
+  background-color: var(--color-background);
+  color: var(--color-primary);
+}
+
+.backButton:hover {
+  background-color: var(--color-surface-soft);
+}
+
+.nextButton {
+  border: 2px solid var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.nextButton:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.adjustButton {
+  border: 2px solid var(--color-primary);
+  background-color: var(--color-background);
+  color: var(--color-primary);
+}
+
+.adjustButton:hover {
+  background-color: var(--color-surface-soft);
+}
+
+.backButton:focus-visible,
+.nextButton:focus-visible,
+.adjustButton:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+.resultsIntro {
+  margin: 0 0 var(--spacing-stack-md);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.resultsList {
+  list-style: none;
+  margin: 0 0 var(--spacing-stack-md);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack-md);
+}
+
+.noHighMatch {
+  margin: 0 0 var(--spacing-stack-md);
+  padding: var(--spacing-stack-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-background);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}

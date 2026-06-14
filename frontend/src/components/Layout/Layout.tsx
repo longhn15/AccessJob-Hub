@@ -10,6 +10,7 @@ interface LayoutProps {
 const NAV_ITEMS = [
   { to: '/', label: 'Trang chủ', end: true },
   { to: '/jobs', label: 'Việc làm', end: false },
+  { to: '/job-matching', label: 'Gợi ý việc làm', end: false },
   { to: '/resources', label: 'Tài nguyên', end: false },
   { to: '/accessibility', label: 'Accessibility', end: false },
 ] as const

@@ -1,0 +1,26 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack-lg);
+}
+
+.header h1 {
+  margin: 0 0 var(--spacing-stack-sm);
+  font-size: var(--font-size-h1-mobile);
+  font-weight: var(--font-weight-heading-strong);
+  line-height: 1.2;
+  color: var(--color-primary-dark);
+}
+
+@media (min-width: 768px) {
+  .header h1 {
+    font-size: var(--font-size-h1-desktop);
+  }
+}
+
+.lead {
+  margin: 0;
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}

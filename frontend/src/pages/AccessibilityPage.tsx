@@ -57,6 +57,12 @@ const COMMITMENTS = [
     description:
       'Panel Tùy chỉnh tiếp cận (ngay dưới header) cho phép tăng cỡ chữ, khoảng cách dòng, tương phản cao, giảm chuyển động và gạch chân link. Lựa chọn lưu vào localStorage và áp dụng toàn site.',
   },
+  {
+    id: 'job-matching',
+    title: 'Wizard gợi ý việc làm',
+    description:
+      'Luồng /job-matching hỏi nhu cầu tiếp cận trước, gợi ý việc làm rule-based với lý do bằng text — giúp người dùng không cần đọc từng tin một.',
+  },
 ]
 
 const TESTING = [
@@ -99,6 +105,18 @@ export function AccessibilityPage() {
           Mở panel <a href="#a11y-preferences-panel">Tùy chỉnh tiếp cận</a> ngay dưới thanh điều
           hướng để điều chỉnh cỡ chữ, khoảng cách dòng, tương phản, chuyển động và liên kết. Tùy
           chọn được lưu tự động trên trình duyệt này.
+        </p>
+      </section>
+
+      <section aria-labelledby="job-matching-heading">
+        <h2 id="job-matching-heading">Tìm việc dễ hơn</h2>
+        <p>
+          Dùng{' '}
+          <Link to="/job-matching" className={styles.inlineLink}>
+            wizard gợi ý việc làm
+          </Link>{' '}
+          để trả lời câu hỏi về hình thức làm việc và nhu cầu tiếp cận — hệ thống sẽ gợi ý việc
+          phù hợp kèm lý do rõ ràng.
         </p>
       </section>
 

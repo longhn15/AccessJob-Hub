@@ -4,6 +4,7 @@ import { Layout } from './components/Layout/Layout'
 import { AccessibilityPage } from './pages/AccessibilityPage'
 import { HomePage } from './pages/HomePage'
 import { JobDetailPage } from './pages/JobDetailPage'
+import { JobMatchingPage } from './pages/JobMatchingPage'
 import { JobsListPage } from './pages/JobsListPage'
 import { ResourceDetailPage } from './pages/ResourceDetailPage'
 import { ResourcesListPage } from './pages/ResourcesListPage'
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/jobs" element={<JobsListPage />} />
             <Route path="/jobs/:id" element={<JobDetailPage />} />
+            <Route path="/job-matching" element={<JobMatchingPage />} />
             <Route path="/resources" element={<ResourcesListPage />} />
             <Route path="/resources/:id" element={<ResourceDetailPage />} />
             <Route path="/accessibility" element={<AccessibilityPage />} />

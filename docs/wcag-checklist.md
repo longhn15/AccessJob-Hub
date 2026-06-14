@@ -2,7 +2,7 @@
 
 Checklist thực tế cho các luồng Front-end chính. Cập nhật sau vòng kiểm thử cuối **2026-06-12** (report `FINAL_ACCESSIBILITY_AUDIT_006`).
 
-**Phạm vi route:** `/`, `/jobs`, `/jobs/:id`, `/resources`, `/resources/:id`, `/accessibility`
+**Phạm vi route:** `/`, `/jobs`, `/jobs/:id`, `/job-matching`, `/resources`, `/resources/:id`, `/accessibility`
 
 **Tiêu chuẩn mục tiêu:** WCAG 2.2 Level AA cho luồng chính.
 
@@ -37,6 +37,8 @@ Checklist thực tế cho các luồng Front-end chính. Cập nhật sau vòng 
 | 2.8 | Nav active state | `aria-current="page"` + underline 3px | Layout nav | ✅ `/jobs`, `/accessibility` |
 | 2.9 | `prefers-reduced-motion` | CSS global + panel giảm chuyển động | `index.css`, Preferences Panel | ✅ |
 | 2.10 | Accessibility Preferences Panel | Keyboard, fieldset/radio, status message, localStorage | Layout (mọi route) | ✅ axe 0 violation `/`, `/jobs`, `/accessibility` (2026-06-14) |
+| 2.11 | Job Matching Wizard keyboard | Tab, Next/Back, focus heading khi chuyển bước | `/job-matching` | ⬜ Manual — expected verification |
+| 2.12 | Wizard progress text | “Bước X trong 4” + `aria-live` | `/job-matching` | ✅ Implemented |
 
 ---
 
@@ -121,3 +123,4 @@ Chi tiết: `.cursor/rules/ui-design-system-rule.mdc`
 |------|---------|
 | 2026-06-12 | Tạo checklist ban đầu (`ACCESSIBILITY_VERIFICATION_FIXES_005`) |
 | 2026-06-14 | Thêm Accessibility Preferences Panel — checklist mục 2.10 (`ACCESSIBILITY_PREFERENCES_007`) |
+| 2026-06-14 | Thêm route `/job-matching` — wizard gợi ý việc làm (`ACCESSIBLE_JOB_MATCHING_008`) |
