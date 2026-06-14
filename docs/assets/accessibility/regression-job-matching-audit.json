@@ -1,0 +1,47 @@
+{
+  "timestamp": "2026-06-14T15:41:49.671Z",
+  "baseUrl": "http://localhost:3000",
+  "axe": [
+    {
+      "route": "/",
+      "violations": 0,
+      "violationIds": []
+    },
+    {
+      "route": "/job-matching",
+      "violations": 0,
+      "violationIds": []
+    }
+  ],
+  "responsive": {
+    "mobile360": {
+      "scrollWidth": 360,
+      "clientWidth": 360,
+      "overflow": false,
+      "overflowPx": 0
+    },
+    "zoom200": {
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "overflow": false,
+      "overflowPx": 0
+    }
+  },
+  "preferences": {
+    "hasStorageKey": false,
+    "storageKey": "accessjob:a11y-preferences",
+    "parsedFontScale": "large",
+    "afterReloadFontScale": "large",
+    "afterReloadContrast": "high",
+    "persistOk": true
+  },
+  "wizard": {
+    "panelVisible": true,
+    "navLinkVisible": true,
+    "step1Error": "Vui lòng chọn một hình thức làm việc trước khi tiếp tục.",
+    "step2Error": "Vui lòng chọn ít nhất một nhu cầu hỗ trợ tiếp cận.",
+    "resultsVisible": true,
+    "hasDetailLink": true,
+    "headingFocusedOnLoad": true
+  }
+}

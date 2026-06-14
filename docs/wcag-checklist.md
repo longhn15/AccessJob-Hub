@@ -37,7 +37,7 @@ Checklist thực tế cho các luồng Front-end chính. Cập nhật sau vòng 
 | 2.8 | Nav active state | `aria-current="page"` + underline 3px | Layout nav | ✅ `/jobs`, `/accessibility` |
 | 2.9 | `prefers-reduced-motion` | CSS global + panel giảm chuyển động | `index.css`, Preferences Panel | ✅ |
 | 2.10 | Accessibility Preferences Panel | Keyboard, fieldset/radio, status message, localStorage | Layout (mọi route) | ✅ axe 0 violation `/`, `/jobs`, `/accessibility` (2026-06-14) |
-| 2.11 | Job Matching Wizard keyboard | Tab, Next/Back, focus heading khi chuyển bước | `/job-matching` | ⬜ Manual — expected verification |
+| 2.11 | Job Matching Wizard keyboard | Tab, Next/Back, focus heading khi chuyển bước, validation bước 2 | `/job-matching` | ✅ Playwright (`regression-job-matching-audit.json`, 2026-06-14) |
 | 2.12 | Wizard progress text | “Bước X trong 4” + `aria-live` | `/job-matching` | ✅ Implemented |
 
 ---
@@ -75,19 +75,24 @@ Checklist thực tế cho các luồng Front-end chính. Cập nhật sau vòng 
 | 360×800 | `/` | Không | `mobile360_.png` |
 | 360×800 | `/jobs` | Không | `mobile360_jobs.png` |
 | 360×800 | `/accessibility` | Không (sau fix table wrapper) | `mobile360_accessibility.png` |
+| 360×800 | `/job-matching` | Không | `mobile360_job-matching.png` |
 | Zoom 200% | `/jobs` | Không | `zoom200_jobs.png` |
+| Zoom 200% | `/job-matching` | Không | `zoom200_job-matching.png` |
 
 ---
 
-## 6. Công cụ tự động — kết quả thật (2026-06-12)
+## 6. Công cụ tự động — kết quả thật
 
 | Công cụ | Phạm vi | Kết quả |
 |---------|---------|---------|
-| `npm run lint` | Frontend | **PASS** |
-| `npm run build` | Frontend | **PASS** |
-| axe-core (Playwright) | 6 route chính | **0 violations** mọi route |
-| Lighthouse Accessibility | 6 route chính | **100/100** mọi route |
-| Playwright keyboard script | Skip, nav, jobs, form | **PASS** (chi tiết `audit-report.json`) |
+| `npm run lint` | Frontend | **PASS** (2026-06-14 regression) |
+| `npm run build` | Frontend | **PASS** (2026-06-14 regression) |
+| axe-core (Playwright) | 6 route chính | **0 violations** mọi route (2026-06-12) |
+| axe-core (Playwright) | `/`, `/job-matching` | **0 violations** (2026-06-14 regression) |
+| Lighthouse Accessibility | 6 route chính | **100/100** mọi route (2026-06-12) |
+| Lighthouse Accessibility | `/job-matching` | **100/100** (`lighthouse-job-matching.json`, 2026-06-14) |
+| Playwright keyboard script | Skip, nav, jobs, form | **PASS** (chi tiết `audit-report.json`, 2026-06-12) |
+| Playwright wizard + preferences | `/job-matching`, localStorage | **PASS** (`regression-job-matching-audit.json`, 2026-06-14) |
 | NVDA / ChromeVox | Form lỗi | **Chưa chạy** — cần test thủ công có âm thanh |
 
 ---
@@ -124,3 +129,4 @@ Chi tiết: `.cursor/rules/ui-design-system-rule.mdc`
 | 2026-06-12 | Tạo checklist ban đầu (`ACCESSIBILITY_VERIFICATION_FIXES_005`) |
 | 2026-06-14 | Thêm Accessibility Preferences Panel — checklist mục 2.10 (`ACCESSIBILITY_PREFERENCES_007`) |
 | 2026-06-14 | Thêm route `/job-matching` — wizard gợi ý việc làm (`ACCESSIBLE_JOB_MATCHING_008`) |
+| 2026-06-14 | Regression wizard + preferences panel — axe/Lighthouse/keyboard/mobile/zoom (`JOB_MATCHING_PREFERENCES_REGRESSION_009`) |
