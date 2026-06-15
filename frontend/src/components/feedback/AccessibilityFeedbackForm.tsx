@@ -1,9 +1,10 @@
-import { type FormEvent, useId, useRef, useState } from 'react'
+import { type FormEvent, useId, useLayoutEffect, useRef, useState } from 'react'
 import { createAccessibilityFeedback } from '../../api/accessibilityFeedback'
 import { ApiError } from '../../types/api'
 import {
   countFieldErrors,
-  focusFormErrors,
+  focusAndScrollMessage,
+  focusErrorSummary,
   mapApiFieldErrors,
   type FieldErrors,
 } from '../../utils/formErrors'
@@ -63,11 +64,16 @@ function validateClient(values: FormValues): FieldErrors {
 export function AccessibilityFeedbackForm() {
   const formId = useId()
   const errorSummaryRef = useRef<HTMLDivElement>(null)
+  const successRef = useRef<HTMLParagraphElement>(null)
+  const formErrorRef = useRef<HTMLParagraphElement>(null)
   const [values, setValues] = useState<FormValues>(EMPTY_VALUES)
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
   const [formError, setFormError] = useState<string | null>(null)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
+  const [errorFocusRequest, setErrorFocusRequest] = useState(0)
+  const [successFocusRequest, setSuccessFocusRequest] = useState(0)
+  const [formErrorFocusRequest, setFormErrorFocusRequest] = useState(0)
 
   function updateField<K extends keyof FormValues>(key: K, value: FormValues[K]) {
     setValues((prev) => ({ ...prev, [key]: value }))
@@ -81,6 +87,24 @@ export function AccessibilityFeedbackForm() {
     setSuccessMessage(null)
   }
 
+  useLayoutEffect(() => {
+    if (errorFocusRequest === 0) return
+    if (countFieldErrors(fieldErrors) === 0) return
+    focusErrorSummary(errorSummaryRef.current)
+  }, [errorFocusRequest, fieldErrors])
+
+  useLayoutEffect(() => {
+    if (successFocusRequest === 0) return
+    if (!successMessage) return
+    focusAndScrollMessage(successRef.current)
+  }, [successFocusRequest, successMessage])
+
+  useLayoutEffect(() => {
+    if (formErrorFocusRequest === 0) return
+    if (!formError) return
+    focusAndScrollMessage(formErrorRef.current)
+  }, [formErrorFocusRequest, formError])
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setFormError(null)
@@ -89,9 +113,7 @@ export function AccessibilityFeedbackForm() {
     const clientErrors = validateClient(values)
     if (countFieldErrors(clientErrors) > 0) {
       setFieldErrors(clientErrors)
-      requestAnimationFrame(() =>
-        focusFormErrors(clientErrors, errorSummaryRef.current),
-      )
+      setErrorFocusRequest((value) => value + 1)
       return
     }
 
@@ -106,30 +128,32 @@ export function AccessibilityFeedbackForm() {
       })
       setSuccessMessage(response.message)
       setValues(EMPTY_VALUES)
+      setSuccessFocusRequest((value) => value + 1)
     } catch (err) {
       if (err instanceof ApiError) {
         if (err.status === 400) {
           const apiErrors = mapApiFieldErrors(err.body)
           if (countFieldErrors(apiErrors) > 0) {
             setFieldErrors(apiErrors)
-            requestAnimationFrame(() =>
-              focusFormErrors(apiErrors, errorSummaryRef.current),
-            )
+            setErrorFocusRequest((value) => value + 1)
           } else {
             setFormError(err.message)
+            setFormErrorFocusRequest((value) => value + 1)
           }
         } else {
           setFormError(err.message)
+          setFormErrorFocusRequest((value) => value + 1)
         }
       } else {
         setFormError('Không thể gửi phản hồi. Vui lòng thử lại sau.')
+        setFormErrorFocusRequest((value) => value + 1)
       }
     } finally {
       setSubmitting(false)
     }
   }
 
-  const showErrorSummary = countFieldErrors(fieldErrors) >= 2
+  const showErrorSummary = countFieldErrors(fieldErrors) > 0
 
   return (
     <section className={styles.formSection} aria-labelledby={`${formId}-heading`}>
@@ -141,11 +165,21 @@ export function AccessibilityFeedbackForm() {
       </p>
 
       {successMessage && (
-        <StatusMessage variant="success" message={successMessage} id={`${formId}-success`} />
+        <StatusMessage
+          ref={successRef}
+          variant="success"
+          message={successMessage}
+          id={`${formId}-success`}
+        />
       )}
 
       {formError && (
-        <StatusMessage variant="error" message={formError} id={`${formId}-form-error`} />
+        <StatusMessage
+          ref={formErrorRef}
+          variant="error"
+          message={formError}
+          id={`${formId}-form-error`}
+        />
       )}
 
       <form
@@ -158,9 +192,7 @@ export function AccessibilityFeedbackForm() {
         }
       >
         {showErrorSummary && (
-          <div ref={errorSummaryRef} tabIndex={-1}>
-            <ErrorSummary errors={fieldErrors} formId={formId} />
-          </div>
+          <ErrorSummary ref={errorSummaryRef} errors={fieldErrors} formId={formId} />
         )}
 
         <FormField id="category" label="Danh mục phản hồi" required error={fieldErrors.category}>

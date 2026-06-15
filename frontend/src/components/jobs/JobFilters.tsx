@@ -16,11 +16,40 @@ const WORK_TYPE_OPTIONS = [
   { value: 'internship', label: 'Thực tập' },
 ]
 
+const EXPERIENCE_OPTIONS = [
+  { value: '', label: 'Tất cả kinh nghiệm' },
+  { value: 'none', label: 'Chưa yêu cầu kinh nghiệm' },
+  { value: 'under-1', label: 'Dưới 1 năm' },
+  { value: '1-2', label: '1–2 năm' },
+  { value: '3-plus', label: '3+ năm' },
+]
+
+const SALARY_OPTIONS = [
+  { value: '', label: 'Tất cả mức lương' },
+  { value: 'under-5m', label: 'Dưới 5 triệu' },
+  { value: '5-10m', label: '5–10 triệu' },
+  { value: '10-15m', label: '10–15 triệu' },
+  { value: 'over-15m', label: 'Trên 15 triệu' },
+  { value: 'negotiable', label: 'Thỏa thuận' },
+]
+
+const WORK_PLACE_OPTIONS = [
+  { value: '', label: 'Tất cả vị trí' },
+  { value: 'remote', label: 'Từ xa' },
+  { value: 'hue', label: 'Huế' },
+  { value: 'da-nang', label: 'Đà Nẵng' },
+  { value: 'hanoi', label: 'Hà Nội' },
+  { value: 'hcm', label: 'TP. Hồ Chí Minh' },
+  { value: 'hybrid', label: 'Hybrid' },
+]
+
 export function JobFilters({ filters, onChange, onSubmit }: JobFiltersProps) {
   const formId = useId()
   const keywordId = `${formId}-keyword`
-  const locationId = `${formId}-location`
   const workTypeId = `${formId}-workType`
+  const experienceId = `${formId}-experience`
+  const salaryId = `${formId}-salary`
+  const workPlaceId = `${formId}-workPlace`
   const remoteId = `${formId}-remote`
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -47,15 +76,57 @@ export function JobFilters({ filters, onChange, onSubmit }: JobFiltersProps) {
         </div>
 
         <div className={styles.field}>
-          <label htmlFor={locationId}>Địa điểm</label>
-          <input
-            id={locationId}
-            name="location"
-            type="text"
-            value={filters.location ?? ''}
-            onChange={(e) => onChange({ ...filters, location: e.target.value })}
-            autoComplete="off"
-          />
+          <label htmlFor={experienceId}>Kinh nghiệm</label>
+          <select
+            id={experienceId}
+            name="experienceLevel"
+            value={filters.experienceLevel ?? ''}
+            onChange={(e) =>
+              onChange({ ...filters, experienceLevel: e.target.value || undefined })
+            }
+          >
+            {EXPERIENCE_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className={styles.field}>
+          <label htmlFor={salaryId}>Mức lương</label>
+          <select
+            id={salaryId}
+            name="salaryRange"
+            value={filters.salaryRange ?? ''}
+            onChange={(e) =>
+              onChange({ ...filters, salaryRange: e.target.value || undefined })
+            }
+          >
+            {SALARY_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className={styles.field}>
+          <label htmlFor={workPlaceId}>Vị trí tuyển dụng / địa điểm làm việc</label>
+          <select
+            id={workPlaceId}
+            name="workPlace"
+            value={filters.workPlace ?? ''}
+            onChange={(e) =>
+              onChange({ ...filters, workPlace: e.target.value || undefined })
+            }
+          >
+            {WORK_PLACE_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className={styles.field}>

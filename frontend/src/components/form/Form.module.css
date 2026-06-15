@@ -73,6 +73,18 @@
   background-color: var(--color-surface);
 }
 
+.messageFocusTarget:focus {
+  border-color: var(--color-primary-dark);
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.errorSummary:focus {
+  border-color: var(--color-primary-dark);
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
 .errorSummaryTitle {
   margin: 0 0 var(--spacing-stack-sm);
   font-size: var(--font-size-label);
@@ -84,14 +96,31 @@
   margin: 0;
   padding-left: var(--spacing-gutter);
   line-height: var(--line-height-body);
+  list-style: disc;
 }
 
-.errorSummaryList a {
+.errorSummaryLink {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
   color: var(--color-primary);
+  font-family: inherit;
+  font-size: inherit;
   font-weight: var(--font-weight-heading);
+  line-height: inherit;
+  text-align: left;
+  text-decoration: underline;
+  cursor: pointer;
+  min-height: var(--spacing-touch-min);
 }
 
-.errorSummaryList a:focus-visible {
+.errorSummaryLink:hover {
+  color: var(--color-primary-dark);
+}
+
+.errorSummaryLink:focus-visible {
   outline: var(--focus-ring);
   outline-offset: var(--focus-offset);
 }

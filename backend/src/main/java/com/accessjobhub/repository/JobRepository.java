@@ -25,6 +25,9 @@ public interface JobRepository extends JpaRepository<Job, Long> {
               ))
               AND (:location IS NULL OR LOWER(j.location) LIKE LOWER(CONCAT('%', :location, '%')))
               AND (:workType IS NULL OR j.workType = :workType)
+              AND (:experienceLevel IS NULL OR j.experienceLevel = :experienceLevel)
+              AND (:salaryRange IS NULL OR j.salaryRange = :salaryRange)
+              AND (:workPlace IS NULL OR j.workPlace = :workPlace)
               AND (:remoteAvailable IS NULL OR j.remoteAvailable = :remoteAvailable)
             ORDER BY j.createdAt DESC, j.id DESC
             """)
@@ -32,6 +35,9 @@ public interface JobRepository extends JpaRepository<Job, Long> {
             @Param("keyword") String keyword,
             @Param("location") String location,
             @Param("workType") String workType,
+            @Param("experienceLevel") String experienceLevel,
+            @Param("salaryRange") String salaryRange,
+            @Param("workPlace") String workPlace,
             @Param("remoteAvailable") Boolean remoteAvailable,
             Pageable pageable
     );

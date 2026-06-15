@@ -11,17 +11,38 @@ export function countFieldErrors(errors: FieldErrors): number {
   return Object.keys(errors).length
 }
 
-/** Focus ErrorSummary (≥2 lỗi) hoặc field đầu tiên (1 lỗi) sau submit. */
-export function focusFormErrors(
-  errors: FieldErrors,
-  summaryEl: HTMLElement | null,
-): void {
-  const keys = Object.keys(errors)
-  if (keys.length >= 2) {
-    summaryEl?.focus()
-    return
+/** Scroll element ra giữa viewport. */
+export function scrollElementIntoViewCenter(element: HTMLElement): void {
+  element.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'auto' })
+}
+
+/** Focus và scroll message tổng (success / lỗi form) ra giữa trang. */
+export function focusAndScrollMessage(el: HTMLElement | null): void {
+  if (!el) return
+  el.focus({ preventScroll: true })
+  scrollElementIntoViewCenter(el)
+}
+
+/** Sau submit lỗi — focus Error Summary và đưa ra giữa viewport. */
+export function focusErrorSummary(element: HTMLElement | null): void {
+  if (!element) return
+
+  const apply = () => {
+    element.focus({ preventScroll: true })
+    scrollElementIntoViewCenter(element)
   }
-  if (keys.length === 1) {
-    document.getElementById(keys[0])?.focus()
-  }
+
+  apply()
+  requestAnimationFrame(() => {
+    apply()
+    requestAnimationFrame(apply)
+  })
+}
+
+/** Chỉ gọi khi user bấm button trong Error Summary. */
+export function focusFieldFromSummaryLink(fieldId: string): void {
+  const control = document.getElementById(fieldId)
+  if (!control) return
+  control.focus({ preventScroll: true })
+  scrollElementIntoViewCenter(control)
 }

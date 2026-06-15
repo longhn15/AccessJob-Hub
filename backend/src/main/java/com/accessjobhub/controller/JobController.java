@@ -26,10 +26,15 @@ public class JobController {
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String location,
             @RequestParam(required = false) String workType,
+            @RequestParam(required = false) String experienceLevel,
+            @RequestParam(required = false) String salaryRange,
+            @RequestParam(required = false) String workPlace,
             @RequestParam(required = false) Boolean remoteAvailable,
             @RequestParam(required = false) Integer limit
     ) {
-        return ResponseEntity.ok(jobService.listJobs(keyword, location, workType, remoteAvailable, limit));
+        return ResponseEntity.ok(jobService.listJobs(
+                keyword, location, workType, experienceLevel, salaryRange, workPlace, remoteAvailable, limit
+        ));
     }
 
     @GetMapping("/{id}")

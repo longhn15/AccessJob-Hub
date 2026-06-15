@@ -6,6 +6,9 @@ export function fetchJobs(filters: JobFilters = {}): Promise<Job[]> {
     keyword: filters.keyword,
     location: filters.location,
     workType: filters.workType,
+    experienceLevel: filters.experienceLevel,
+    salaryRange: filters.salaryRange,
+    workPlace: filters.workPlace,
     remoteAvailable: filters.remoteAvailable,
     limit: filters.limit,
   })

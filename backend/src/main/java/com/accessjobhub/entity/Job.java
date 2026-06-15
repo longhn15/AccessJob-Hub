@@ -29,6 +29,15 @@ public class Job {
     @Column(name = "work_type", nullable = false, length = 50)
     private String workType;
 
+    @Column(name = "experience_level", length = 50)
+    private String experienceLevel;
+
+    @Column(name = "salary_range", length = 50)
+    private String salaryRange;
+
+    @Column(name = "work_place", length = 50)
+    private String workPlace;
+
     @Column(name = "remote_available", nullable = false)
     private boolean remoteAvailable;
 
@@ -94,6 +103,30 @@ public class Job {
 
     public void setWorkType(String workType) {
         this.workType = workType;
+    }
+
+    public String getExperienceLevel() {
+        return experienceLevel;
+    }
+
+    public void setExperienceLevel(String experienceLevel) {
+        this.experienceLevel = experienceLevel;
+    }
+
+    public String getSalaryRange() {
+        return salaryRange;
+    }
+
+    public void setSalaryRange(String salaryRange) {
+        this.salaryRange = salaryRange;
+    }
+
+    public String getWorkPlace() {
+        return workPlace;
+    }
+
+    public void setWorkPlace(String workPlace) {
+        this.workPlace = workPlace;
     }
 
     public boolean isRemoteAvailable() {

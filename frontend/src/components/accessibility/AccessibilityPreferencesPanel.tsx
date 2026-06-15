@@ -1,4 +1,4 @@
-import { useEffect, useId } from 'react'
+import { useEffect, useId, useRef } from 'react'
 import { useAccessibilityPreferences } from '../../hooks/useAccessibilityPreferences'
 import styles from './AccessibilityPreferencesPanel.module.css'
 
@@ -21,6 +21,8 @@ function openPanelFromHash() {
 
 export function AccessibilityPreferencesPanel() {
   const panelId = useId()
+  const panelRef = useRef<HTMLDetailsElement>(null)
+  const summaryRef = useRef<HTMLElement>(null)
   const {
     preferences,
     statusMessage,
@@ -38,9 +40,37 @@ export function AccessibilityPreferencesPanel() {
     return () => window.removeEventListener('hashchange', openPanelFromHash)
   }, [])
 
+  useEffect(() => {
+    function handlePointerDown(event: PointerEvent) {
+      const panel = panelRef.current
+      if (!panel?.open) return
+      const target = event.target
+      if (target instanceof Node && !panel.contains(target)) {
+        panel.open = false
+      }
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      const panel = panelRef.current
+      if (!panel?.open || event.key !== 'Escape') return
+      event.preventDefault()
+      panel.open = false
+      summaryRef.current?.focus()
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
   return (
-    <details className={styles.panel} id="a11y-preferences-panel">
-      <summary className={styles.summary}>Tùy chỉnh tiếp cận</summary>
+    <details ref={panelRef} className={styles.panel} id="a11y-preferences-panel">
+      <summary ref={summaryRef} className={styles.summary}>
+        Tùy chỉnh tiếp cận
+      </summary>
       <div className={styles.content} id={panelId}>
         <p className={styles.intro}>
           Điều chỉnh cỡ chữ, khoảng cách dòng, tương phản và chuyển động. Lựa chọn được lưu tự

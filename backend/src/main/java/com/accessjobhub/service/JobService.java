@@ -29,6 +29,9 @@ public class JobService {
             String keyword,
             String location,
             String workType,
+            String experienceLevel,
+            String salaryRange,
+            String workPlace,
             Boolean remoteAvailable,
             Integer limit
     ) {
@@ -37,6 +40,9 @@ public class JobService {
                 StringUtils.blankToNull(keyword),
                 StringUtils.blankToNull(location),
                 StringUtils.blankToNull(workType),
+                StringUtils.blankToNull(experienceLevel),
+                StringUtils.blankToNull(salaryRange),
+                StringUtils.blankToNull(workPlace),
                 remoteAvailable,
                 PageRequest.of(0, resolvedLimit)
         );
