@@ -3,6 +3,7 @@
   border-radius: var(--radius-md);
   padding: var(--spacing-stack-md);
   background-color: var(--color-surface);
+  min-width: 0;
 }
 
 .heading {
@@ -29,7 +30,8 @@
   line-height: 1.4;
 }
 
-.field input {
+.field input,
+.field select {
   min-height: var(--spacing-touch-min);
   padding: 0 var(--spacing-stack-sm);
   border: 2px solid var(--color-text);
@@ -41,7 +43,8 @@
   scroll-margin-top: calc(var(--spacing-touch-min) + var(--spacing-stack-md));
 }
 
-.field input:focus-visible {
+.field input:focus-visible,
+.field select:focus-visible {
   border-color: var(--color-primary);
   outline: var(--focus-ring);
   outline-offset: var(--focus-offset);
@@ -65,6 +68,35 @@
 }
 
 .submitButton:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+.resetButton {
+  min-height: var(--spacing-touch-min);
+  padding: 0 var(--spacing-gutter);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  font-family: inherit;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-heading);
+  cursor: pointer;
+}
+
+.resetButton:hover:not(:disabled) {
+  background-color: var(--color-surface-soft);
+}
+
+.resetButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.resetButton:focus-visible {
   outline: var(--focus-ring);
   outline-offset: var(--focus-offset);
 }

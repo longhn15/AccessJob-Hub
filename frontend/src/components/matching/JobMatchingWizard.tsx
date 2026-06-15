@@ -4,6 +4,8 @@ import type { Job } from '../../types/job'
 import {
   ACCESSIBILITY_NEED_OPTIONS,
   FIELD_INTEREST_OPTIONS,
+  MATCH_TIER_LABELS,
+  MATCH_TIER_ORDER,
   WORK_FORMAT_OPTIONS,
   type AccessibilityNeed,
   type FieldInterest,
@@ -112,11 +114,20 @@ export function JobMatchingWizard() {
     }
   }
 
-  const handleAdjust = () => {
-    setErrorMessage(null)
+  const handleRestart = () => {
+    setAnswers(INITIAL_ANSWERS)
+    setResults([])
+    setJobs([])
     setLoadError(null)
+    setErrorMessage(null)
     goToStep(1)
   }
+
+  const groupedResults = MATCH_TIER_ORDER.map((tier) => ({
+    tier,
+    label: MATCH_TIER_LABELS[tier],
+    items: results.filter((result) => result.tier === tier),
+  })).filter((group) => group.items.length > 0)
 
   const handleWorkFormatChange = (value: WorkFormatPreference) => {
     setAnswers((current) => ({ ...current, workFormat: value }))
@@ -276,23 +287,43 @@ export function JobMatchingWizard() {
                 )}
 
                 {results.length === 0 ? (
-                  <p className={styles.noHighMatch} role="status">
-                    Hiện chưa có việc làm nào trong hệ thống. Vui lòng thử lại sau hoặc xem danh
-                    sách việc làm thủ công.
-                  </p>
+                  <div className={styles.noHighMatch} role="status">
+                    <p>
+                      Chưa có việc làm phù hợp với lựa chọn hiện tại. Hãy bấm{' '}
+                      <strong>Làm lại</strong> để điều chỉnh hình thức làm việc, nhu cầu hỗ trợ
+                      tiếp cận hoặc lĩnh vực quan tâm.
+                    </p>
+                  </div>
                 ) : (
-                  <ul className={styles.resultsList}>
-                    {results.map((result) => (
-                      <li key={result.job.id}>
-                        <MatchResultCard result={result} />
-                      </li>
+                  <div className={styles.tierGroups}>
+                    {groupedResults.map((group) => (
+                      <section
+                        key={group.tier}
+                        className={styles.tierGroup}
+                        aria-labelledby={`match-tier-${group.tier}`}
+                      >
+                        <h3 id={`match-tier-${group.tier}`} className={styles.tierHeading}>
+                          {group.label}
+                          <span className={styles.tierCount}>
+                            {' '}
+                            ({group.items.length})
+                          </span>
+                        </h3>
+                        <ul className={styles.resultsList}>
+                          {group.items.map((result) => (
+                            <li key={result.job.id}>
+                              <MatchResultCard result={result} />
+                            </li>
+                          ))}
+                        </ul>
+                      </section>
                     ))}
-                  </ul>
+                  </div>
                 )}
 
                 <div className={styles.actions}>
-                  <button type="button" className={styles.adjustButton} onClick={handleAdjust}>
-                    Điều chỉnh lựa chọn
+                  <button type="button" className={styles.restartButton} onClick={handleRestart}>
+                    Làm lại
                   </button>
                 </div>
               </>

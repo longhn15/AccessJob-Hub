@@ -37,7 +37,7 @@ export const WORK_FORMAT_OPTIONS: {
   value: WorkFormatPreference
   label: string
 }[] = [
-  { value: 'remote', label: 'Remote' },
+  { value: 'remote', label: 'Từ xa' },
   { value: 'hybrid', label: 'Hybrid' },
   { value: 'office', label: 'Tại văn phòng' },
   { value: 'any', label: 'Không chắc / tất cả' },
@@ -69,6 +69,8 @@ export const FIELD_INTEREST_OPTIONS: {
 
 export const MATCH_TIER_LABELS: Record<MatchTier, string> = {
   high: 'Phù hợp cao',
-  medium: 'Phù hợp vừa',
+  medium: 'Có thể phù hợp',
   low: 'Cần xem thêm',
 }
+
+export const MATCH_TIER_ORDER: MatchTier[] = ['high', 'medium', 'low']

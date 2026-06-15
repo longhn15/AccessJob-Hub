@@ -6,6 +6,7 @@ import { LoadingState } from '../components/common/LoadingState'
 import { ResourceCard } from '../components/resources/ResourceCard'
 import { ResourceFilters } from '../components/resources/ResourceFilters'
 import type { Resource, ResourceFilters as ResourceFiltersType } from '../types/resource'
+import { hasActiveResourceFilters } from '../utils/resourceFilters'
 import styles from './ResourcesListPage.module.css'
 
 export function ResourcesListPage() {
@@ -50,18 +51,28 @@ export function ResourcesListPage() {
     setAppliedFilters({ ...draftFilters })
   }
 
+  function handleResetFilters() {
+    setDraftFilters({})
+    setLoading(true)
+    setError(null)
+    setAppliedFilters({})
+  }
+
   function handleRetry() {
     setLoading(true)
     setError(null)
     setReloadKey((key) => key + 1)
   }
 
+  const filtersActive = hasActiveResourceFilters(appliedFilters)
+
   return (
     <div className={styles.page}>
       <header className={styles.pageHeader}>
-        <h1>Tài nguyên học tập</h1>
+        <h1>Tài nguyên hỗ trợ tìm việc</h1>
         <p className={styles.intro}>
-          Tài liệu về WCAG, kỹ năng số và việc làm dễ tiếp cận. Dùng bộ lọc để thu hẹp kết quả.
+          Tài liệu về WCAG, kỹ năng số và việc làm dễ tiếp cận — hỗ trợ bạn đáp ứng nhu cầu hỗ trợ
+          tiếp cận khi tìm việc. Dùng từ khóa và danh mục bên dưới để thu hẹp kết quả.
         </p>
       </header>
 
@@ -70,6 +81,10 @@ export function ResourcesListPage() {
           filters={draftFilters}
           onChange={setDraftFilters}
           onSubmit={handleApplyFilters}
+          onReset={handleResetFilters}
+          hasActiveFilters={
+            hasActiveResourceFilters(draftFilters) || filtersActive
+          }
         />
 
         <section className={styles.results} aria-labelledby="resources-results-heading">
@@ -80,8 +95,10 @@ export function ResourcesListPage() {
           {!loading && !error && (
             <p className={styles.resultCount} role="status" aria-live="polite">
               {resources.length === 0
-                ? 'Không có tài nguyên nào khớp bộ lọc.'
-                : `Tìm thấy ${resources.length} tài nguyên.`}
+                ? filtersActive
+                  ? 'Không tìm thấy tài nguyên phù hợp với bộ lọc hiện tại.'
+                  : 'Chưa có tài nguyên nào trong hệ thống.'
+                : `Tìm thấy ${resources.length} tài nguyên phù hợp.`}
             </p>
           )}
 
@@ -91,8 +108,10 @@ export function ResourcesListPage() {
 
           {!loading && !error && resources.length === 0 && (
             <EmptyState
-              title="Chưa có kết quả"
-              description="Thử đổi từ khóa hoặc danh mục để tìm tài nguyên phù hợp hơn."
+              title="Không tìm thấy tài nguyên phù hợp"
+              description="Bạn có thể thử từ khóa ngắn hơn, chọn danh mục “Tất cả” hoặc xóa bộ lọc."
+              actionLabel={filtersActive ? 'Xóa bộ lọc' : undefined}
+              onAction={filtersActive ? handleResetFilters : undefined}
             />
           )}
 

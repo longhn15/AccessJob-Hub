@@ -7,17 +7,14 @@ import { ErrorState } from '../components/common/ErrorState'
 import { LoadingState } from '../components/common/LoadingState'
 import { ApiError } from '../types/api'
 import type { Job } from '../types/job'
+import {
+  formatExperienceLevel,
+  formatSalaryRange,
+  formatWorkMode,
+  formatWorkType,
+  parseRequirementItems,
+} from '../utils/jobLabels'
 import styles from './JobDetailPage.module.css'
-
-function formatWorkType(workType: string): string {
-  const map: Record<string, string> = {
-    'full-time': 'Toàn thời gian',
-    'part-time': 'Bán thời gian',
-    contract: 'Hợp đồng',
-    internship: 'Thực tập',
-  }
-  return map[workType] ?? workType
-}
 
 function NotFoundView() {
   return (
@@ -102,6 +99,10 @@ export function JobDetailPage() {
   }
 
   const workTypeLabel = formatWorkType(job.workType)
+  const workModeLabel = formatWorkMode(job)
+  const experienceLabel = formatExperienceLevel(job.experienceLevel)
+  const salaryLabel = formatSalaryRange(job.salaryRange)
+  const requirementItems = parseRequirementItems(job.requirements)
 
   return (
     <article className={styles.page}>
@@ -113,28 +114,82 @@ export function JobDetailPage() {
 
       <header className={styles.header}>
         <h1>{job.title}</h1>
-        <p className={styles.meta}>
-          <span>{job.companyName}</span>
-          <span aria-hidden="true"> · </span>
-          <span>{job.location}</span>
-        </p>
-        <div className={styles.badges}>
-          <Badge label={workTypeLabel} ariaLabel={`Hình thức: ${workTypeLabel}`} />
-          {job.remoteAvailable && (
-            <Badge label="Từ xa" ariaLabel="Hình thức: Có thể làm từ xa" />
-          )}
-        </div>
       </header>
 
       <div className={styles.content}>
+        <section className={styles.overviewSection} aria-labelledby="job-overview-heading">
+          <h2 id="job-overview-heading">Tổng quan công việc</h2>
+          <dl className={styles.overviewList}>
+            <div className={styles.overviewItem}>
+              <dt>Tổ chức</dt>
+              <dd>{job.companyName}</dd>
+            </div>
+            <div className={styles.overviewItem}>
+              <dt>Địa điểm</dt>
+              <dd>{job.location}</dd>
+            </div>
+            <div className={styles.overviewItem}>
+              <dt>Hình thức làm việc</dt>
+              <dd>
+                <Badge
+                  label={workModeLabel}
+                  ariaLabel={`Hình thức làm việc: ${workModeLabel}`}
+                />
+              </dd>
+            </div>
+            <div className={styles.overviewItem}>
+              <dt>Loại hình</dt>
+              <dd>
+                <Badge label={workTypeLabel} ariaLabel={`Loại hình: ${workTypeLabel}`} />
+              </dd>
+            </div>
+            {experienceLabel && (
+              <div className={styles.overviewItem}>
+                <dt>Kinh nghiệm</dt>
+                <dd>{experienceLabel}</dd>
+              </div>
+            )}
+            {salaryLabel && (
+              <div className={styles.overviewItem}>
+                <dt>Mức lương</dt>
+                <dd>{salaryLabel}</dd>
+              </div>
+            )}
+          </dl>
+        </section>
+
         <section aria-labelledby="job-description-heading">
           <h2 id="job-description-heading">Mô tả công việc</h2>
           <p>{job.fullDescription}</p>
         </section>
 
         <section aria-labelledby="job-requirements-heading">
-          <h2 id="job-requirements-heading">Yêu cầu</h2>
-          <p>{job.requirements}</p>
+          <h2 id="job-requirements-heading">Yêu cầu và kỹ năng</h2>
+          {requirementItems.length > 1 ? (
+            <ul className={styles.bulletList}>
+              {requirementItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>{job.requirements}</p>
+          )}
+        </section>
+
+        <section aria-labelledby="job-compensation-heading">
+          <h2 id="job-compensation-heading">Mức lương và hình thức làm việc</h2>
+          <ul className={styles.bulletList}>
+            <li>
+              Mức lương:{' '}
+              <strong>{salaryLabel ?? 'Liên hệ để trao đổi'}</strong>
+            </li>
+            <li>
+              Hình thức: <strong>{workModeLabel}</strong> ({workTypeLabel})
+            </li>
+            <li>
+              Địa điểm: <strong>{job.location}</strong>
+            </li>
+          </ul>
         </section>
 
         {job.accessibilitySupport && (
@@ -144,15 +199,14 @@ export function JobDetailPage() {
           </section>
         )}
 
-        <section aria-labelledby="job-contact-heading">
-          <h2 id="job-contact-heading">Liên hệ</h2>
+        <section className={styles.applySection} aria-labelledby="job-apply-heading">
+          <h2 id="job-apply-heading">Cách ứng tuyển</h2>
           <p>
-            Email:{' '}
+            Bạn có thể gửi form quan tâm bên dưới hoặc liên hệ qua email:{' '}
             <a href={`mailto:${job.contactEmail}`}>{job.contactEmail}</a>
           </p>
+          <ApplicationForm jobId={job.id} jobTitle={job.title} />
         </section>
-
-        <ApplicationForm jobId={job.id} jobTitle={job.title} />
       </div>
     </article>
   )

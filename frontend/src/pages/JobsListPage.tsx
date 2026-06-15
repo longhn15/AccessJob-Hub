@@ -6,6 +6,7 @@ import { LoadingState } from '../components/common/LoadingState'
 import { JobCard } from '../components/jobs/JobCard'
 import { JobFilters } from '../components/jobs/JobFilters'
 import type { Job, JobFilters as JobFiltersType } from '../types/job'
+import { hasActiveJobFilters } from '../utils/jobFilters'
 import styles from './JobsListPage.module.css'
 
 export function JobsListPage() {
@@ -50,6 +51,15 @@ export function JobsListPage() {
     setAppliedFilters({ ...draftFilters })
   }
 
+  function handleResetFilters() {
+    setDraftFilters({})
+    setLoading(true)
+    setError(null)
+    setAppliedFilters({})
+  }
+
+  const filtersActive = hasActiveJobFilters(appliedFilters)
+
   function handleRetry() {
     setLoading(true)
     setError(null)
@@ -71,6 +81,8 @@ export function JobsListPage() {
           filters={draftFilters}
           onChange={setDraftFilters}
           onSubmit={handleApplyFilters}
+          onReset={handleResetFilters}
+          hasActiveFilters={hasActiveJobFilters(draftFilters) || filtersActive}
         />
 
         <section className={styles.results} aria-labelledby="jobs-results-heading">
@@ -81,8 +93,10 @@ export function JobsListPage() {
           {!loading && !error && (
             <p className={styles.resultCount} role="status" aria-live="polite">
               {jobs.length === 0
-                ? 'Không có việc làm nào khớp bộ lọc.'
-                : `Tìm thấy ${jobs.length} việc làm.`}
+                ? filtersActive
+                  ? 'Không tìm thấy việc làm phù hợp với bộ lọc hiện tại.'
+                  : 'Chưa có việc làm nào trong hệ thống.'
+                : `Tìm thấy ${jobs.length} việc làm${filtersActive ? ' phù hợp bộ lọc' : ''}.`}
             </p>
           )}
 
@@ -92,8 +106,12 @@ export function JobsListPage() {
 
           {!loading && !error && jobs.length === 0 && (
             <EmptyState
-              title="Chưa có kết quả"
-              description="Thử đổi từ khóa, địa điểm hoặc bỏ bớt bộ lọc để xem thêm việc làm."
+              title="Không tìm thấy việc làm phù hợp"
+              description={
+                filtersActive
+                  ? 'Hãy thử thay đổi hoặc xóa bớt bộ lọc để xem thêm kết quả.'
+                  : 'Hiện chưa có tin tuyển dụng. Vui lòng quay lại sau.'
+              }
             />
           )}
 

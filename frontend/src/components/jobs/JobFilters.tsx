@@ -6,6 +6,8 @@ interface JobFiltersProps {
   filters: JobFiltersType
   onChange: (filters: JobFiltersType) => void
   onSubmit: () => void
+  onReset?: () => void
+  hasActiveFilters?: boolean
 }
 
 const WORK_TYPE_OPTIONS = [
@@ -43,7 +45,13 @@ const WORK_PLACE_OPTIONS = [
   { value: 'hybrid', label: 'Hybrid' },
 ]
 
-export function JobFilters({ filters, onChange, onSubmit }: JobFiltersProps) {
+export function JobFilters({
+  filters,
+  onChange,
+  onSubmit,
+  onReset,
+  hasActiveFilters = false,
+}: JobFiltersProps) {
   const formId = useId()
   const keywordId = `${formId}-keyword`
   const workTypeId = `${formId}-workType`
@@ -164,6 +172,17 @@ export function JobFilters({ filters, onChange, onSubmit }: JobFiltersProps) {
         <button type="submit" className={styles.submitButton}>
           Áp dụng bộ lọc
         </button>
+
+        {onReset && (
+          <button
+            type="button"
+            className={styles.resetButton}
+            onClick={onReset}
+            disabled={!hasActiveFilters}
+          >
+            Xóa bộ lọc
+          </button>
+        )}
       </form>
     </aside>
   )

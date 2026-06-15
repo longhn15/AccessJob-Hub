@@ -36,3 +36,29 @@
 .emptyText {
   margin: 0;
 }
+
+.emptyAction {
+  margin: var(--spacing-stack-md) 0 0;
+}
+
+.emptyButton {
+  min-height: var(--spacing-touch-min);
+  padding: 0 var(--spacing-gutter);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  font-family: inherit;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-heading);
+  cursor: pointer;
+}
+
+.emptyButton:hover {
+  background-color: var(--color-surface-soft);
+}
+
+.emptyButton:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}

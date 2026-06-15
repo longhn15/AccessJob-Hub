@@ -119,7 +119,7 @@
 
 .backButton,
 .nextButton,
-.adjustButton {
+.restartButton {
   min-height: var(--spacing-touch-min);
   min-width: var(--spacing-touch-min);
   padding: 0 var(--spacing-gutter);
@@ -151,21 +151,47 @@
   border-color: var(--color-primary-dark);
 }
 
-.adjustButton {
+.restartButton {
   border: 2px solid var(--color-primary);
   background-color: var(--color-background);
   color: var(--color-primary);
 }
 
-.adjustButton:hover {
+.restartButton:hover {
   background-color: var(--color-surface-soft);
 }
 
 .backButton:focus-visible,
 .nextButton:focus-visible,
-.adjustButton:focus-visible {
+.restartButton:focus-visible {
   outline: var(--focus-ring);
   outline-offset: var(--focus-offset);
+}
+
+.tierGroups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack-lg);
+  margin-bottom: var(--spacing-stack-md);
+}
+
+.tierGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack-md);
+}
+
+.tierHeading {
+  margin: 0;
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-heading);
+  line-height: 1.3;
+  color: var(--color-primary-dark);
+}
+
+.tierCount {
+  font-weight: 400;
+  color: var(--color-text-muted);
 }
 
 .resultsIntro {

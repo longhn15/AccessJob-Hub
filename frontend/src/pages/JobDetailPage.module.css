@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-stack-md);
+  min-width: 0;
+  overflow-x: clip;
 }
 
 .page h1 {
@@ -88,4 +90,50 @@
   background-color: var(--color-surface-soft);
   border-left: 4px solid var(--color-primary);
   border-radius: var(--radius-sm);
+}
+
+.overviewSection {
+  padding: var(--spacing-stack-md);
+  background-color: var(--color-surface-soft);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.overviewList {
+  margin: 0;
+  display: grid;
+  gap: var(--spacing-stack-sm);
+}
+
+.overviewItem {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.overviewItem dt {
+  margin: 0;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-text-muted);
+}
+
+.overviewItem dd {
+  margin: 0;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.bulletList {
+  margin: 0;
+  padding-left: var(--spacing-gutter);
+  line-height: var(--line-height-body);
+}
+
+.bulletList li + li {
+  margin-top: var(--spacing-stack-sm);
+}
+
+.applySection {
+  padding-top: var(--spacing-stack-md);
+  border-top: 2px solid var(--color-border);
 }

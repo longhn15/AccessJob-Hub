@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom'
 import type { Job } from '../../types/job'
+import {
+  formatExperienceLevel,
+  formatSalaryRange,
+  formatWorkMode,
+  formatWorkType,
+} from '../../utils/jobLabels'
 import { Badge } from '../common/Badge'
 import styles from './JobCard.module.css'
 
@@ -7,18 +13,11 @@ interface JobCardProps {
   job: Job
 }
 
-function formatWorkType(workType: string): string {
-  const map: Record<string, string> = {
-    'full-time': 'Toàn thời gian',
-    'part-time': 'Bán thời gian',
-    contract: 'Hợp đồng',
-    internship: 'Thực tập',
-  }
-  return map[workType] ?? workType
-}
-
 export function JobCard({ job }: JobCardProps) {
   const workTypeLabel = formatWorkType(job.workType)
+  const workModeLabel = formatWorkMode(job)
+  const experienceLabel = formatExperienceLevel(job.experienceLevel)
+  const salaryLabel = formatSalaryRange(job.salaryRange)
 
   return (
     <article className={styles.card} aria-labelledby={`job-title-${job.id}`}>
@@ -34,9 +33,16 @@ export function JobCard({ job }: JobCardProps) {
           <span>{job.location}</span>
         </p>
         <div className={styles.badges}>
-          <Badge label={workTypeLabel} ariaLabel={`Hình thức: ${workTypeLabel}`} />
-          {job.remoteAvailable && (
-            <Badge label="Từ xa" ariaLabel="Hình thức: Có thể làm từ xa" />
+          <Badge label={workModeLabel} ariaLabel={`Hình thức làm việc: ${workModeLabel}`} />
+          <Badge label={workTypeLabel} ariaLabel={`Loại hình: ${workTypeLabel}`} />
+          {experienceLabel && (
+            <Badge
+              label={experienceLabel}
+              ariaLabel={`Kinh nghiệm: ${experienceLabel}`}
+            />
+          )}
+          {salaryLabel && (
+            <Badge label={salaryLabel} ariaLabel={`Mức lương: ${salaryLabel}`} />
           )}
         </div>
       </header>
@@ -46,7 +52,7 @@ export function JobCard({ job }: JobCardProps) {
       {job.accessibilitySupport && (
         <div className={styles.accessibilityBlock}>
           <h4 className={styles.accessibilityHeading}>Hỗ trợ tiếp cận</h4>
-          <p>{job.accessibilitySupport}</p>
+          <p className={styles.accessibilityText}>{job.accessibilitySupport}</p>
         </div>
       )}
 

@@ -36,7 +36,7 @@ export function MatchResultCard({ result }: MatchResultCardProps) {
       <p className={styles.description}>{job.shortDescription}</p>
 
       <div className={styles.reasonsBlock}>
-        <h4 className={styles.reasonsHeading}>Vì sao gợi ý</h4>
+        <h4 className={styles.reasonsHeading}>Vì sao phù hợp?</h4>
         <ul className={styles.reasonsList}>
           {reasons.map((reason) => (
             <li key={reason}>{reason}</li>
