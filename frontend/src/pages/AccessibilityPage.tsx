@@ -120,6 +120,18 @@ export function AccessibilityPage() {
         </p>
       </section>
 
+      <section aria-labelledby="employer-checklist-heading">
+        <h2 id="employer-checklist-heading">Dành cho nhà tuyển dụng</h2>
+        <p>
+          Dùng{' '}
+          <Link to="/employer-checklist" className={styles.inlineLink}>
+            công cụ tự đánh giá tin tuyển dụng
+          </Link>{' '}
+          để rà soát tin đăng có thân thiện với người khuyết tật. Đây là checklist tham khảo, không
+          phải chứng nhận WCAG chính thức.
+        </p>
+      </section>
+
       <section aria-labelledby="commitments-heading">
         <h2 id="commitments-heading">Cam kết đã áp dụng</h2>
         <ul className={styles.list}>

@@ -78,6 +78,8 @@ export function Layout({ children }: LayoutProps) {
             </Link>
             {' · '}
             <Link to="/wcag-22">Ma trận WCAG 2.2</Link>
+            {' · '}
+            <Link to="/employer-checklist">Kiểm tra tin tuyển dụng</Link>
           </p>
         </div>
       </footer>

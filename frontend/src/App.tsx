@@ -8,6 +8,7 @@ import { JobMatchingPage } from './pages/JobMatchingPage'
 import { JobsListPage } from './pages/JobsListPage'
 import { ResourceDetailPage } from './pages/ResourceDetailPage'
 import { ResourcesListPage } from './pages/ResourcesListPage'
+import { EmployerChecklistPage } from './pages/EmployerChecklistPage'
 import { Wcag22ConformancePage } from './pages/Wcag22ConformancePage'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/resources" element={<ResourcesListPage />} />
             <Route path="/resources/:id" element={<ResourceDetailPage />} />
             <Route path="/accessibility" element={<AccessibilityPage />} />
+            <Route path="/employer-checklist" element={<EmployerChecklistPage />} />
             <Route path="/wcag-22" element={<Wcag22ConformancePage />} />
           </Routes>
         </Layout>

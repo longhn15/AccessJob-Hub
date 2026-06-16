@@ -78,6 +78,7 @@ API base URL: `VITE_API_URL` (mặc định `/api` — dùng relative path qua N
 | `/resources` | Danh sách tài nguyên (`GET /api/resources`) |
 | `/resources/:id` | Chi tiết tài nguyên (`GET /api/resources/{id}`) |
 | `/accessibility` | Accessibility Statement + form phản hồi (`POST /api/accessibility-feedback`) |
+| `/employer-checklist` | Công cụ tự đánh giá tin tuyển dụng hòa nhập (client-side, không API) |
 | `/wcag-22` | Ma trận đối chiếu tiêu chí WCAG 2.2 mới (tự đánh giá minh chứng) |
 
 ### Accessibility Preferences Panel
@@ -149,5 +150,6 @@ Chi tiết: [docs/api-endpoints.md](docs/api-endpoints.md)
 - [x] `POST /api/accessibility-feedback` (phản hồi accessibility)
 - [x] Front-end core pages (jobs, resources, accessibility statement — read-only API)
 - [x] Accessible Job Matching Wizard (`/job-matching`)
+- [x] Employer Accessibility Self-Check (`/employer-checklist` — client-side checklist)
 - [x] Form ứng tuyển / phản hồi accessibility (FE)
 - [x] Accessibility Preferences Panel (localStorage, toàn site)

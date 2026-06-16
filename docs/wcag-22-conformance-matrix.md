@@ -35,6 +35,14 @@ Tài liệu đối chiếu các **tiêu chí WCAG 2.2 mới** với bằng chứ
 
 ---
 
+## Công cụ giáo dục — inclusive design (không phải tiêu chí WCAG bắt buộc)
+
+| Công cụ | Route | Mô tả |
+|---------|-------|--------|
+| Employer Accessibility Self-Check | `/employer-checklist` | Checklist tham khảo giúp nhà tuyển dụng tự rà soát tin tuyển dụng hòa nhập; chấm điểm client-side, không lưu server. **Không** claim chứng nhận WCAG chính thức. |
+
+---
+
 ## Liên kết
 
 - [Tuyên bố accessibility](/accessibility) — cam kết và form phản hồi

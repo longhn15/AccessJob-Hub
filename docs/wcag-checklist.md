@@ -2,7 +2,7 @@
 
 Checklist thực tế cho các luồng Front-end chính. Cập nhật sau vòng kiểm thử cuối **2026-06-12** (report `FINAL_ACCESSIBILITY_AUDIT_006`).
 
-**Phạm vi route:** `/`, `/jobs`, `/jobs/:id`, `/job-matching`, `/resources`, `/resources/:id`, `/accessibility`, `/wcag-22`
+**Phạm vi route:** `/`, `/jobs`, `/jobs/:id`, `/job-matching`, `/resources`, `/resources/:id`, `/accessibility`, `/employer-checklist`, `/wcag-22`
 
 **Ma trận WCAG 2.2 mới:** [wcag-22-conformance-matrix.md](./wcag-22-conformance-matrix.md) · route `/wcag-22`
 
@@ -41,6 +41,7 @@ Checklist thực tế cho các luồng Front-end chính. Cập nhật sau vòng 
 | 2.10 | Accessibility Preferences Panel | Keyboard, fieldset/radio, status message, localStorage | Layout (mọi route) | ✅ axe 0 violation `/`, `/jobs`, `/accessibility` (2026-06-14) |
 | 2.11 | Job Matching Wizard keyboard | Tab, Next/Back, focus heading khi chuyển bước, validation bước 2 | `/job-matching` | ✅ Playwright (`regression-job-matching-audit.json`, 2026-06-14) |
 | 2.12 | Wizard progress text | “Bước X trong 4” + `aria-live` | `/job-matching` | ✅ Implemented |
+| 2.13 | Employer checklist keyboard | Tab qua fieldset/checkbox, Submit/Reset bằng bàn phím | `/employer-checklist` | ✅ Expected — native checkbox + button; chưa chạy axe/Lighthouse sau implement |
 
 ---
 
@@ -78,6 +79,7 @@ Checklist thực tế cho các luồng Front-end chính. Cập nhật sau vòng 
 | 360×800 | `/jobs` | Không | `mobile360_jobs.png` |
 | 360×800 | `/accessibility` | Không (sau fix table wrapper) | `mobile360_accessibility.png` |
 | 360×800 | `/job-matching` | Không | `mobile360_job-matching.png` |
+| 360×800 | `/employer-checklist` | Không (expected) | Chưa chụp screenshot — CSS `overflow-x: clip`, fieldset responsive |
 | Zoom 200% | `/jobs` | Không | `zoom200_jobs.png` |
 | Zoom 200% | `/job-matching` | Không | `zoom200_job-matching.png` |
 
@@ -134,3 +136,4 @@ Chi tiết: `.cursor/rules/ui-design-system-rule.mdc`
 | 2026-06-14 | Regression wizard + preferences panel — axe/Lighthouse/keyboard/mobile/zoom (`JOB_MATCHING_PREFERENCES_REGRESSION_009`) |
 | 2026-06-16 | Thêm ma trận WCAG 2.2 mới — route `/wcag-22`, docs `wcag-22-conformance-matrix.md` (`WCAG22_CONFORMANCE_MATRIX_013`) |
 | 2026-06-16 | Redundant Entry + lưu Job Matching — localStorage contact profile & saved matching (`REDUNDANT_ENTRY_SAVED_MATCHING_014`) |
+| 2026-06-16 | Employer Accessibility Self-Check — route `/employer-checklist`, checklist client-side (`EMPLOYER_ACCESSIBILITY_SELF_CHECK_015`) |

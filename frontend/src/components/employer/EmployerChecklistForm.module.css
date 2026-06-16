@@ -1,0 +1,146 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack-lg);
+  min-width: 0;
+}
+
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fieldset {
+  margin: 0;
+  padding: var(--spacing-stack-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-soft);
+  min-width: 0;
+}
+
+.legend {
+  padding: 0 var(--spacing-stack-sm);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-primary-dark);
+}
+
+.criteriaList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-stack-sm);
+  margin: var(--spacing-stack-md) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.optionLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-stack-sm);
+  min-height: var(--spacing-touch-min);
+  padding: var(--spacing-stack-sm);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.optionLabel:hover {
+  background-color: var(--color-background);
+}
+
+.optionLabel:has(input:focus-visible) {
+  border-color: var(--color-primary);
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+.control {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.2rem;
+  accent-color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.disclaimer {
+  margin: 0;
+  padding: var(--spacing-stack-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-background);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+}
+
+.disclaimer strong {
+  color: var(--color-text);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-stack-md);
+}
+
+.submitButton,
+.resetButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--spacing-touch-min);
+  min-width: var(--spacing-touch-min);
+  padding: 0 var(--spacing-gutter);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-heading);
+  cursor: pointer;
+}
+
+.submitButton {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.submitButton:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.resetButton {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.resetButton:hover {
+  background-color: var(--color-surface-soft);
+}
+
+.submitButton:focus-visible,
+.resetButton:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+.hintMessage {
+  margin: 0;
+  padding: var(--spacing-stack-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-soft);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}

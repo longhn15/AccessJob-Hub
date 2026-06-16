@@ -3,6 +3,13 @@ import styles from './HomePage.module.css'
 
 const FEATURES = [
   {
+    title: 'Kiểm tra tin tuyển dụng',
+    description:
+      'Bạn là nhà tuyển dụng? Kiểm tra tin tuyển dụng đã thân thiện tiếp cận chưa — checklist 20 tiêu chí, chấm điểm ngay trên trình duyệt.',
+    to: '/employer-checklist',
+    cta: 'Bắt đầu kiểm tra',
+  },
+  {
     title: 'Gợi ý việc phù hợp',
     description:
       'Wizard hỏi nhu cầu tiếp cận trước, rồi gợi ý việc làm phù hợp với lý do rõ ràng.',
