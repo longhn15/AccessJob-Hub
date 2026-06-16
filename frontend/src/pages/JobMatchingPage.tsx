@@ -1,7 +1,24 @@
-import { JobMatchingWizard } from '../components/matching/JobMatchingWizard'
+import { useCallback, useRef, useState } from 'react'
+import {
+  JobMatchingWizard,
+  type JobMatchingWizardHandle,
+} from '../components/matching/JobMatchingWizard'
+import { SavedJobMatchingPanel } from '../components/matching/SavedJobMatchingPanel'
+import type { SavedJobMatchingResult } from '../utils/savedJobMatchingStorage'
 import styles from './JobMatchingPage.module.css'
 
 export function JobMatchingPage() {
+  const wizardRef = useRef<JobMatchingWizardHandle>(null)
+  const [savedPanelKey, setSavedPanelKey] = useState(0)
+
+  const handleRestore = useCallback((saved: SavedJobMatchingResult) => {
+    wizardRef.current?.restoreFromSaved(saved)
+  }, [])
+
+  const handleSaved = useCallback(() => {
+    setSavedPanelKey((value) => value + 1)
+  }, [])
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -12,7 +29,9 @@ export function JobMatchingPage() {
         </p>
       </header>
 
-      <JobMatchingWizard />
+      <SavedJobMatchingPanel key={savedPanelKey} onRestore={handleRestore} />
+
+      <JobMatchingWizard ref={wizardRef} onSaved={handleSaved} />
     </div>
   )
 }

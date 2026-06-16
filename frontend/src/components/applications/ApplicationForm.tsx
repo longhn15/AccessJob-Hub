@@ -9,6 +9,8 @@ import {
   type FieldErrors,
 } from '../../utils/formErrors'
 import { isBlank, isValidEmail, LIMITS } from '../../utils/validation'
+import { saveContactProfile } from '../../utils/contactProfileStorage'
+import { ContactProfileControls } from '../contact/ContactProfileControls'
 import { ErrorSummary } from '../form/ErrorSummary'
 import { getFieldAriaProps } from '../form/fieldAria'
 import { FormField } from '../form/FormField'
@@ -76,6 +78,30 @@ export function ApplicationForm({ jobId, jobTitle }: ApplicationFormProps) {
   const [errorFocusRequest, setErrorFocusRequest] = useState(0)
   const [successFocusRequest, setSuccessFocusRequest] = useState(0)
   const [formErrorFocusRequest, setFormErrorFocusRequest] = useState(0)
+  const [saveContactProfileChecked, setSaveContactProfileChecked] = useState(false)
+  const [contactStorageRefreshKey, setContactStorageRefreshKey] = useState(0)
+
+  function handleFillContactProfile(profile: {
+    fullName: string
+    email: string
+    phone?: string
+  }) {
+    setValues((prev) => ({
+      ...prev,
+      fullName: profile.fullName,
+      email: profile.email,
+      phone: profile.phone ?? '',
+    }))
+    setFieldErrors((prev) => {
+      const next = { ...prev }
+      delete next.fullName
+      delete next.email
+      delete next.phone
+      return next
+    })
+    setFormError(null)
+    setSuccessMessage(null)
+  }
 
   function updateField<K extends keyof FormValues>(key: K, value: FormValues[K]) {
     setValues((prev) => ({ ...prev, [key]: value }))
@@ -132,8 +158,17 @@ export function ApplicationForm({ jobId, jobTitle }: ApplicationFormProps) {
       }
 
       const response = await createApplication(payload)
+      if (saveContactProfileChecked) {
+        saveContactProfile({
+          fullName: payload.fullName,
+          email: payload.email,
+          phone: payload.phone,
+        })
+        setContactStorageRefreshKey((value) => value + 1)
+      }
       setSuccessMessage(response.message)
       setValues(EMPTY_VALUES)
+      setSaveContactProfileChecked(false)
       setSuccessFocusRequest((value) => value + 1)
     } catch (err) {
       if (err instanceof ApiError) {
@@ -214,6 +249,16 @@ export function ApplicationForm({ jobId, jobTitle }: ApplicationFormProps) {
         {showErrorSummary && (
           <ErrorSummary ref={errorSummaryRef} errors={fieldErrors} formId={formId} />
         )}
+
+        <ContactProfileControls
+          key={contactStorageRefreshKey}
+          mode="full"
+          onFill={handleFillContactProfile}
+          disabled={submitting}
+          showSaveCheckbox
+          saveChecked={saveContactProfileChecked}
+          onSaveCheckedChange={setSaveContactProfileChecked}
+        />
 
         <FormField id="fullName" label="Họ và tên" required error={fieldErrors.fullName}>
           <TextInput

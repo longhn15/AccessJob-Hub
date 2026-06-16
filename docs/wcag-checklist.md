@@ -133,3 +133,4 @@ Chi tiết: `.cursor/rules/ui-design-system-rule.mdc`
 | 2026-06-14 | Thêm route `/job-matching` — wizard gợi ý việc làm (`ACCESSIBLE_JOB_MATCHING_008`) |
 | 2026-06-14 | Regression wizard + preferences panel — axe/Lighthouse/keyboard/mobile/zoom (`JOB_MATCHING_PREFERENCES_REGRESSION_009`) |
 | 2026-06-16 | Thêm ma trận WCAG 2.2 mới — route `/wcag-22`, docs `wcag-22-conformance-matrix.md` (`WCAG22_CONFORMANCE_MATRIX_013`) |
+| 2026-06-16 | Redundant Entry + lưu Job Matching — localStorage contact profile & saved matching (`REDUNDANT_ENTRY_SAVED_MATCHING_014`) |

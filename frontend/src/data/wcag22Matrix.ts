@@ -115,16 +115,17 @@ export const WCAG22_AA_CRITERIA: Wcag22Criterion[] = [
     id: '3.3.7',
     name: 'Redundant Entry',
     level: 'A',
-    status: 'planned',
+    status: 'partial',
     evidence: {
-      route: '/jobs/:id (ApplicationForm), /accessibility (AccessibilityFeedbackForm)',
-      component: 'ApplicationForm, AccessibilityFeedbackForm',
+      route: '/jobs/:id, /accessibility, /job-matching',
+      component:
+        'ApplicationForm, AccessibilityFeedbackForm, ContactProfileControls, SavedJobMatchingPanel',
       description:
-        'Hai form thu thập email/liên hệ riêng biệt; chưa tự điền lại thông tin đã nhập ở form khác trong cùng phiên.',
+        'ApplicationForm: checkbox đồng ý lưu + nút điền/xóa thông tin liên hệ (localStorage accessjob:contact-profile). AccessibilityFeedbackForm: nút dùng email đã lưu. Job Matching: lưu/xem lại kết quả gần nhất (accessjob:saved-job-matching). Không tự động điền/lưu âm thầm.',
     },
-    testingMethods: ['code-review'],
+    testingMethods: ['keyboard', 'manual', 'code-review'],
     limitations:
-      'Chưa implement auto-fill/reuse contact info. Hướng cải thiện: lưu họ tên/email (với sự đồng ý) vào localStorage và gợi ý điền lại.',
+      'Chỉ lưu cục bộ trên thiết bị/trình duyệt; không đồng bộ server hay giữa thiết bị. Tin nhắn form và mô tả feedback không được lưu. Chưa chạy axe/Lighthouse sau tính năng mới.',
   },
   {
     id: '3.3.8',

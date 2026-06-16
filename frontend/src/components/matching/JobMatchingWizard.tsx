@@ -1,4 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useId,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react'
 import { fetchJobs } from '../../api/jobs'
 import type { Job } from '../../types/job'
 import {
@@ -14,6 +22,10 @@ import {
   type WorkFormatPreference,
 } from '../../types/jobMatching'
 import { hasHighMatches, matchJobs } from '../../utils/jobMatching'
+import {
+  saveJobMatchingResult,
+  type SavedJobMatchingResult,
+} from '../../utils/savedJobMatchingStorage'
 import { ErrorState } from '../common/ErrorState'
 import { LoadingState } from '../common/LoadingState'
 import { MatchResultCard } from './MatchResultCard'
@@ -34,7 +46,16 @@ const INITIAL_ANSWERS: JobMatchingAnswers = {
   fieldInterest: null,
 }
 
-export function JobMatchingWizard() {
+export interface JobMatchingWizardHandle {
+  restoreFromSaved: (saved: SavedJobMatchingResult) => void
+}
+
+interface JobMatchingWizardProps {
+  onSaved?: () => void
+}
+
+export const JobMatchingWizard = forwardRef<JobMatchingWizardHandle, JobMatchingWizardProps>(
+  function JobMatchingWizard({ onSaved }, ref) {
   const [step, setStep] = useState(1)
   const [answers, setAnswers] = useState<JobMatchingAnswers>(INITIAL_ANSWERS)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -42,9 +63,13 @@ export function JobMatchingWizard() {
   const [results, setResults] = useState<JobMatchResult[]>([])
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState<string | null>(null)
+  const [saveStatusMessage, setSaveStatusMessage] = useState<string | null>(null)
+  const [missingSavedJobsNote, setMissingSavedJobsNote] = useState<string | null>(null)
 
   const stepHeadingRef = useRef<HTMLHeadingElement>(null)
   const errorRef = useRef<HTMLParagraphElement>(null)
+  const saveStatusRef = useRef<HTMLParagraphElement>(null)
+  const saveStatusId = useId()
 
   const focusStepHeading = useCallback(() => {
     stepHeadingRef.current?.focus()
@@ -60,20 +85,55 @@ export function JobMatchingWizard() {
     }
   }, [errorMessage])
 
-  const loadAndMatch = useCallback(async (currentAnswers: JobMatchingAnswers) => {
-    setLoading(true)
-    setLoadError(null)
+  useEffect(() => {
+    if (!saveStatusMessage) return
+    saveStatusRef.current?.focus()
+  }, [saveStatusMessage])
 
-    try {
-      const jobList = await fetchJobs({ limit: 50 })
-      setJobs(jobList)
-      setResults(matchJobs(jobList, currentAnswers))
-    } catch {
-      setLoadError('Không thể tải danh sách việc làm. Vui lòng thử lại.')
-    } finally {
-      setLoading(false)
-    }
-  }, [])
+  const loadAndMatch = useCallback(
+    async (currentAnswers: JobMatchingAnswers, savedSummaryIds?: number[]) => {
+      setLoading(true)
+      setLoadError(null)
+      setMissingSavedJobsNote(null)
+
+      try {
+        const jobList = await fetchJobs({ limit: 50 })
+        setJobs(jobList)
+        const matched = matchJobs(jobList, currentAnswers)
+        setResults(matched)
+
+        if (savedSummaryIds && savedSummaryIds.length > 0) {
+          const foundIds = new Set(matched.map((item) => item.job.id))
+          const missingCount = savedSummaryIds.filter((id) => !foundIds.has(id)).length
+          if (missingCount > 0) {
+            setMissingSavedJobsNote(
+              `${missingCount} việc làm trong bản lưu không còn trong danh sách hiện tại. Kết quả bên dưới được tính lại từ dữ liệu mới nhất.`,
+            )
+          }
+        }
+      } catch {
+        setLoadError('Không thể tải danh sách việc làm. Vui lòng thử lại.')
+      } finally {
+        setLoading(false)
+      }
+    },
+    [],
+  )
+
+  const restoreFromSaved = useCallback(
+    (saved: SavedJobMatchingResult) => {
+      setAnswers(saved.answers)
+      setErrorMessage(null)
+      setSaveStatusMessage(null)
+      setMissingSavedJobsNote(null)
+      setStep(4)
+      const summaryIds = saved.matchSummary.map((item) => item.jobId)
+      void loadAndMatch(saved.answers, summaryIds)
+    },
+    [loadAndMatch],
+  )
+
+  useImperativeHandle(ref, () => ({ restoreFromSaved }), [restoreFromSaved])
 
   const goToStep = (nextStep: number) => {
     setErrorMessage(null)
@@ -120,7 +180,31 @@ export function JobMatchingWizard() {
     setJobs([])
     setLoadError(null)
     setErrorMessage(null)
+    setSaveStatusMessage(null)
+    setMissingSavedJobsNote(null)
     goToStep(1)
+  }
+
+  const handleSaveResults = () => {
+    if (results.length === 0) return
+
+    const saved = saveJobMatchingResult({
+      savedAt: new Date().toISOString(),
+      answers,
+      matchSummary: results.slice(0, 5).map((result) => ({
+        jobId: result.job.id,
+        jobTitle: result.job.title,
+        tier: result.tier,
+        score: result.score,
+      })),
+    })
+
+    if (saved) {
+      setSaveStatusMessage('Đã lưu kết quả gợi ý việc làm trên thiết bị này.')
+      onSaved?.()
+    } else {
+      setSaveStatusMessage('Không thể lưu kết quả. Vui lòng thử lại hoặc kiểm tra dung lượng trình duyệt.')
+    }
   }
 
   const groupedResults = MATCH_TIER_ORDER.map((tier) => ({
@@ -279,6 +363,25 @@ export function JobMatchingWizard() {
                   {jobs.length} tin hiện có.
                 </p>
 
+                {missingSavedJobsNote && (
+                  <p className={styles.restoreNote} role="status">
+                    {missingSavedJobsNote}
+                  </p>
+                )}
+
+                {saveStatusMessage && (
+                  <p
+                    ref={saveStatusRef}
+                    id={saveStatusId}
+                    className={styles.saveStatus}
+                    role="status"
+                    aria-live="polite"
+                    tabIndex={-1}
+                  >
+                    {saveStatusMessage}
+                  </p>
+                )}
+
                 {!hasHighMatches(results) && results.length > 0 && (
                   <p className={styles.noHighMatch} role="status">
                     Chưa có việc phù hợp cao với mọi tiêu chí. Dưới đây là các gợi ý gần nhất
@@ -322,6 +425,11 @@ export function JobMatchingWizard() {
                 )}
 
                 <div className={styles.actions}>
+                  {results.length > 0 && (
+                    <button type="button" className={styles.saveButton} onClick={handleSaveResults}>
+                      Lưu kết quả gợi ý
+                    </button>
+                  )}
                   <button type="button" className={styles.restartButton} onClick={handleRestart}>
                     Làm lại
                   </button>
@@ -354,4 +462,4 @@ export function JobMatchingWizard() {
       )}
     </div>
   )
-}
+})

@@ -18,7 +18,7 @@ Tài liệu đối chiếu các **tiêu chí WCAG 2.2 mới** với bằng chứ
 | **2.5.7** | Dragging Movements | AA | Không áp dụng | Không có drag-and-drop bắt buộc trong MVP | Thủ công, rà soát mã | Nếu thêm UI kéo-thả sau này cần phương án thay thế |
 | **2.5.8** | Target Size (Minimum) | AA | Đã đáp ứng | Nút/nav/CTA ≥44px; checkbox + label row ≥44px | Thủ công, rà soát mã | Chưa đo tự động mọi link inline |
 | **3.2.6** | Consistent Help | A | Đáp ứng một phần | Footer link "Trợ giúp & phản hồi tiếp cận" → `/accessibility#accessibility-feedback`; trang Accessibility | Thủ công, rà soát mã | Chưa có Help page riêng; help chủ yếu qua footer |
-| **3.3.7** | Redundant Entry | A | Dự kiến cải thiện | ApplicationForm + AccessibilityFeedbackForm chưa reuse contact info | Rà soát mã | Hướng: localStorage với đồng ý người dùng |
+| **3.3.7** | Redundant Entry | A | Đáp ứng một phần | ApplicationForm (lưu/điền/xóa contact), AccessibilityFeedbackForm (email đã lưu), Job Matching (lưu/xem lại kết quả) — localStorage, có đồng ý | Bàn phím, thủ công, rà soát mã | Chỉ cục bộ thiết bị; không đồng bộ server; không lưu message/mô tả |
 | **3.3.8** | Accessible Authentication (Minimum) | AA | Không áp dụng | MVP không có login/CAPTCHA/password puzzle | Rà soát mã | Áp dụng khi có auth |
 
 ---

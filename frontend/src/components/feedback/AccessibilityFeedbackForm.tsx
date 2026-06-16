@@ -9,6 +9,7 @@ import {
   type FieldErrors,
 } from '../../utils/formErrors'
 import { isBlank, isValidEmail, LIMITS } from '../../utils/validation'
+import { ContactProfileControls } from '../contact/ContactProfileControls'
 import { ErrorSummary } from '../form/ErrorSummary'
 import { getFieldAriaProps } from '../form/fieldAria'
 import { FormField } from '../form/FormField'
@@ -74,6 +75,18 @@ export function AccessibilityFeedbackForm() {
   const [errorFocusRequest, setErrorFocusRequest] = useState(0)
   const [successFocusRequest, setSuccessFocusRequest] = useState(0)
   const [formErrorFocusRequest, setFormErrorFocusRequest] = useState(0)
+
+  function handleFillSavedEmail(profile: { email: string }) {
+    setValues((prev) => ({ ...prev, contactEmail: profile.email }))
+    setFieldErrors((prev) => {
+      if (!prev.contactEmail) return prev
+      const next = { ...prev }
+      delete next.contactEmail
+      return next
+    })
+    setFormError(null)
+    setSuccessMessage(null)
+  }
 
   function updateField<K extends keyof FormValues>(key: K, value: FormValues[K]) {
     setValues((prev) => ({ ...prev, [key]: value }))
@@ -194,6 +207,12 @@ export function AccessibilityFeedbackForm() {
         {showErrorSummary && (
           <ErrorSummary ref={errorSummaryRef} errors={fieldErrors} formId={formId} />
         )}
+
+        <ContactProfileControls
+          mode="email-only"
+          onFill={handleFillSavedEmail}
+          disabled={submitting}
+        />
 
         <FormField id="category" label="Danh mục phản hồi" required error={fieldErrors.category}>
           <Select
