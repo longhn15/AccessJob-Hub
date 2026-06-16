@@ -69,6 +69,15 @@ export function Layout({ children }: LayoutProps) {
           <p>AccessJob Hub — Nền tảng việc làm dễ tiếp cận theo tiêu chuẩn WCAG 2.2.</p>
           <p className={styles.footerLinks}>
             <Link to="/accessibility">Tuyên bố accessibility</Link>
+            {' · '}
+            <Link
+              to="/accessibility#accessibility-feedback"
+              aria-label="Trợ giúp và phản hồi tiếp cận — đi đến form phản hồi accessibility"
+            >
+              Trợ giúp &amp; phản hồi tiếp cận
+            </Link>
+            {' · '}
+            <Link to="/wcag-22">Ma trận WCAG 2.2</Link>
           </p>
         </div>
       </footer>

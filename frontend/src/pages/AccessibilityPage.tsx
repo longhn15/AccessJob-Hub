@@ -132,6 +132,19 @@ export function AccessibilityPage() {
         </ul>
       </section>
 
+      <section aria-labelledby="evidence-heading">
+        <h2 id="evidence-heading">Bằng chứng kiểm thử WCAG 2.2</h2>
+        <p>
+          Xem{' '}
+          <Link to="/wcag-22" className={styles.inlineLink}>
+            ma trận đối chiếu WCAG 2.2
+          </Link>{' '}
+          để biết trạng thái từng tiêu chí mới (2.4.11, 2.5.7, 2.5.8, 3.2.6, 3.3.7, 3.3.8) kèm
+          bằng chứng route/component và phương pháp kiểm thử. Đây là tự đánh giá minh chứng, không
+          phải chứng nhận pháp lý.
+        </p>
+      </section>
+
       <section aria-labelledby="testing-heading">
         <h2 id="testing-heading">Kế hoạch kiểm thử</h2>
         <p>
@@ -160,7 +173,7 @@ export function AccessibilityPage() {
         </div>
       </section>
 
-      <section aria-labelledby="feedback-heading">
+      <section id="accessibility-feedback" aria-labelledby="feedback-heading">
         <h2 id="feedback-heading">Phản hồi accessibility</h2>
         <p>
           Nếu bạn gặp rào cản khi sử dụng website, vui lòng gửi phản hồi qua form bên dưới.

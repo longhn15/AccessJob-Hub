@@ -2,7 +2,9 @@
 
 Checklist thực tế cho các luồng Front-end chính. Cập nhật sau vòng kiểm thử cuối **2026-06-12** (report `FINAL_ACCESSIBILITY_AUDIT_006`).
 
-**Phạm vi route:** `/`, `/jobs`, `/jobs/:id`, `/job-matching`, `/resources`, `/resources/:id`, `/accessibility`
+**Phạm vi route:** `/`, `/jobs`, `/jobs/:id`, `/job-matching`, `/resources`, `/resources/:id`, `/accessibility`, `/wcag-22`
+
+**Ma trận WCAG 2.2 mới:** [wcag-22-conformance-matrix.md](./wcag-22-conformance-matrix.md) · route `/wcag-22`
 
 **Tiêu chuẩn mục tiêu:** WCAG 2.2 Level AA cho luồng chính.
 
@@ -130,3 +132,4 @@ Chi tiết: `.cursor/rules/ui-design-system-rule.mdc`
 | 2026-06-14 | Thêm Accessibility Preferences Panel — checklist mục 2.10 (`ACCESSIBILITY_PREFERENCES_007`) |
 | 2026-06-14 | Thêm route `/job-matching` — wizard gợi ý việc làm (`ACCESSIBLE_JOB_MATCHING_008`) |
 | 2026-06-14 | Regression wizard + preferences panel — axe/Lighthouse/keyboard/mobile/zoom (`JOB_MATCHING_PREFERENCES_REGRESSION_009`) |
+| 2026-06-16 | Thêm ma trận WCAG 2.2 mới — route `/wcag-22`, docs `wcag-22-conformance-matrix.md` (`WCAG22_CONFORMANCE_MATRIX_013`) |

@@ -78,6 +78,7 @@ API base URL: `VITE_API_URL` (mặc định `/api` — dùng relative path qua N
 | `/resources` | Danh sách tài nguyên (`GET /api/resources`) |
 | `/resources/:id` | Chi tiết tài nguyên (`GET /api/resources/{id}`) |
 | `/accessibility` | Accessibility Statement + form phản hồi (`POST /api/accessibility-feedback`) |
+| `/wcag-22` | Ma trận đối chiếu tiêu chí WCAG 2.2 mới (tự đánh giá minh chứng) |
 
 ### Accessibility Preferences Panel
 
@@ -91,6 +92,14 @@ Panel **Tùy chỉnh tiếp cận** (ngay dưới header, mọi trang) cho phép
 - Đặt lại mặc định
 
 Lựa chọn lưu vào `localStorage` (`accessjob:a11y-preferences`) và áp dụng toàn site qua `data-*` trên `<html>`.
+
+### Accessibility evidence
+
+- [WCAG checklist](docs/wcag-checklist.md) — checklist tổng thể MVP
+- [WCAG 2.2 conformance matrix](docs/wcag-22-conformance-matrix.md) — đối chiếu tiêu chí WCAG 2.2 **mới** (route `/wcag-22`)
+- Trang `/accessibility` — tuyên bố, form phản hồi, link tới ma trận
+
+*Ma trận và checklist là tự đánh giá minh chứng demo — không phải chứng nhận pháp lý.*
 
 ## Cursor rules
 
