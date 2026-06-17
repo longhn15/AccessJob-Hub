@@ -71,8 +71,8 @@ export function ResourcesListPage() {
       <header className={styles.pageHeader}>
         <h1>Tài nguyên hỗ trợ tìm việc</h1>
         <p className={styles.intro}>
-          Tài liệu về WCAG, kỹ năng số và việc làm dễ tiếp cận — hỗ trợ bạn đáp ứng nhu cầu hỗ trợ
-          tiếp cận khi tìm việc. Dùng từ khóa và danh mục bên dưới để thu hẹp kết quả.
+          Hướng dẫn ngắn gọn về CV, phỏng vấn, kỹ năng số và tiêu chuẩn WCAG — giúp bạn tìm việc
+          và áp dụng thực tế. Dùng bộ lọc bên dưới để tìm tài nguyên phù hợp.
         </p>
       </header>
 

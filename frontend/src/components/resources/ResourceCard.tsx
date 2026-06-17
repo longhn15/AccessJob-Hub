@@ -1,5 +1,10 @@
 import { Link } from 'react-router-dom'
 import type { Resource } from '../../types/resource'
+import {
+  formatDifficultyLevel,
+  formatResourceType,
+  resourceDisplaySummary,
+} from '../../utils/resourceLabels'
 import { Badge } from '../common/Badge'
 import styles from './ResourceCard.module.css'
 
@@ -7,56 +12,78 @@ interface ResourceCardProps {
   resource: Resource
 }
 
-const CATEGORY_HINTS: Record<string, string> = {
-  'Tiêu chuẩn web': 'WCAG · Web dễ tiếp cận',
-  'Việc làm': 'Tìm việc · Quyền lợi',
-  'Kỹ năng số': 'Bàn phím · Công cụ',
-  'Hồ sơ ứng tuyển': 'CV · Hồ sơ',
+function formatAudienceShort(audience: string[]): string {
+  if (audience.length === 0) return ''
+  if (audience.length <= 2) return audience.join(', ')
+  return `${audience.slice(0, 2).join(', ')}…`
 }
 
 export function ResourceCard({ resource }: ResourceCardProps) {
-  const topicHint = CATEGORY_HINTS[resource.category]
-  const actionLabel = `Xem tài nguyên: ${resource.title}`
+  const summary = resourceDisplaySummary(resource)
+  const typeLabel = formatResourceType(resource.resourceType)
+  const difficultyLabel = formatDifficultyLevel(resource.difficultyLevel)
+  const audienceShort = formatAudienceShort(resource.audience ?? [])
+  const takeaways = (resource.keyTakeaways ?? []).slice(0, 2)
+  const tags = resource.tags ?? []
+  const readMinutes = resource.estimatedReadMinutes
 
   return (
     <article className={styles.card} aria-labelledby={`resource-title-${resource.id}`}>
-      <header className={styles.header}>
-        <h3 id={`resource-title-${resource.id}`} className={styles.title}>
-          <Link to={`/resources/${resource.id}`} className={styles.titleLink}>
-            {resource.title}
-          </Link>
-        </h3>
-        <div className={styles.tags}>
-          <Badge label={resource.category} ariaLabel={`Danh mục: ${resource.category}`} />
-          {topicHint && <span className={styles.topicHint}>{topicHint}</span>}
-        </div>
-      </header>
+      <div className={styles.metaRow}>
+        <Badge label={resource.category} ariaLabel={`Danh mục: ${resource.category}`} />
+        {typeLabel && (
+          <span className={styles.metaChip}>{typeLabel}</span>
+        )}
+        {difficultyLabel && (
+          <span className={styles.metaChip}>{difficultyLabel}</span>
+        )}
+        {readMinutes != null && readMinutes > 0 && (
+          <span className={styles.metaChip}>{readMinutes} phút đọc</span>
+        )}
+      </div>
 
-      <p className={styles.description}>{resource.description}</p>
+      <h3 id={`resource-title-${resource.id}`} className={styles.title}>
+        <Link to={`/resources/${resource.id}`} className={styles.titleLink}>
+          {resource.title}
+        </Link>
+      </h3>
 
-      {resource.url && (
-        <p className={styles.external}>
-          <a
-            href={resource.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Mở liên kết ngoài: ${resource.title} (mở tab mới)`}
-          >
-            Mở liên kết ngoài
-            <span className={styles.srOnly}> (mở tab mới)</span>
-            <span aria-hidden="true"> ↗</span>
-          </a>
+      <p className={styles.summary}>{summary}</p>
+
+      {audienceShort && (
+        <p className={styles.audience}>
+          <span className={styles.labelInline}>Phù hợp với:</span> {audienceShort}
         </p>
+      )}
+
+      {takeaways.length > 0 && (
+        <div className={styles.takeaways}>
+          <p className={styles.takeawaysHeading}>Bạn sẽ biết:</p>
+          <ul className={styles.takeawaysList}>
+            {takeaways.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {tags.length > 0 && (
+        <ul className={styles.tagList} aria-label="Thẻ liên quan">
+          {tags.slice(0, 4).map((tag) => (
+            <li key={tag}>
+              <span className={styles.tag}>{tag}</span>
+            </li>
+          ))}
+        </ul>
       )}
 
       <p className={styles.cta}>
         <Link
           to={`/resources/${resource.id}`}
           className={styles.detailLink}
-          aria-label={actionLabel}
+          aria-label={`Xem hướng dẫn: ${resource.title}`}
         >
-          <span className={styles.ctaPrefix}>Xem tài nguyên:</span>
-          <span className={styles.ctaTitle}>{resource.title}</span>
+          Xem hướng dẫn
           <span aria-hidden="true"> →</span>
         </Link>
       </p>

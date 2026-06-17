@@ -25,11 +25,23 @@ public class ResourceService {
         this.resourceRepository = resourceRepository;
     }
 
-    public List<ResourceResponse> listResources(String category, String keyword, Integer limit) {
+    public List<ResourceResponse> listResources(
+            String category,
+            String keyword,
+            String resourceType,
+            String difficultyLevel,
+            String audience,
+            Boolean featured,
+            Integer limit
+    ) {
         int resolvedLimit = QueryLimit.resolve(limit);
         List<Resource> resources = resourceRepository.findActiveResources(
                 StringUtils.blankToNull(category),
                 StringUtils.blankToNull(keyword),
+                StringUtils.blankToNull(resourceType),
+                StringUtils.blankToNull(difficultyLevel),
+                StringUtils.blankToNull(audience),
+                featured,
                 PageRequest.of(0, resolvedLimit)
         );
         return resources.stream().map(ResourceMapper::toResponse).toList();

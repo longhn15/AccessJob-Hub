@@ -1,5 +1,9 @@
 import { type FormEvent, useId } from 'react'
 import { RESOURCE_CATEGORIES } from '../../constants/resourceCategories'
+import {
+  DIFFICULTY_FILTER_OPTIONS,
+  RESOURCE_TYPE_FILTER_OPTIONS,
+} from '../../constants/resourceFilterOptions'
 import type { ResourceFilters as ResourceFiltersType } from '../../types/resource'
 import styles from './ResourceFilters.module.css'
 
@@ -26,6 +30,8 @@ export function ResourceFilters({
   const formId = useId()
   const keywordId = `${formId}-keyword`
   const categoryId = `${formId}-category`
+  const resourceTypeId = `${formId}-resource-type`
+  const difficultyId = `${formId}-difficulty`
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -68,8 +74,44 @@ export function ResourceFilters({
           </select>
         </div>
 
+        <div className={styles.field}>
+          <label htmlFor={resourceTypeId}>Loại tài nguyên</label>
+          <select
+            id={resourceTypeId}
+            name="resourceType"
+            value={filters.resourceType ?? ''}
+            onChange={(e) =>
+              onChange({ ...filters, resourceType: e.target.value || undefined })
+            }
+          >
+            {RESOURCE_TYPE_FILTER_OPTIONS.map((opt) => (
+              <option key={opt.value || 'all-types'} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className={styles.field}>
+          <label htmlFor={difficultyId}>Mức độ</label>
+          <select
+            id={difficultyId}
+            name="difficultyLevel"
+            value={filters.difficultyLevel ?? ''}
+            onChange={(e) =>
+              onChange({ ...filters, difficultyLevel: e.target.value || undefined })
+            }
+          >
+            {DIFFICULTY_FILTER_OPTIONS.map((opt) => (
+              <option key={opt.value || 'all-levels'} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <button type="submit" className={styles.submitButton}>
-          Áp dụng bộ lọc
+          Tìm kiếm
         </button>
 
         {onReset && (

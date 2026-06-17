@@ -25,9 +25,21 @@ public class ResourceController {
     public ResponseEntity<List<ResourceResponse>> listResources(
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String resourceType,
+            @RequestParam(required = false) String difficultyLevel,
+            @RequestParam(required = false) String audience,
+            @RequestParam(required = false) Boolean featured,
             @RequestParam(required = false) Integer limit
     ) {
-        return ResponseEntity.ok(resourceService.listResources(category, keyword, limit));
+        return ResponseEntity.ok(resourceService.listResources(
+                category,
+                keyword,
+                resourceType,
+                difficultyLevel,
+                audience,
+                featured,
+                limit
+        ));
     }
 
     @GetMapping("/{id}")

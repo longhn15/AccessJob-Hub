@@ -5,6 +5,10 @@ export function fetchResources(filters: ResourceFilters = {}): Promise<Resource[
   return apiGet<Resource[]>('/resources', {
     keyword: filters.keyword,
     category: filters.category,
+    resourceType: filters.resourceType,
+    difficultyLevel: filters.difficultyLevel,
+    audience: filters.audience,
+    featured: filters.featured,
     limit: filters.limit,
   })
 }
