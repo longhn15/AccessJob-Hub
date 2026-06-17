@@ -12,9 +12,11 @@ import { EmployerChecklistPage } from './pages/EmployerChecklistPage'
 import { Wcag22ConformancePage } from './pages/Wcag22ConformancePage'
 
 function App() {
+  const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined
+
   return (
     <AccessibilityPreferencesProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={routerBasename}>
         <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
