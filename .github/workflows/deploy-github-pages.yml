@@ -3,8 +3,7 @@ name: Deploy GitHub Pages
 on:
   push:
     branches:
-      - main
-      - develop
+      - feat/resource-detail-content-polish
   workflow_dispatch:
 
 permissions:
